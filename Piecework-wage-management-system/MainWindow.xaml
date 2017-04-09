@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="计件工资管理系统" Height="600" Width="800">
+        Title="计件工资管理系统" Height="650" Width="1024" ResizeMode="CanMinimize">
     <Grid>
-        <TextBox x:Name="textBox_UsernameInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="144" AutomationProperties.HelpText="请在此输入用户名" Margin="324,240,324,306" BorderBrush="Black"/>
+        <TextBox x:Name="textBox_UsernameInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="144" AutomationProperties.HelpText="请在此输入用户名" Margin="324,237,324,309" BorderBrush="Black" RenderTransformOrigin="0.514,-0.391"/>
         <TextBox x:Name="textBox_PasswordInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="144" Margin="324,306,324,240" AutomationProperties.HelpText="请在此输入密码" BorderBrush="Black"/>
-        <Label x:Name="label_password" Content="密码：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,281,409,263"/>
-        <Label x:Name="label_username" Content="用户名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,215,397,329" Width="58"/>
+        <Label x:Name="label_password" Content="密码：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,273,409,271"/>
+        <Label x:Name="label_username" Content="用户名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,207,397,337" Width="58"/>
         <Button x:Name="button_login" Content="登录" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="324,0,409,199"/>
         <Button x:Name="button_signUp" Content="注册" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="409,0,324,199"/>
 
