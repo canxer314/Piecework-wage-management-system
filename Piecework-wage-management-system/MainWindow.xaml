@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="计件工资管理系统" Height="600" Width="800">
     <Grid>
-        
+        <TextBox x:Name="textBox_UsernameInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" AutomationProperties.HelpText="请在此输入用户名" Margin="336,240,336,306"/>
+        <TextBox x:Name="textBox_PasswordInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Margin="336,311,336,235" AutomationProperties.HelpText="请在此输入密码"/>
+
     </Grid>
 </Window>
