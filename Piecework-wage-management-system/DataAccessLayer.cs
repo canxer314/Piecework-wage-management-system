@@ -23,7 +23,7 @@ namespace Piecework_wage_management_system
             //{
             //    connection.Open();
             //}
-            //catch(Exception e)
+            //catch(MySqlException e)
             //{
             //    SqlConnection myCon=new SqlConnection("server=.\\szy;database=master;uid=sa;PWD=11");
             //    myCon.Open();
