@@ -11,8 +11,8 @@
         <TextBox x:Name="textBox_PasswordInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="144" Margin="324,306,324,240" AutomationProperties.HelpText="请在此输入密码" BorderBrush="Black"/>
         <Label x:Name="label_password" Content="密码：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,273,409,271"/>
         <Label x:Name="label_username" Content="用户名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,207,397,337"/>
-        <Button x:Name="button_login" Content="登录" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="324,0,409,199"/>
-        <Button x:Name="button_signUp" Content="注册" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="409,0,324,199"/>
+        <Button x:Name="button_login" Content="登录" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="437,0,522,205" Click="button_login_Click"/>
+        <Button x:Name="button_signUp" Content="注册" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="522,0,437,205" Click="button_signUp_Click"/>
         <Label x:Name="label_welcomeToUse" Content="欢迎使用计件工资管理系统！" HorizontalAlignment="Center" Margin="196,86,190,464" FontSize="48" Foreground="#FFE22626" VerticalAlignment="Center"/>
 
     </Grid>

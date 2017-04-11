@@ -24,5 +24,15 @@ namespace Piecework_wage_management_system
         {
             InitializeComponent();
         }
+
+        private void button_login_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_signUp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
