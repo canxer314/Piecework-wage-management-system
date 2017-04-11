@@ -19,6 +19,40 @@ namespace Piecework_wage_management_system
         {
             MySqlConnection connection = new MySqlConnection(mysqlconnectionString);
             connection.Open();
+            //try
+            //{
+            //    connection.Open();
+            //}
+            //catch(Exception e)
+            //{
+            //    SqlConnection myCon=new SqlConnection("server=.\\szy;database=master;uid=sa;PWD=11");
+            //    myCon.Open();
+            //    SqlCommand myCmd = new SqlCommand("select * from sys.databases where name='SZY'",myCon);
+            //    object n = myCmd.ExecuteScalar();
+  
+            //    if (n!=null)
+            //    {
+            //        MessageBox.Show("数据库szy 存在");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("数据库szy 不存在");
+            //    }
+            //    myCon.Close();
+            //}
+
+            ////检测数据库是否存在
+            //    connection = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=;");  
+            //    MySqlCommand cmd = new MySqlCommand("CREATE DATABASE 你的数据库名;", conn );  
+            //    conn.Open();            
+            //    cmd.ExecuteNonQuery();  
+            //    conn.Close();  
+
+            ////检测数据库表是否存在
+            //string sqlStr = "select count(*) from sysobjects where id = object_id('数据库名.Owner.表名')";
+            //IDbConnection conn = connection;
+            //if (conn.Execute(sqlStr) == 1)
+            //else
             return connection;
         }
 
