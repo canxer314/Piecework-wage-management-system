@@ -9,7 +9,7 @@ namespace Piecework_wage_management_system
     class Employee
     {
         public string Name { get; set; }
-        public short EmployeeID { get; set; }
+        public short EmployeeId { get; set; }
         public string Password { get; set; }
         public string Department { get; set; }
         public string Workshop { get; set; }

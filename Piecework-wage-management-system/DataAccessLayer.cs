@@ -14,45 +14,53 @@ namespace Piecework_wage_management_system
         public readonly string mysqlconnectionString =
                  @"server=127.0.0.1;database=gradulation_design_db;uid=root;pwd=;charset='gbk'";
 
+        //初始化数据库
+        public void DataBaseInit()
+        {
+            MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=;");  
+            MySqlCommand cmd = new MySqlCommand(@"
+            CREATE DATABASE IF NOT EXISTS gradulation_design_db CHARACTER SET GBK;
+            USE gradulation_design_db;
+            CREATE TABLE IF NOT EXISTS tbl_Employee (
+                Id SMALLINT UNSIGNED PRIMARY KEY,
+                Name CHAR(8),
+                Password CHAR(16),
+                Dept VARCHAR(16),
+                WorkShop VARCHAR(16),
+                Job VARCHAR(16),
+                Authority TINYINT,
+                Tel CHAR(13)
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Product (
+                Id INT AUTO_INCREMENT PRIMARY KEY,
+                Name CHAR(16) UNIQUE KEY
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Procedure (
+                Id INT AUTO_INCREMENT PRIMARY KEY,
+                Name CHAR(16) UNIQUE KEY,
+                Sequence SMALLINT,
+                Product_Id INT,
+                CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
+                    REFERENCES tbl_Product (Id)
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Value (
+                Name CHAR(8) PRIMARY KEY,
+                Unit_Price SMALLINT,
+                Procedure_Id INT,
+                CONSTRAINT fk_Procedure FOREIGN KEY (Procedure_Id)
+                    REFERENCES tbl_Procedure (Id)
+            );
+            ", conn);
+            conn.Open();            
+            cmd.ExecuteNonQuery();
+            conn.Close();  
+        }
+
         //获取MySql的连接数据库对象。MySqlConnection
         public MySqlConnection OpenConnection()
         {
             MySqlConnection connection = new MySqlConnection(mysqlconnectionString);
             connection.Open();
-            //try
-            //{
-            //    connection.Open();
-            //}
-            //catch(MySqlException e)
-            //{
-            //    SqlConnection myCon=new SqlConnection("server=.\\szy;database=master;uid=sa;PWD=11");
-            //    myCon.Open();
-            //    SqlCommand myCmd = new SqlCommand("select * from sys.databases where name='SZY'",myCon);
-            //    object n = myCmd.ExecuteScalar();
-  
-            //    if (n!=null)
-            //    {
-            //        MessageBox.Show("数据库szy 存在");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("数据库szy 不存在");
-            //    }
-            //    myCon.Close();
-            //}
-
-            ////检测数据库是否存在
-            //    connection = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=;");  
-            //    MySqlCommand cmd = new MySqlCommand("CREATE DATABASE 你的数据库名;", conn );  
-            //    conn.Open();            
-            //    cmd.ExecuteNonQuery();  
-            //    conn.Close();  
-
-            ////检测数据库表是否存在
-            //string sqlStr = "select count(*) from sysobjects where id = object_id('数据库名.Owner.表名')";
-            //IDbConnection conn = connection;
-            //if (conn.Execute(sqlStr) == 1)
-            //else
             return connection;
         }
 
@@ -61,9 +69,9 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("Insert into Employee values "
-                     + "(@EName, @EID, @EPasswd, @Dept, @WorkShop, @Job, @Authority, @Tel)",
-                     new { EName = e.Name, EID=e.EmployeeID, EPasswd=e.Password, Dept=e.Department,
+                return conn.Execute("Insert into tbl_Employee values "
+                     + "(@Id, @Name, @Password, @Dept, @WorkShop, @Job, @Authority, @Tel)",
+                     new { Id = e.EmployeeId, Name=e.Name, Password=e.Password, Dept=e.Department,
                          WorkShop =e.Workshop, Job=e.Job, Authority=e.Authority, Tel=e.Telephone});
             }
         }
@@ -73,26 +81,26 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                const string query = "select * from Employee order by EID desc";
+                const string query = "select * from tbl_Employee order by Id desc";
                 return conn.Query<Employee>(query,null);
             }
         }
 
-        //根据EName获取所有Employee对象的集合
-        public IEnumerable<Employee> QueryEmployeeByEName(string eName)
+        //根据Name获取所有Employee对象的集合
+        public IEnumerable<Employee> QueryEmployeeByEName(string name)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from Employee where EName=@EName", new { EName = eName });
+                return conn.Query<Employee>("select * from tbl_Employee where Name=@Name", new { Name = name });
             }
         }
 
-        //根据EID获取Employee对象的集合
-        public IEnumerable<Employee> QueryEmployeeByEID(short eID)
+        //根据EmployeeID获取Employee对象的集合
+        public IEnumerable<Employee> QueryEmployeeByEID(short employeeId)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from Employee where EID=@EID", new { EID = eID });
+                return conn.Query<Employee>("select * from tbl_Employee where Id=@EmployeeId", new { EmployeeId=employeeId });
             }
         }
 
@@ -101,7 +109,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from Employee where Dept=@Dept", new { Dept = dept });
+                return conn.Query<Employee>("select * from tbl_Employee where Dept=@Dept", new { Dept = dept });
             }
         }
 
@@ -110,7 +118,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from Employee where WorkShop=@WorkShop", new { WorkShop = workShop });
+                return conn.Query<Employee>("select * from tbl_Employee where WorkShop=@WorkShop", new { WorkShop = workShop });
             }
         }
 
@@ -119,7 +127,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from Employee where Job=@Job", new { Job = job });
+                return conn.Query<Employee>("select * from tbl_Employee where Job=@Job", new { Job = job });
             }
         }
 
@@ -128,7 +136,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from Employee where Tel=@Tel", new { Tel = tel });
+                return conn.Query<Employee>("select * from tbl_Employee where Tel=@Tel", new { Tel = tel });
             }
         }
     }
