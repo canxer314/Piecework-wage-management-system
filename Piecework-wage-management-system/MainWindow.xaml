@@ -5,15 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="计件工资管理系统" Height="650" Width="1024" ResizeMode="CanMinimize">
+        Title="计件工资管理系统" Height="411" Width="328" ResizeMode="CanMinimize" Background="LightBlue">
     <Grid>
-        <TextBox x:Name="textBox_UsernameInputBox" HorizontalAlignment="Center" TextWrapping="Wrap" Width="144" AutomationProperties.HelpText="请在此输入用户名" Margin="437,0,437,335" BorderBrush="Black" RenderTransformOrigin="0.514,-0.391" Height="23" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="textBox_PasswordInputBox" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="144" Margin="324,306,324,240" AutomationProperties.HelpText="请在此输入密码" BorderBrush="Black"/>
-        <Label x:Name="label_password" Content="密码：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,273,409,271"/>
-        <Label x:Name="label_username" Content="用户名：" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="337,207,397,337"/>
-        <Button x:Name="button_login" Content="登录" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="437,0,522,205" Click="button_login_Click"/>
-        <Button x:Name="button_signUp" Content="注册" HorizontalAlignment="Center" Width="59" VerticalAlignment="Bottom" Margin="522,0,437,205" Click="button_signUp_Click"/>
-        <Label x:Name="label_welcomeToUse" Content="欢迎使用计件工资管理系统！" HorizontalAlignment="Center" Margin="196,86,190,464" FontSize="48" Foreground="#FFE22626" VerticalAlignment="Center"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="39*"/>
+        </Grid.ColumnDefinitions>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="87,209,0,0" VerticalAlignment="Top" Width="155" Grid.ColumnSpan="2" Height="23" TabIndex="2" KeyDown="passwordBox_KeyDown"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Margin="87,161,0,0" Grid.ColumnSpan="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" TabIndex="1"/>
+        <Label x:Name="lblWelcome" Content="欢迎使用计件工资管理系统！&#xD;&#xA;&#x9;请先登录！" HorizontalAlignment="Left" Margin="40,52,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="70" Width="240" FontSize="18"/>
+        <Label x:Name="labelUsername" Content="用户名：" HorizontalAlignment="Left" Margin="30,161,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelPassword" Content="密码：" HorizontalAlignment="Left" Margin="30,209,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSignUp" Content="注册" Margin="87,259,57,0" VerticalAlignment="Top" Background="White" TabIndex="3"/>
+        <Button x:Name="btnLogin" Content="登录" HorizontalAlignment="Left" Margin="179,259,0,0" VerticalAlignment="Top" Width="63" Grid.ColumnSpan="2" Click="btnLogin_Click" Background="White" TabIndex="4"/>
     </Grid>
 </Window>
