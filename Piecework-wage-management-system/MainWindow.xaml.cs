@@ -23,17 +23,33 @@ namespace Piecework_wage_management_system
         public MainWindow()
         {
             InitializeComponent();
+            DataAccessLayer dataAccessLayer = new DataAccessLayer();
+            dataAccessLayer.DataBaseInit();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnAdministratorLogin_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Successfully login!");
+            AdminLoginWindow adminLoginWindow = new AdminLoginWindow();
+            adminLoginWindow.Show();
+            if (adminLoginWindow.IsLogin == true)
+            {
+                AdminWindow adminWindow = new AdminWindow();
+                this.Close();
+            }
         }
 
-        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Enter)
-                btnLogin_Click(sender, e);
+            ReckonByThePieceWindow reckonByThePieceWindow = new ReckonByThePieceWindow();
+            reckonByThePieceWindow.Show();
+            this.Close();
+        }
+
+        private void btnTrackRecord_Click(object sender, RoutedEventArgs e)
+        {
+            TrackRecordWindow trackRecordWindow = new TrackRecordWindow();
+            trackRecordWindow = new TrackRecordWindow();
+            this.Close();
         }
     }
 }

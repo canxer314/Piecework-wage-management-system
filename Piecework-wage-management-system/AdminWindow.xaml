@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="AdminWindow" Height="650" Width="1024" ResizeMode="NoResize">
+    <DockPanel>
+        <Border Height="30" Background="AliceBlue" DockPanel.Dock="Top">
+            <TextBlock>Menu</TextBlock>
+        </Border>
+        <Border Height="30" Background="LightSteelBlue" DockPanel.Dock="Bottom">
+            <TextBlock>Status</TextBlock>
+        </Border>
+        <Border Background="LawnGreen" DockPanel.Dock="Left" Width="185">
+            <TextBlock>Left Side</TextBlock>
+        </Border>
+        <DockPanel>
+            
+        <Border Height="30" Background="Aqua" DockPanel.Dock="Top">
+            <TextBlock>Ribbon</TextBlock>
+        </Border>
+        <Border Background="HotPink">
+            <TextBlock>Remaining Part</TextBlock>
+        </Border>
+        </DockPanel>
+    </DockPanel>
 </Window>

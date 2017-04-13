@@ -5,18 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="计件工资管理系统" Height="411" Width="328" ResizeMode="CanMinimize" Background="LightBlue">
+        Title="计件工资管理系统" Height="460" Width="380" ResizeMode="NoResize" Background="LightYellow">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="39*"/>
-        </Grid.ColumnDefinitions>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="87,209,0,0" VerticalAlignment="Top" Width="155" Grid.ColumnSpan="2" Height="23" TabIndex="2" KeyDown="passwordBox_KeyDown"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Margin="87,161,0,0" Grid.ColumnSpan="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" TabIndex="1"/>
-        <Label x:Name="lblWelcome" Content="欢迎使用计件工资管理系统！&#xD;&#xA;&#x9;请先登录！" HorizontalAlignment="Left" Margin="40,52,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="70" Width="240" FontSize="18"/>
-        <Label x:Name="labelUsername" Content="用户名：" HorizontalAlignment="Left" Margin="30,161,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labelPassword" Content="密码：" HorizontalAlignment="Left" Margin="30,209,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSignUp" Content="注册" Margin="87,259,57,0" VerticalAlignment="Top" Background="White" TabIndex="3"/>
-        <Button x:Name="btnLogin" Content="登录" HorizontalAlignment="Left" Margin="179,259,0,0" VerticalAlignment="Top" Width="63" Grid.ColumnSpan="2" Click="btnLogin_Click" Background="White" TabIndex="4"/>
+        <Label x:Name="lblWelcome" Content="欢迎使用计件工资管理系统！" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Height="65" Width="315" FontSize="24"/>
+        <Button x:Name="btnReckonByPiece" Content="计件" HorizontalAlignment="Left" Margin="105,130,0,0" VerticalAlignment="Top" Width="160" Height="50" FontSize="22" Background="LightGreen" Click="btnReckonByThePiece_Click"/>
+        <Button x:Name="btnTrackRecord" Content="业绩查询" HorizontalAlignment="Left" Margin="105,215,0,0" VerticalAlignment="Top" Width="160" Height="50" FontSize="22" Background="LightBlue" Click="btnTrackRecord_Click"/>
+        <Button x:Name="btnAdministratorLogin" Content="管理员登录" HorizontalAlignment="Left" Margin="105,300,0,0" VerticalAlignment="Top" Width="160" Height="50" FontSize="22" Background="#FFFF4242" Click="btnAdministratorLogin_Click"/>
     </Grid>
 </Window>

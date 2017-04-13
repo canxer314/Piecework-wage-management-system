@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Piecework_wage_management_system
 {
     /// <summary>
-    /// EmployeeWindow.xaml 的交互逻辑
+    /// TrackRecordWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class EmployeeWindow : Window
+    public partial class TrackRecordWindow : Window
     {
-        public EmployeeWindow()
+        public TrackRecordWindow()
         {
             InitializeComponent();
         }
