@@ -31,11 +31,6 @@ namespace Piecework_wage_management_system
         {
             AdminLoginWindow adminLoginWindow = new AdminLoginWindow();
             adminLoginWindow.Show();
-            if (adminLoginWindow.IsLogin == true)
-            {
-                AdminWindow adminWindow = new AdminWindow();
-                this.Close();
-            }
         }
 
         private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
@@ -50,6 +45,16 @@ namespace Piecework_wage_management_system
             TrackRecordWindow trackRecordWindow = new TrackRecordWindow();
             trackRecordWindow = new TrackRecordWindow();
             this.Close();
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            if (AdminLoginWindow.IsLogin == true)
+            {
+                AdminWindow adminWindow = new AdminWindow();
+                adminWindow.Show();
+                this.Close();
+            }
         }
     }
 }

@@ -19,18 +19,18 @@ namespace Piecework_wage_management_system
     /// </summary>
     public partial class AdminLoginWindow : Window
     {
-        public bool IsLogin { get; set; }
+        public static bool IsLogin { get; set; }
 
         public AdminLoginWindow()
         {
+            IsLogin = false;
             InitializeComponent();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            IsLogin = false;
             //processing with the database
-            //IsLogin = true;
+            IsLogin = true;
             if (IsLogin == true)
             {
                 IsLogin = true;
