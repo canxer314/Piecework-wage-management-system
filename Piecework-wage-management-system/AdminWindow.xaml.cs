@@ -24,9 +24,84 @@ namespace Piecework_wage_management_system
             InitializeComponent();
         }
 
+        private void MenuItem_Click_Show_Book(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click_Show_Books(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void btnAdministratorManage_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("hello!");
+            this.MainFrame.Source = new Uri("AdministratorManage_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnWorkshopManage_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("WorkShopManage_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnJobManage_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("JobManage_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnWorkerManage_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("WorkerManage_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnProceduceManage_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("ProceduceManage_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnProductionScheduling_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("ProductionScheduling_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("ReckonByPiece_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnWageRecord_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("RecordPieceWorkWage_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnSalaryRecord_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("RecordRegularSalary_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnPrintPayrollReckonByThePiece_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("PrintReckonPayroll_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnPrintPayroll_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("PrintPayroll_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnInitDatabase_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("InitializeDatabase_Page.xaml",UriKind.Relative);
+        }
+
+        private void btnProceduceRecord_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("ProceduceRecord_Page.xaml",UriKind.Relative);
         }
     }
 }

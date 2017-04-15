@@ -67,18 +67,64 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdministratorManage_Page.xaml.cs">
+      <DependentUpon>AdministratorManage_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminLoginWindow.xaml.cs">
       <DependentUpon>AdminLoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EmployeeLoginWindow.xaml.cs">
       <DependentUpon>EmployeeLoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InitializeDatabase_Page.xaml.cs">
+      <DependentUpon>InitializeDatabase_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobManage_Page.xaml.cs">
+      <DependentUpon>JobManage_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrintPayroll_Page.xaml.cs">
+      <DependentUpon>PrintPayroll_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrintReckonPayroll_Page.xaml.cs">
+      <DependentUpon>PrintReckonPayroll_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProceduceManage_Page.xaml.cs">
+      <DependentUpon>ProceduceManage_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProceduceRecord_Page.xaml.cs">
+      <DependentUpon>ProceduceRecord_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProductionScheduling_Page.xaml.cs">
+      <DependentUpon>ProductionScheduling_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReckonByPiece_Page.xaml.cs">
+      <DependentUpon>ReckonByPiece_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReckonByThePieceWindow.xaml.cs">
       <DependentUpon>ReckonByThePieceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecordPieceWorkWage_Page.xaml.cs">
+      <DependentUpon>RecordPieceWorkWage_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecordRegularSalary_Page.xaml.cs">
+      <DependentUpon>RecordRegularSalary_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="TrackRecordWindow.xaml.cs">
       <DependentUpon>TrackRecordWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WorkerManage_Page.xaml.cs">
+      <DependentUpon>WorkerManage_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkShopManage_Page.xaml.cs">
+      <DependentUpon>WorkShopManage_Page.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AdministratorManage_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminLoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -88,6 +134,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmployeeLoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InitializeDatabase_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobManage_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,11 +168,51 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PrintPayroll_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PrintReckonPayroll_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProceduceManage_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProceduceRecord_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProductionScheduling_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReckonByPiece_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReckonByThePieceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RecordPieceWorkWage_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RecordRegularSalary_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TrackRecordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WorkerManage_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WorkShopManage_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
