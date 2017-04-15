@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
+        Title="AdminWindow" Height="643" Width="1024" ResizeMode="CanResizeWithGrip">
     <DockPanel>
-        <Menu Height="25" Background="AliceBlue" DockPanel.Dock="Top">
+        <Menu Background="AliceBlue" DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="Show _Book" />
                 <MenuItem Header="Show Book_s" />
@@ -22,8 +22,37 @@
                 <MenuItem Header="Paste" Command="Paste" />
             </MenuItem>
         </Menu>
-        <Border Background="LawnGreen" DockPanel.Dock="Left" Width="185">
-        </Border>
+        <StackPanel Background="GreenYellow" DockPanel.Dock="Left" Width="180">
+            <GroupBox Header="Basic Data">
+                <StackPanel>
+                    <Button x:Name="btnAdministratorManage" Content="Administrator Manage"  Click="btnAdministratorManage_Click" Height="39"/>
+                    <Button x:Name="btnWorkshopManage" Content="Workshop Manage" Height="39" />
+                    <Button x:Name="btnJobManage" Content="Job Manage" Height="39" />
+                    <Button x:Name="btnWorkerManage" Content="Worker Manage" Height="39" />
+                    <Button x:Name="btnProceduceManage" Content="Proceduce Manage" Height="39" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Production Scheduling">
+                <StackPanel>
+                    <Button x:Name="btnProductionScheduling" Content="Production Scheduling" Height="39" />
+                    <Button x:Name="btnReckonByThePiece" Content="Reckon By Piece" Height="39" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Pay Record">
+                <StackPanel>
+                    <Button x:Name="btnWageRecord" Content="Record Piece-Work Wage" Height="39" />
+                    <Button x:Name="btnSalaryRecord" Content="Record Regular Salary" Height="39" />
+                    <Button x:Name="btnPrintPayrollReckonByThePiece" Content="Print Reckon Payroll" Height="39" />
+                    <Button x:Name="btnPrintPayroll" Content="Print Payroll" Height="39" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="System Manage">
+                <StackPanel>
+                    <Button x:Name="btnInitDatabase" Content="Initialize Database" Height="39"/>
+                    <Button x:Name="btnProceduceRecord" Content="Proceduce Record" Height="39" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
         <DockPanel>
             
         <Border Height="30" Background="Aqua" DockPanel.Dock="Top">

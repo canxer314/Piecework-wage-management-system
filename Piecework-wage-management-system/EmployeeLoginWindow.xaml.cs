@@ -26,6 +26,12 @@ namespace Piecework_wage_management_system
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

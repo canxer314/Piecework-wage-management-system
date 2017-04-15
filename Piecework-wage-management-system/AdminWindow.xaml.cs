@@ -23,5 +23,10 @@ namespace Piecework_wage_management_system
         {
             InitializeComponent();
         }
+
+        private void btnAdministratorManage_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("hello!");
+        }
     }
 }
