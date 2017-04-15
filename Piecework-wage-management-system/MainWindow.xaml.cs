@@ -22,6 +22,7 @@ namespace Piecework_wage_management_system
     {
         public MainWindow()
         {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             DataAccessLayer dataAccessLayer = new DataAccessLayer();
             dataAccessLayer.DataBaseInit();
@@ -30,12 +31,14 @@ namespace Piecework_wage_management_system
         private void btnAdministratorLogin_Click(object sender, RoutedEventArgs e)
         {
             AdminLoginWindow adminLoginWindow = new AdminLoginWindow();
-            adminLoginWindow.Show();
+            adminLoginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            adminLoginWindow.ShowDialog();
         }
 
         private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
         {
             ReckonByThePieceWindow reckonByThePieceWindow = new ReckonByThePieceWindow();
+            reckonByThePieceWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             reckonByThePieceWindow.Show();
             this.Close();
         }
@@ -43,7 +46,8 @@ namespace Piecework_wage_management_system
         private void btnTrackRecord_Click(object sender, RoutedEventArgs e)
         {
             TrackRecordWindow trackRecordWindow = new TrackRecordWindow();
-            trackRecordWindow = new TrackRecordWindow();
+            trackRecordWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            trackRecordWindow.Show();
             this.Close();
         }
 
@@ -52,6 +56,7 @@ namespace Piecework_wage_management_system
             if (AdminLoginWindow.IsLogin == true)
             {
                 AdminWindow adminWindow = new AdminWindow();
+                adminWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 adminWindow.Show();
                 this.Close();
             }

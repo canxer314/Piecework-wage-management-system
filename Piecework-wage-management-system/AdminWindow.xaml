@@ -7,14 +7,22 @@
         mc:Ignorable="d"
         Title="AdminWindow" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
     <DockPanel>
-        <Border Height="30" Background="AliceBlue" DockPanel.Dock="Top">
-            <TextBlock>Menu</TextBlock>
-        </Border>
-        <Border Height="30" Background="LightSteelBlue" DockPanel.Dock="Bottom">
-            <TextBlock>Status</TextBlock>
-        </Border>
+        <Menu Height="25" Background="AliceBlue" DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="Show _Book" />
+                <MenuItem Header="Show Book_s" />
+                <Separator />
+                <MenuItem Header="E_xit" />
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="Undo" Command="Undo" />
+                <Separator />
+                <MenuItem Header="Cut" Command="Cut" />
+                <MenuItem Header="Copy" Command="Copy" />
+                <MenuItem Header="Paste" Command="Paste" />
+            </MenuItem>
+        </Menu>
         <Border Background="LawnGreen" DockPanel.Dock="Left" Width="185">
-            <TextBlock>Left Side</TextBlock>
         </Border>
         <DockPanel>
             
