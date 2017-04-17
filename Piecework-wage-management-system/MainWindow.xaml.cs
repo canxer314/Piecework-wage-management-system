@@ -26,6 +26,13 @@ namespace Piecework_wage_management_system
             InitializeComponent();
             DataAccessLayer dataAccessLayer = new DataAccessLayer();
             dataAccessLayer.DataBaseInit();
+            if (dataAccessLayer.QueryAdministratorByAll().Count() == 0)
+            {
+                FirstUse_Window firstUseWnd = new FirstUse_Window();
+                firstUseWnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                firstUseWnd.ShowDialog();
+            }
+
         }
 
         private void btnAdministratorLogin_Click(object sender, RoutedEventArgs e)

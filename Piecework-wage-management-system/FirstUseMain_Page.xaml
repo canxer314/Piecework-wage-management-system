@@ -1,0 +1,28 @@
+﻿<Page x:Class="Piecework_wage_management_system.FirstUseMain_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Piecework_wage_management_system"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="FirstUseMain_Page">
+
+    <Grid Background="BlueViolet">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="13*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblUsername" Content="username:" Margin="27,127,198,108" Grid.Row="1" />
+        <TextBox x:Name="txtUsername" Margin="101,127,34,108" Grid.Row="1" />
+        <Label x:Name="lblPassword" Content="password:" Margin="27,159,198,76" Grid.Row="1" />
+        <PasswordBox x:Name="pwbPassword" Margin="101,159,34,76" Grid.Row="1"/>
+
+        <Button x:Name="btnReturn" Content="cancel" HorizontalAlignment="Left" Margin="191,227,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="19"/>
+        <Button x:Name="btnSignup" Content="Signup" HorizontalAlignment="Left" Margin="101,227,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="19" Click="btnSignup_Click"/>
+        <Label x:Name="lblTitle" Content="Instructions" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" Height="38" Width="300" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblConfirm" Content="confirm:" HorizontalAlignment="Left" Margin="27,190,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74"/>
+        <PasswordBox x:Name="pwbConfirm" HorizontalAlignment="Left" Margin="101,190,0,0" Grid.Row="1" VerticalAlignment="Top" Width="165" Height="25"/>
+        <Label x:Name="lblInstrusiton" Content="Before you start to use this software, you must&#xD;&#xA;first sign up an system administrator account. &#xD;&#xA;The database will initialize automatically." HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="112" Width="280"/>
+    </Grid>
+</Page>

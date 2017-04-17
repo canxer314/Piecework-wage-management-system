@@ -22,7 +22,7 @@ namespace Piecework_wage_management_system
             CREATE DATABASE IF NOT EXISTS gradulation_design_db CHARACTER SET GBK;
             USE gradulation_design_db;
             CREATE TABLE IF NOT EXISTS tbl_Administrator (
-                Id SMALLINT UNSIGNED PRIMARY KEY,
+                Id SMALLINT AUTO_INCREMENT UNSIGNED PRIMARY KEY,
                 Name CHAR(8),
                 Password CHAR(16),
                 Authority TINYINT
@@ -82,6 +82,16 @@ namespace Piecework_wage_management_system
                 return conn.Execute("Insert into tbl_Administrator values "
                      + "(@Id, @Name, @Password, @Authority)",
                      new { Id = a.AdministratorId, Name = a.Name, Password = a.Password, Authority = a.Authority });
+            }
+        }
+
+        //获取所有Employee对象的集合
+        public IEnumerable<Administrator> QueryAdministratorByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Employee order by Id desc";
+                return conn.Query<Administrator>(query,null);
             }
         }
 
