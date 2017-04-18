@@ -9,10 +9,10 @@
     <Grid>
         <Label x:Name="lblUsername" Content="用户名：" HorizontalAlignment="Left" Margin="29,37,0,0" VerticalAlignment="Top" Height="25" Width="56"/>
         <Label x:Name="lblPassword" Content="密码：" HorizontalAlignment="Left" Margin="29,85,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="90,85,0,0" VerticalAlignment="Top" Width="181" Height="25" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="25" Margin="90,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnReturn" Content="返回" HorizontalAlignment="Left" Margin="90,134,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnReturn_Click"/>
-        <Button x:Name="btnLogin" Content="登录" HorizontalAlignment="Left" Margin="196,134,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnLogin_Click"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="90,85,0,0" VerticalAlignment="Top" Width="181" Height="25" Grid.ColumnSpan="2" TabIndex="2" KeyDown="passwordBox_KeyDown"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="25" Margin="90,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Grid.ColumnSpan="2" TabIndex="1" />
+        <Button x:Name="btnReturn" Content="返回" HorizontalAlignment="Left" Margin="196,134,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnReturn_Click" TabIndex="4"/>
+        <Button x:Name="btnLogin" Content="登录" HorizontalAlignment="Left" Margin="90,134,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnLogin_Click" TabIndex="3"/>
 
     </Grid>
 </Window>

@@ -30,20 +30,30 @@ namespace Piecework_wage_management_system
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //processing with the database
-            IsLogin = true;
-            if (IsLogin == true)
+            DataAccessLayer dataAccessLayer = new DataAccessLayer();
+            foreach (Administrator admin in dataAccessLayer.QueryAdministratorByAll())
+                if(txtUsername.Text.ToString() == admin.Name && passwordBox.Password == admin.Password)
+                {
+                    IsLogin = true;
+                    this.Close();
+                }
+            if(IsLogin == false)
             {
-                IsLogin = true;
-                this.Close();
+                MessageBox.Show("帐号或密码错误！");
+                passwordBox.Password = null;
             }
-            else
-                MessageBox.Show("密码错误！");
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             IsLogin = false;
             this.Close();
+        }
+
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                btnLogin_Click(sender,e);
         }
     }
 }
