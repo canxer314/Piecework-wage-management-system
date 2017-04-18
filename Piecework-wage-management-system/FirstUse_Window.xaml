@@ -20,7 +20,7 @@
         <Label x:Name="lblPassword" Content="password:" Margin="71,0,0,0" Grid.Row="3" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" Height="25" />
         <PasswordBox x:Name="pwbPassword" Margin="180,0,0,0" Grid.Row="3" RenderTransformOrigin="-0.364,2.767" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="165" FontSize="14" TabIndex="2"/>
 
-        <Button x:Name="btnReturn" Content="cancel" HorizontalAlignment="Left" Margin="210,21,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="19" TabIndex="6"/>
+        <Button x:Name="btnReturn" Content="cancel" HorizontalAlignment="Left" Margin="210,21,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="19" TabIndex="6" Click="btnReturn_Click"/>
         <Button x:Name="btnSignup" Content="Signup" HorizontalAlignment="Left" Margin="115,21,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="19" Click="btnSignup_Click" TabIndex="4"/>
         <Label x:Name="lblTitle" Content="Instructions" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Height="38" Width="300" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="60,0"/>
         <Label x:Name="lblConfirm" Content="confirm:" HorizontalAlignment="Left" Margin="71,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="104" Height="25" FontSize="14"/>

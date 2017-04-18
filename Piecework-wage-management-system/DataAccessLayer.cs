@@ -15,7 +15,7 @@ namespace Piecework_wage_management_system
                  @"server=127.0.0.1;database=gradulation_design_db;uid=root;pwd=;charset='gbk'";
 
         //初始化数据库
-        public void DataBaseInit()
+        public bool DataBaseInit()
         {
             MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=;");  
             MySqlCommand cmd = new MySqlCommand(@"
@@ -61,9 +61,17 @@ namespace Piecework_wage_management_system
                     REFERENCES tbl_Procedure (Id)
             );
             ", conn);
-            conn.Open();            
+            try
+            {
+                conn.Open();            
+            }
+            catch(MySqlException e)
+            {
+                return false;
+            }
             cmd.ExecuteNonQuery();
-            conn.Close();  
+            conn.Close();
+            return true;
         }
 
         //获取MySql的连接数据库对象。MySqlConnection
@@ -90,7 +98,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                const string query = "select * from tbl_Employee order by Id desc";
+                const string query = "select * from tbl_Administrator order by Id desc";
                 return conn.Query<Administrator>(query,null);
             }
         }

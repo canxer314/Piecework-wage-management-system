@@ -25,14 +25,18 @@ namespace Piecework_wage_management_system
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             DataAccessLayer dataAccessLayer = new DataAccessLayer();
-            dataAccessLayer.DataBaseInit();
-            if (dataAccessLayer.QueryAdministratorByAll().Count() == 0)
+            if (dataAccessLayer.DataBaseInit() == false)
             {
+                MessageBox.Show("Database connection failed. Make sure the setting is correct.");
+                this.Close();
+            }
+            else if (dataAccessLayer.QueryAdministratorByAll().Count() == 0)
+            {
+                //MessageBox.Show(dataAccessLayer.QueryAdministratorByAll().Count().ToString());
                 FirstUse_Window firstUseWnd = new FirstUse_Window();
-                firstUseWnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                firstUseWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 firstUseWnd.ShowDialog();
             }
-
         }
 
         private void btnAdministratorLogin_Click(object sender, RoutedEventArgs e)
@@ -67,6 +71,8 @@ namespace Piecework_wage_management_system
                 adminWindow.Show();
                 this.Close();
             }
+            if (FirstUse_Window.noAdminAccount == true)
+                this.Close();
         }
     }
 }
