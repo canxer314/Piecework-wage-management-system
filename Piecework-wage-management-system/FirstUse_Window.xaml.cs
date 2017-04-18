@@ -23,5 +23,19 @@ namespace Piecework_wage_management_system
         {
             InitializeComponent();
         }
+
+        private void btnSignup_Click(object sender, RoutedEventArgs e)
+        {
+            if(pwbPassword.Password==pwbConfirm.Password)
+            {
+                Administrator administrator = new Administrator();
+                administrator.Name = txtUsername.Text.ToString();
+                administrator.Password = pwbConfirm.Password;
+                administrator.Authority = 1;
+                DataAccessLayer dataAccesslayer = new DataAccessLayer();
+                dataAccesslayer.InsertAdministrator(administrator);
+                this.Close();
+            }   
+        }
     }
 }

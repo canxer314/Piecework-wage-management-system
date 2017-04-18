@@ -22,7 +22,7 @@ namespace Piecework_wage_management_system
             CREATE DATABASE IF NOT EXISTS gradulation_design_db CHARACTER SET GBK;
             USE gradulation_design_db;
             CREATE TABLE IF NOT EXISTS tbl_Administrator (
-                Id SMALLINT AUTO_INCREMENT UNSIGNED PRIMARY KEY,
+                Id SMALLINT AUTO_INCREMENT PRIMARY KEY,
                 Name CHAR(8),
                 Password CHAR(16),
                 Authority TINYINT

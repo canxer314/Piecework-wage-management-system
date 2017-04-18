@@ -76,9 +76,6 @@
     <Compile Include="EmployeeLoginWindow.xaml.cs">
       <DependentUpon>EmployeeLoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FirstUseMain_Page.xaml.cs">
-      <DependentUpon>FirstUseMain_Page.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FirstUse_Window.xaml.cs">
       <DependentUpon>FirstUse_Window.xaml</DependentUpon>
     </Compile>
@@ -140,10 +137,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EmployeeLoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FirstUseMain_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

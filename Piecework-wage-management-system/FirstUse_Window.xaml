@@ -5,9 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="FirstUse_Window" Height="480" Width="420">
-    <Grid>
-        <Frame x:Name="FirstUseFrame" Source="FirstUseMain_Page.xaml" NavigationUIVisibility="Hidden" 
-                Grid.RowSpan="1" Grid.Row="0" VerticalAlignment="Stretch" VerticalContentAlignment="Top" />
+        Title="FirstUse_Window" Height="480" Width="420" ResizeMode="NoResize">
+    <Grid Background="BlueViolet">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblUsername" Content="username:" Margin="71,0,0,0" Grid.Row="2" FontSize="14" HorizontalAlignment="Left" Width="104" VerticalAlignment="Top" Height="25" />
+        <TextBox x:Name="txtUsername" Margin="180,0,0,0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="165" Height="25" FontSize="14" TabIndex="1" />
+        <Label x:Name="lblPassword" Content="password:" Margin="71,0,0,0" Grid.Row="3" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" Height="25" />
+        <PasswordBox x:Name="pwbPassword" Margin="180,0,0,0" Grid.Row="3" RenderTransformOrigin="-0.364,2.767" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="165" FontSize="14" TabIndex="2"/>
+
+        <Button x:Name="btnReturn" Content="cancel" HorizontalAlignment="Left" Margin="210,21,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="19" TabIndex="6"/>
+        <Button x:Name="btnSignup" Content="Signup" HorizontalAlignment="Left" Margin="115,21,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="19" Click="btnSignup_Click" TabIndex="4"/>
+        <Label x:Name="lblTitle" Content="Instructions" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Height="38" Width="300" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="60,0"/>
+        <Label x:Name="lblConfirm" Content="confirm:" HorizontalAlignment="Left" Margin="71,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="104" Height="25" FontSize="14"/>
+        <PasswordBox x:Name="pwbConfirm" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="165" Height="25" FontSize="14" TabIndex="3" />
+        <Label x:Name="lblInstrusiton" Content="Before you start to use this software, you must&#xD;&#xA;first sign up an system administrator account. &#xD;&#xA;The database will initialize automatically." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="112" Width="400" FontSize="16" Grid.Row="1"/>
     </Grid>
 </Window>
