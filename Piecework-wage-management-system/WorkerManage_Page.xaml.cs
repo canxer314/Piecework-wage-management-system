@@ -24,5 +24,20 @@ namespace Piecework_wage_management_system
         {
             InitializeComponent();
         }
+
+        private void AddEmployee(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AlterEmployee(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveEmployee(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,10 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="602" d:DesignWidth="846"
       Title="WorkerManage_Page">
 
-    <Grid>
-        <TextBox FontSize="25">Hello worker manage page!</TextBox>
+    <Grid Background="Chocolate">
+        <Menu Background="AliceBlue" FontSize="12" VerticalAlignment="Top">
+            <MenuItem Header="_Add Employee" Click="AddEmployee"/>
+            <MenuItem Header="_Alter Employee" Click="AlterEmployee"/>
+            <MenuItem Header="_Remove Employee" Click="RemoveEmployee"/>
+        </Menu>
     </Grid>
 </Page>
