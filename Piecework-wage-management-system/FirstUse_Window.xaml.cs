@@ -67,5 +67,11 @@ namespace Piecework_wage_management_system
         {
             this.Close();
         }
+
+        private void pwbConfirm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                btnSignup_Click(sender, e);
+        }
     }
 }

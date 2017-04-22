@@ -48,18 +48,16 @@ namespace Piecework_wage_management_system
 
         private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
         {
-            ReckonByThePieceWindow reckonByThePieceWindow = new ReckonByThePieceWindow();
-            reckonByThePieceWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            reckonByThePieceWindow.Show();
-            this.Close();
+            EmployeeLoginWindow employLoginWnd = new EmployeeLoginWindow(1,this);
+            employLoginWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            employLoginWnd.ShowDialog();
         }
 
         private void btnTrackRecord_Click(object sender, RoutedEventArgs e)
         {
-            TrackRecordWindow trackRecordWindow = new TrackRecordWindow();
-            trackRecordWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            trackRecordWindow.Show();
-            this.Close();
+            EmployeeLoginWindow employLoginWnd = new EmployeeLoginWindow(2,this);
+            employLoginWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            employLoginWnd.ShowDialog();
         }
 
         private void Window_Activated(object sender, EventArgs e)

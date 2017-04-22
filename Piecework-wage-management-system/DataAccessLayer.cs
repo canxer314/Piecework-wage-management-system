@@ -12,12 +12,12 @@ namespace Piecework_wage_management_system
     class DataAccessLayer
     {
         public readonly string mysqlconnectionString =
-                 @"server=127.0.0.1;database=gradulation_design_db;uid=root;pwd=;charset='gbk'";
+                 @"server=127.0.0.1;database=gradulation_design_db;uid=root;pwd=abcd709394;charset='gbk'";
 
         //初始化数据库
         public bool DataBaseInit()
         {
-            MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=;");  
+            MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=abcd709394;");  
             MySqlCommand cmd = new MySqlCommand(@"
             CREATE DATABASE IF NOT EXISTS gradulation_design_db CHARACTER SET GBK;
             USE gradulation_design_db;

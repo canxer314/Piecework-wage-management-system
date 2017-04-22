@@ -24,7 +24,7 @@
         <Button x:Name="btnSignup" Content="Signup" HorizontalAlignment="Left" Margin="115,21,0,0" VerticalAlignment="Top" Width="75" Grid.Row="5" Height="19" Click="btnSignup_Click" TabIndex="4"/>
         <Label x:Name="lblTitle" Content="Instructions" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Height="38" Width="300" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="60,0"/>
         <Label x:Name="lblConfirm" Content="confirm:" HorizontalAlignment="Left" Margin="71,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="104" Height="25" FontSize="14"/>
-        <PasswordBox x:Name="pwbConfirm" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="165" Height="25" FontSize="14" TabIndex="3" />
+        <PasswordBox x:Name="pwbConfirm" HorizontalAlignment="Left" Margin="180,0,0,0" Grid.Row="4" VerticalAlignment="Top" Width="165" Height="25" FontSize="14" TabIndex="3" KeyDown="pwbConfirm_KeyDown" />
         <Label x:Name="lblInstrusiton" Content="Before you start to use this software, you must&#xD;&#xA;first sign up an system administrator account. &#xD;&#xA;The database will initialize automatically." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="112" Width="400" FontSize="16" Grid.Row="1"/>
     </Grid>
 </Window>
