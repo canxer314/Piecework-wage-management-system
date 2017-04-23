@@ -22,27 +22,27 @@ namespace Piecework_wage_management_system
             CREATE DATABASE IF NOT EXISTS gradulation_design_db CHARACTER SET GBK;
             USE gradulation_design_db;
             CREATE TABLE IF NOT EXISTS tbl_Administrator (
-                Id SMALLINT AUTO_INCREMENT PRIMARY KEY,
+                Id INT AUTO_INCREMENT PRIMARY KEY,
                 Name CHAR(20),
                 Password CHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Employee (
-                Id SMALLINT UNSIGNED PRIMARY KEY,
+                Id INT PRIMARY KEY,
                 Name CHAR(20),
-                PY_Abbr VARCHAR(20),
+                PyAbbr VARCHAR(20),
                 Password CHAR(20),
-                Dept VARCHAR(20),
+                Department VARCHAR(20),
                 WorkShop VARCHAR(20),
                 Job VARCHAR(20),
-                Tel CHAR(13)
+                Telephone CHAR(13)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
-                Id INT AUTO_INCREMENT PRIMARY KEY,
+                Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
                 PY_Abbr VARCHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Procedure (
-                Id INT AUTO_INCREMENT PRIMARY KEY,
+                Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
                 PY_Abbr VARCHAR(20),
                 Sequence SMALLINT,
@@ -87,7 +87,7 @@ namespace Piecework_wage_management_system
             {
                 return conn.Execute("Insert into tbl_Administrator values "
                      + "(@Id, @Name, @Password)",
-                     new { Id = a.AdministratorId, Name = a.Name, Password = a.Password });
+                     new { Id = a.Id, Name = a.Name, Password = a.Password });
             }
         }
 
@@ -107,9 +107,9 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Employee values "
-                     + "(@Id, @Name, @PY_Abbr, @Password, @Dept, @WorkShop, @Job, @Tel)",
-                     new { Id = e.EmployeeId, Name=e.Name, PY_Abbr=e.PyAbbr, Password=e.Password, Dept=e.Department,
-                         WorkShop =e.Workshop, Job=e.Job, Tel=e.Telephone});
+                     + "(@Id, @Name, @PyAbbr, @Password, @Department, @WorkShop, @Job, @Telephone)",
+                     new { Id = e.Id, Name=e.Name, PyAbbr=e.PyAbbr, Password=e.Password, Department=e.Department,
+                         WorkShop =e.Workshop, Job=e.Job, Telephone=e.Telephone});
             }
         }
 
@@ -133,20 +133,20 @@ namespace Piecework_wage_management_system
         }
 
         //根据EmployeeID获取Employee对象的集合
-        public IEnumerable<Employee> QueryEmployeeByEID(short employeeId)
+        public IEnumerable<Employee> QueryEmployeeByEID(int Id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Id=@EmployeeId", new { EmployeeId=employeeId });
+                return conn.Query<Employee>("select * from tbl_Employee where Id=@Id", new { EmployeeId=Id });
             }
         }
 
         //根据Dept获取Employee对象的集合
-        public IEnumerable<Employee> QueryEmployeeByDept(string dept)
+        public IEnumerable<Employee> QueryEmployeeByDept(string department)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Dept=@Dept", new { Dept = dept });
+                return conn.Query<Employee>("select * from tbl_Employee where Department=@Department", new { Department = department });
             }
         }
 
@@ -169,11 +169,11 @@ namespace Piecework_wage_management_system
         }
 
         //根据Tel取Employee对象的集合
-        public IEnumerable<Employee> QueryEmployeeByTel(string tel)
+        public IEnumerable<Employee> QueryEmployeeByTel(string telephone)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Tel=@Tel", new { Tel = tel });
+                return conn.Query<Employee>("select * from tbl_Employee where Telephone=@Telephone", new { Telephone = telephone });
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Piecework_wage_management_system
     public class Administrator
     {
         public string Name { get; set; }
-        public short AdministratorId { get; set; }
+        public short Id { get; set; }
         public string Password { get; set; }
     }
 }

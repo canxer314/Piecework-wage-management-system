@@ -30,24 +30,15 @@ namespace Piecework_wage_management_system
 
         public void FillListView()
         {
-            List<Employee> list = db.QueryEmployeeByAll().ToList();
-            if (list == null)
-            {
-                MessageBox.Show("No Employee in the Database");
-            }
-            else
-            {
-                employee_ListView.ItemsSource = db.QueryEmployeeByAll();
-                MessageBox.Show(list.ElementAt(0).Name.ToString());
-            }
+            List<Employee> list = db.QueryEmployeeByAll().ToList<Employee>();
             try
             {
-                //employee_ListView.ItemsSource = list;
-                tb_show.Text = list.ElementAt(0).Name;
-                ///employee_ListView.ItemsSource = db.QueryEmployeeByAll();
+                employee_ListView.ItemsSource = list;
+                tb_show.Text = list.ElementAt(0).Telephone;
             }
             catch
             {
+
             }
         }
 

@@ -34,7 +34,7 @@ namespace Piecework_wage_management_system
             //processing with the database
             DataAccessLayer dataAccessLayer = new DataAccessLayer();
             foreach (Employee employee in dataAccessLayer.QueryEmployeeByAll())
-                if(txtID.Text.ToString() == employee.EmployeeId.ToString() && passwordBox.Password == employee.Password)
+                if(txtID.Text.ToString() == employee.Id.ToString() && passwordBox.Password == employee.Password)
                 {
                     IsLogin = true;
                     switch(functionEntry)

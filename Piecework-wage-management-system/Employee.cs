@@ -8,9 +8,9 @@ namespace Piecework_wage_management_system
 {
     public class Employee
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string PyAbbr { get; set; }
-        public short EmployeeId { get; set; }
         public string Password { get; set; }
         public string Department { get; set; }
         public string Workshop { get; set; }

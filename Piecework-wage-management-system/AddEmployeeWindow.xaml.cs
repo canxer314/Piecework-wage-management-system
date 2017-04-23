@@ -32,7 +32,7 @@ namespace Piecework_wage_management_system
         {
             foreach (Employee empl in db.QueryEmployeeByAll())
             {
-                if(txt_EmployeeId.Text == empl.EmployeeId.ToString())
+                if(txt_EmployeeId.Text == empl.Id.ToString())
                 {
                     MessageBox.Show("Already exists worker having eID:" + txt_EmployeeId.Text);
                     return;
@@ -43,7 +43,7 @@ namespace Piecework_wage_management_system
             employee.PyAbbr = (new BusinessLogicLayer()).PinyinAbbreviationConvert(txt_EmployeeName.Text);
             try
             {
-            employee.EmployeeId = short.Parse(txt_EmployeeId.Text);
+            employee.Id = int.Parse(txt_EmployeeId.Text);
             }
             catch { }
             employee.Department = txt_Department.Text;

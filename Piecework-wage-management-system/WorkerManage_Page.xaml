@@ -16,18 +16,18 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="AliceBlue" >
             <MenuItem Header="_Add Employee" Click="AddEmployee"/>
-            <MenuItem Header="_Alter Employee" Click="AlterEmployee"/>
+            <MenuItem Header="A_lter Employee" Click="AlterEmployee"/>
             <MenuItem Header="_Remove Employee" Click="RemoveEmployee"/>
         </Menu>
         <ListView Grid.Row="1" Name="employee_ListView" MinWidth="400" Width="auto">
             <ListView.View>
                 <GridView x:Name="employee_GridView">
-                    <GridViewColumn Header="Name"></GridViewColumn>
-                    <GridViewColumn Header="EmployeeId"></GridViewColumn>
-                    <GridViewColumn Header="Department"></GridViewColumn>
-                    <GridViewColumn Header="Workshop"></GridViewColumn>
-                    <GridViewColumn Header="Job"></GridViewColumn>
-                    <GridViewColumn Header="Telephone"></GridViewColumn>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                    <GridViewColumn Header="EmployeeId" DisplayMemberBinding="{Binding Path=Id}"></GridViewColumn>
+                    <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=Department}"></GridViewColumn>
+                    <GridViewColumn Header="Workshop" DisplayMemberBinding="{Binding Path=Workshop}"></GridViewColumn>
+                    <GridViewColumn Header="Job" DisplayMemberBinding="{Binding Path=Job}"></GridViewColumn>
+                    <GridViewColumn Header="Telephone" DisplayMemberBinding="{Binding Path=Telephone}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
