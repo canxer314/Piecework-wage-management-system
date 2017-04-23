@@ -9,10 +9,28 @@
       Title="WorkerManage_Page">
 
     <Grid Background="Chocolate">
-        <Menu Background="AliceBlue" FontSize="12" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Background="AliceBlue" >
             <MenuItem Header="_Add Employee" Click="AddEmployee"/>
             <MenuItem Header="_Alter Employee" Click="AlterEmployee"/>
             <MenuItem Header="_Remove Employee" Click="RemoveEmployee"/>
         </Menu>
+        <ListView Grid.Row="1" Name="employee_ListView" MinWidth="400" Width="auto">
+            <ListView.View>
+                <GridView x:Name="employee_GridView">
+                    <GridViewColumn Header="Name"></GridViewColumn>
+                    <GridViewColumn Header="EmployeeId"></GridViewColumn>
+                    <GridViewColumn Header="Department"></GridViewColumn>
+                    <GridViewColumn Header="Workshop"></GridViewColumn>
+                    <GridViewColumn Header="Job"></GridViewColumn>
+                    <GridViewColumn Header="Telephone"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock x:Name="tb_show" Grid.Row="2" MinWidth="400"/>
     </Grid>
 </Page>

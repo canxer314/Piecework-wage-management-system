@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
         Title="计件工资管理系统" Height="460" Width="380" ResizeMode="NoResize" Background="LightYellow" Activated="Window_Activated">
-    <Grid>
-        <Label x:Name="lblWelcome" Content="欢迎使用计件工资管理系统！" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Height="65" Width="315" FontSize="24"/>
-        <Button x:Name="btnReckonByPiece" Content="计件" HorizontalAlignment="Left" Margin="105,130,0,0" VerticalAlignment="Top" Width="160" Height="50" FontSize="22" Background="LightGreen" Click="btnReckonByThePiece_Click"/>
-        <Button x:Name="btnTrackRecord" Content="业绩查询" HorizontalAlignment="Left" Margin="105,215,0,0" VerticalAlignment="Top" Width="160" Height="50" FontSize="22" Background="LightBlue" Click="btnTrackRecord_Click"/>
-        <Button x:Name="btnAdministratorLogin" Content="管理员登录" HorizontalAlignment="Left" Margin="105,300,0,0" VerticalAlignment="Top" Width="160" Height="50" FontSize="22" Background="#FFFF4242" Click="btnAdministratorLogin_Click"/>
-    </Grid>
+    <UniformGrid Rows="5">
+        <Label x:Name="lblWelcome" Content="欢迎使用计件工资管理系统！" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="50" Width="315" FontSize="24"/>
+        <Button x:Name="btnReckonByPiece" Content="计件" HorizontalAlignment="Center"  Width="160" Height="50" FontSize="22" Background="LightGreen" Click="btnReckonByThePiece_Click"/>
+        <Button x:Name="btnTrackRecord" Content="业绩查询" HorizontalAlignment="Center"  Width="160" Height="50" FontSize="22" Background="LightBlue" Click="btnTrackRecord_Click"/>
+        <Button x:Name="btnAdministratorLogin" Content="管理员登录" HorizontalAlignment="Center"  Width="160" Height="50" FontSize="22" Background="#FFFF4242" Click="btnAdministratorLogin_Click"/>
+    </UniformGrid>
 </Window>

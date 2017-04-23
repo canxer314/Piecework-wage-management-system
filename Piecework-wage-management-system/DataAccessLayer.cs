@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Piecework_wage_management_system
 {
-    class DataAccessLayer
+    public class DataAccessLayer
     {
         public readonly string mysqlconnectionString =
                  @"server=127.0.0.1;database=gradulation_design_db;uid=root;pwd=abcd709394;charset='gbk'";
@@ -23,38 +23,36 @@ namespace Piecework_wage_management_system
             USE gradulation_design_db;
             CREATE TABLE IF NOT EXISTS tbl_Administrator (
                 Id SMALLINT AUTO_INCREMENT PRIMARY KEY,
-                Name CHAR(8),
-                Password CHAR(16),
-                Authority TINYINT
+                Name CHAR(20),
+                Password CHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Employee (
                 Id SMALLINT UNSIGNED PRIMARY KEY,
-                Name CHAR(8),
-                PY_Abbr VARCHAR(8),
-                Password CHAR(16),
-                Dept VARCHAR(16),
-                WorkShop VARCHAR(16),
-                Job VARCHAR(16),
-                Authority TINYINT,
+                Name CHAR(20),
+                PY_Abbr VARCHAR(20),
+                Password CHAR(20),
+                Dept VARCHAR(20),
+                WorkShop VARCHAR(20),
+                Job VARCHAR(20),
                 Tel CHAR(13)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
-                Name CHAR(16) UNIQUE KEY,
-                PY_Abbr VARCHAR(16)
+                Name CHAR(20) UNIQUE KEY,
+                PY_Abbr VARCHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Procedure (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
-                Name CHAR(16) UNIQUE KEY,
-                PY_Abbr VARCHAR(16),
+                Name CHAR(20) UNIQUE KEY,
+                PY_Abbr VARCHAR(20),
                 Sequence SMALLINT,
                 Product_Id INT,
                 CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
                     REFERENCES tbl_Product (Id)
             );
             CREATE TABLE IF NOT EXISTS tbl_Value (
-                Name CHAR(8) PRIMARY KEY,
-                PY_Abbr VARCHAR(8),
+                Name CHAR(20) PRIMARY KEY,
+                PY_Abbr VARCHAR(20),
                 Unit_Price SMALLINT,
                 Procedure_Id INT,
                 CONSTRAINT fk_Procedure FOREIGN KEY (Procedure_Id)
@@ -65,7 +63,7 @@ namespace Piecework_wage_management_system
             {
                 conn.Open();            
             }
-            catch(MySqlException e)
+            catch
             {
                 return false;
             }
@@ -88,8 +86,8 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Administrator values "
-                     + "(@Id, @Name, @Password, @Authority)",
-                     new { Id = a.AdministratorId, Name = a.Name, Password = a.Password, Authority = a.Authority });
+                     + "(@Id, @Name, @Password)",
+                     new { Id = a.AdministratorId, Name = a.Name, Password = a.Password });
             }
         }
 
@@ -109,9 +107,9 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Employee values "
-                     + "(@Id, @Name, @Password, @Dept, @WorkShop, @Job, @Authority, @Tel)",
-                     new { Id = e.EmployeeId, Name=e.Name, Password=e.Password, Dept=e.Department,
-                         WorkShop =e.Workshop, Job=e.Job, Authority=e.Authority, Tel=e.Telephone});
+                     + "(@Id, @Name, @PY_Abbr, @Password, @Dept, @WorkShop, @Job, @Tel)",
+                     new { Id = e.EmployeeId, Name=e.Name, PY_Abbr=e.PyAbbr, Password=e.Password, Dept=e.Department,
+                         WorkShop =e.Workshop, Job=e.Job, Tel=e.Telephone});
             }
         }
 

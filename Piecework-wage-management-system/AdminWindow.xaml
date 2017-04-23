@@ -23,7 +23,7 @@
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Left" Width="170" >
-            <UniformGrid Rows="13" Columns="1">
+            <UniformGrid Rows="13">
                 <Button x:Name="btnAdministratorManage" Content="Administrator Manage"  Click="btnAdministratorManage_Click" FontSize="12" FontWeight="Bold" />
                 <Button x:Name="btnWorkshopManage" Content="Workshop Manage" FontSize="12" FontWeight="Bold" Click="btnWorkshopManage_Click" />
                 <Button x:Name="btnJobManage" Content="Job Manage" FontSize="12" FontWeight="Bold" Click="btnJobManage_Click" />

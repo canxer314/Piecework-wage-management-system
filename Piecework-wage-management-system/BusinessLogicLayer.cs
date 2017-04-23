@@ -7,7 +7,7 @@ using NPinyin;
 
 namespace Piecework_wage_management_system
 {
-    class BusinessLogicLayer
+    public class BusinessLogicLayer
     {
         //权限处理
         public bool AuthorityProcessing(byte userAuthority, byte functionAuthority)

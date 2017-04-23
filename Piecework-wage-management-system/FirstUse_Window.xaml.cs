@@ -47,7 +47,6 @@ namespace Piecework_wage_management_system
                 Administrator administrator = new Administrator();
                 administrator.Name = txtUsername.Text.ToString();
                 administrator.Password = pwbConfirm.Password;
-                administrator.Authority = 1;
                 DataAccessLayer dataAccesslayer = new DataAccessLayer();
                 dataAccesslayer.InsertAdministrator(administrator);
                 noAdminAccount = false;

@@ -12,7 +12,7 @@
             <RowDefinition Height="38*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="11*"/>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="19*"/>
         </Grid.RowDefinitions>
         <Label x:Name="lblUsername" Content="username:" Margin="71,0,0,0" Grid.Row="2" FontSize="14" HorizontalAlignment="Left" Width="104" VerticalAlignment="Top" Height="25" />

@@ -20,14 +20,42 @@ namespace Piecework_wage_management_system
     /// </summary>
     public partial class WorkerManage_Page : Page
     {
+        public DataAccessLayer db { set; get; }
         public WorkerManage_Page()
         {
+            db = new DataAccessLayer();
             InitializeComponent();
+            FillListView();
+        }
+
+        public void FillListView()
+        {
+            List<Employee> list = db.QueryEmployeeByAll().ToList();
+            if (list == null)
+            {
+                MessageBox.Show("No Employee in the Database");
+            }
+            else
+            {
+                employee_ListView.ItemsSource = db.QueryEmployeeByAll();
+                MessageBox.Show(list.ElementAt(0).Name.ToString());
+            }
+            try
+            {
+                //employee_ListView.ItemsSource = list;
+                tb_show.Text = list.ElementAt(0).Name;
+                ///employee_ListView.ItemsSource = db.QueryEmployeeByAll();
+            }
+            catch
+            {
+            }
         }
 
         private void AddEmployee(object sender, RoutedEventArgs e)
         {
-
+            AddEmployeeWindow addEmplWnd = new AddEmployeeWindow(db, this);
+            addEmplWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            addEmplWnd.ShowDialog();
         }
 
         private void AlterEmployee(object sender, RoutedEventArgs e)

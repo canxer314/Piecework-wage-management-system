@@ -67,6 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdministratorManage_Page.xaml.cs">
       <DependentUpon>AdministratorManage_Page.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <Compile Include="WorkShopManage_Page.xaml.cs">
       <DependentUpon>WorkShopManage_Page.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdministratorManage_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

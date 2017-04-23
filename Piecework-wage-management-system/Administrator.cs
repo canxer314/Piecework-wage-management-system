@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Piecework_wage_management_system
 {
-    class Administrator
+    public class Administrator
     {
         public string Name { get; set; }
         public short AdministratorId { get; set; }
         public string Password { get; set; }
-        public byte Authority { get; set; }
     }
 }

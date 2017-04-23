@@ -41,9 +41,13 @@ namespace Piecework_wage_management_system
 
         private void btnAdministratorLogin_Click(object sender, RoutedEventArgs e)
         {
-            AdminLoginWindow adminLoginWindow = new AdminLoginWindow();
-            adminLoginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            adminLoginWindow.ShowDialog();
+            AdminWindow adminWnd = new AdminWindow();
+            adminWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            adminWnd.Show();
+            this.Close();
+            //AdminLoginWindow adminLoginWindow = new AdminLoginWindow();
+            //adminLoginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //adminLoginWindow.ShowDialog();
         }
 
         private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
