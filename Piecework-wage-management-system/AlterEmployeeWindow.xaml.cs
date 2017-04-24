@@ -113,7 +113,7 @@ namespace Piecework_wage_management_system
 
         private void btn_ResetPassword_Click(object sender, RoutedEventArgs e)
         {
-            db.UpdateEmployeeById(OriginEmployee.Id, OriginEmployee.Id.ToString());
+            db.UpdateEmployeePasswordById(OriginEmployee.Id, OriginEmployee.Id.ToString());
             SystemSounds.Beep.Play();
             MessageBox.Show("The password of " + OriginEmployee.Name + " has been reset to its default value.");
             this.Close();

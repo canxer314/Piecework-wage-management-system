@@ -55,7 +55,7 @@ namespace Piecework_wage_management_system
             }
             else
             {
-                MessageBox.Show("two passwords are different");
+                MessageBox.Show("The two passwords not match!");
                 pwbPassword.Password = null;
                 pwbConfirm.Password = null;
                 return;

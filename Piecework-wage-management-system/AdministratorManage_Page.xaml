@@ -5,10 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="602" d:DesignWidth="846"
       Title="AdministratorManage_Page">
 
-    <Grid>
-        <TextBox FontSize="25">Hello administrator manage page!</TextBox>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Background="BlanchedAlmond" >
+            <MenuItem x:Name="AddAccount" Header="_Add account" Click="AddAccount_Click"/>
+            <MenuItem x:Name="ModifyPassword" Header="_Modify Password" Click="ModifyPassword_Click"/>
+            <MenuItem x:Name="DeleteAccount" Header="_Delete account" Click="DeleteAccount_Click"/>
+            <MenuItem x:Name="RefreshList" Header="_Refresh List" Click="RefreshList_Click"/>
+        </Menu>
+        <DataGrid x:Name="gridAdministrator" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

@@ -82,5 +82,11 @@ namespace Piecework_wage_management_system
             }
             FillListView();
         }
+
+        private void RefreshList(object sender, RoutedEventArgs e)
+        {
+            FillListView();
+            SystemSounds.Beep.Play();
+        }
     }
 }

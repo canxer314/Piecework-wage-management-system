@@ -13,10 +13,11 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Background="AliceBlue" >
+        <Menu Grid.Row="0" Background="BlanchedAlmond" >
             <MenuItem Header="_Add Employee" Click="AddEmployee"/>
-            <MenuItem Header="A_lter Employee" Click="AlterEmployee"/>
+            <MenuItem Header="_Modify Employee" Click="AlterEmployee"/>
             <MenuItem Header="_Remove Employee" Click="RemoveEmployee"/>
+            <MenuItem Header="Refresh _List" Click="RefreshList"/>
         </Menu>
         <DataGrid x:Name="gridEmployees" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False">
             <DataGrid.Columns>

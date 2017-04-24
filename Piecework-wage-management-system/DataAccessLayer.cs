@@ -23,7 +23,7 @@ namespace Piecework_wage_management_system
             USE gradulation_design_db;
             CREATE TABLE IF NOT EXISTS tbl_Administrator (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
-                Name CHAR(20),
+                Name CHAR(20) UNIQUE KEY,
                 Password CHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Employee (
@@ -100,7 +100,27 @@ namespace Piecework_wage_management_system
                 return conn.Query<Administrator>(query,null);
             }
         }
-
+        public IEnumerable<Administrator> QueryAdministratorByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Administrator>("select * from tbl_Administrator where Name=@Name", new { Name = name });
+            }
+        }
+        public int UpdateAdministratorPasswordById(int id, string password)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Administrator set Password=@Password where Id=@Id", new { Password = password, Id = id });
+            }
+        }
+        public int DeleteAdministratorById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Administrator where Id=@Id", new { Id = id });
+            }
+        }
         //插入Employee对象
         public int InsertEmployee(Employee e)
         {
@@ -176,7 +196,7 @@ namespace Piecework_wage_management_system
                 return conn.Query<Employee>("select * from tbl_Employee where Telephone=@Telephone", new { Telephone = telephone });
             }
         }
-        public int UpdateEmployeeById(int id, string password)
+        public int UpdateEmployeePasswordById(int id, string password)
         {
             using (IDbConnection conn = OpenConnection())
             {
