@@ -8,29 +8,25 @@
       d:DesignHeight="602" d:DesignWidth="846"
       Title="WorkerManage_Page">
 
-    <Grid Background="Chocolate">
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="25" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="AliceBlue" >
             <MenuItem Header="_Add Employee" Click="AddEmployee"/>
             <MenuItem Header="A_lter Employee" Click="AlterEmployee"/>
             <MenuItem Header="_Remove Employee" Click="RemoveEmployee"/>
         </Menu>
-        <ListView Grid.Row="1" Name="employee_ListView" MinWidth="400" Width="auto">
-            <ListView.View>
-                <GridView x:Name="employee_GridView">
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
-                    <GridViewColumn Header="EmployeeId" DisplayMemberBinding="{Binding Path=Id}"></GridViewColumn>
-                    <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=Department}"></GridViewColumn>
-                    <GridViewColumn Header="Workshop" DisplayMemberBinding="{Binding Path=Workshop}"></GridViewColumn>
-                    <GridViewColumn Header="Job" DisplayMemberBinding="{Binding Path=Job}"></GridViewColumn>
-                    <GridViewColumn Header="Telephone" DisplayMemberBinding="{Binding Path=Telephone}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBlock x:Name="tb_show" Grid.Row="2" MinWidth="400"/>
+        <DataGrid x:Name="gridEmployees" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Department}" Header="Department"/>
+                <DataGridTextColumn Binding="{Binding Workshop}" Header="Workshop"/>
+                <DataGridTextColumn Binding="{Binding Job}" Header="Job"/>
+                <DataGridTextColumn Binding="{Binding Telephone}" Header="Telephone"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

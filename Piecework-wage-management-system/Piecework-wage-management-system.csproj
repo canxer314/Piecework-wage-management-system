@@ -76,6 +76,9 @@
     <Compile Include="AdminLoginWindow.xaml.cs">
       <DependentUpon>AdminLoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AlterEmployeeWindow.xaml.cs">
+      <DependentUpon>AlterEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeLoginWindow.xaml.cs">
       <DependentUpon>EmployeeLoginWindow.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AlterEmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

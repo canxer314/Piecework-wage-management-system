@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,9 +35,46 @@ namespace Piecework_wage_management_system
             {
                 if(txt_EmployeeId.Text == empl.Id.ToString())
                 {
-                    MessageBox.Show("Already exists worker having eID:" + txt_EmployeeId.Text);
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Already exists employee having eID:" + txt_EmployeeId.Text);
                     return;
                 }
+            }
+            if(txt_EmployeeName == null)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Name can not be blank!");
+                return;
+            }
+            if(txt_EmployeeId == null)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Id can not be blank!");
+                return;
+            }
+            if(txt_Department == null)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Department can not be blank!");
+                return;
+            }
+            if(txt_Workshop == null)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Workshop can not be blank!");
+                return;
+            }
+            if(txt_Job == null)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Job can not be blank!");
+                return;
+            }
+            if(txt_Telephone == null)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Telephone can not be blank!");
+                return;
             }
             Employee employee = new Employee();
             employee.Name = txt_EmployeeName.Text;
@@ -70,6 +108,12 @@ namespace Piecework_wage_management_system
             txt_Telephone.Text = null;
             txt_Workshop.Text = null;
             txt_EmployeeName.Focus();
+        }
+
+        private void txt_Telephone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                btn_AddEmployee_Click(sender,e);
         }
     }
 }

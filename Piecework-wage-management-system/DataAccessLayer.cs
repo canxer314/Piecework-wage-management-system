@@ -39,12 +39,12 @@ namespace Piecework_wage_management_system
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
-                PY_Abbr VARCHAR(20)
+                PyAbbr VARCHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Procedure (
                 Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
-                PY_Abbr VARCHAR(20),
+                PyAbbr VARCHAR(20),
                 Sequence SMALLINT,
                 Product_Id INT,
                 CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
@@ -52,7 +52,7 @@ namespace Piecework_wage_management_system
             );
             CREATE TABLE IF NOT EXISTS tbl_Value (
                 Name CHAR(20) PRIMARY KEY,
-                PY_Abbr VARCHAR(20),
+                PyAbbr VARCHAR(20),
                 Unit_Price SMALLINT,
                 Procedure_Id INT,
                 CONSTRAINT fk_Procedure FOREIGN KEY (Procedure_Id)
@@ -96,7 +96,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                const string query = "select * from tbl_Administrator order by Id desc";
+                const string query = "select * from tbl_Administrator order by Id asc";
                 return conn.Query<Administrator>(query,null);
             }
         }
@@ -118,7 +118,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                const string query = "select * from tbl_Employee order by Id desc";
+                const string query = "select * from tbl_Employee order by Id asc";
                 return conn.Query<Employee>(query,null);
             }
         }
@@ -137,7 +137,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Id=@Id", new { EmployeeId=Id });
+                return conn.Query<Employee>("select * from tbl_Employee where Id=@Id", new { Id=Id });
             }
         }
 
@@ -174,6 +174,20 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Query<Employee>("select * from tbl_Employee where Telephone=@Telephone", new { Telephone = telephone });
+            }
+        }
+        public int UpdateEmployeeById(int id, string password)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Employee set Password=@Password where Id=@Id", new { Password = password, Id = id });
+            }
+        }
+        public int DeleteEmployeeById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Employee where Id=@Id", new { Id = id });
             }
         }
     }

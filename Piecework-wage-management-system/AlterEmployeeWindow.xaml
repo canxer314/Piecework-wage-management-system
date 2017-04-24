@@ -1,0 +1,44 @@
+﻿<Window x:Class="Piecework_wage_management_system.AlterEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Piecework_wage_management_system"
+        mc:Ignorable="d"
+        Title="AlterEmployeeWindow" Height="400" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="tb_Title" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Alter Employee"/>
+        <TextBlock x:Name="tb_EmployeeName" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Name:"/>
+        <TextBox x:Name="txt_EmployeeName" Height="25" Width="180" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1" KeyDown="txt_EmployeeName_KeyDown"/>
+        <TextBlock x:Name="tb_EmployeeId" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="EmployeeId:"/>
+        <TextBox x:Name="txt_EmployeeId" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2" KeyDown="txt_EmployeeId_KeyDown" />
+        <TextBlock x:Name="tb_Department" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Department:"/>
+        <TextBox x:Name="txt_Department" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3" KeyDown="txt_Department_KeyDown"/>
+        <TextBlock x:Name="tb_Workshop" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Workshop:"/>
+        <TextBox x:Name="txt_Workshop" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="4" KeyDown="txt_Workshop_KeyDown"/>
+        <TextBlock x:Name="tb_Job" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Job:"/>
+        <TextBox x:Name="txt_Job" Height="25" Width="180" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5" KeyDown="txt_Job_KeyDown"/>
+        <TextBlock x:Name="tb_Telephone" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Telephone:"/>
+        <TextBox x:Name="txt_Telephone" Height="25" Width="180" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="6" KeyDown="txt_Telephone_KeyDown"/>
+        <Button x:Name="btn_Restore" Height="20" Width="55" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Click="btn_Restore_Click" TabIndex="8">Restore</Button>
+        <Button x:Name="btn_AlterEmployee" Height="20" Width="55" Grid.Row="7" Grid.Column="1" FontWeight="Bold" Click="btn_AlterEmployee_Click" TabIndex="7">Alter</Button>
+        <Button x:Name="btn_Return" Height="20" Width="55" Grid.Row="7" Grid.Column="2" FontWeight="Bold" Click="btn_Return_Click" TabIndex="9">Return</Button>
+        <Button x:Name="btn_ResetPassword" Height="20" Width="110" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" FontWeight="Bold" Click="btn_ResetPassword_Click" TabIndex="10">Reset Password</Button>
+    </Grid>
+</Window>

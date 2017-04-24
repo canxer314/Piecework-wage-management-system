@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,14 +28,11 @@ namespace Piecework_wage_management_system
             InitializeComponent();
             FillListView();
         }
-
         public void FillListView()
         {
-            List<Employee> list = db.QueryEmployeeByAll().ToList<Employee>();
             try
             {
-                employee_ListView.ItemsSource = list;
-                tb_show.Text = list.ElementAt(0).Telephone;
+                gridEmployees.ItemsSource = db.QueryEmployeeByAll();
             }
             catch
             {
@@ -51,12 +49,38 @@ namespace Piecework_wage_management_system
 
         private void AlterEmployee(object sender, RoutedEventArgs e)
         {
-
+            if (gridEmployees.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select a employee in the table before you alter it.");
+                return;
+            }
+            if (gridEmployees.SelectedItems.Count > 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Can not alter multiple employee information.");
+                return;
+            }
+            IEnumerable<Employee> employeeList;
+            employeeList = db.QueryEmployeeByEID((gridEmployees.SelectedItem as Employee).Id);
+            AlterEmployeeWindow alterEmployeeWindow = new AlterEmployeeWindow(employeeList.ElementAt(0), db, this);
+            alterEmployeeWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            alterEmployeeWindow.ShowDialog();
         }
 
         private void RemoveEmployee(object sender, RoutedEventArgs e)
         {
-
+            if (gridEmployees.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select at least one employee in the table before you remove it.");
+                return;
+            }
+            foreach (Employee item in gridEmployees.SelectedItems)
+            {
+                db.DeleteEmployeeById(item.Id);
+            }
+            FillListView();
         }
     }
 }
