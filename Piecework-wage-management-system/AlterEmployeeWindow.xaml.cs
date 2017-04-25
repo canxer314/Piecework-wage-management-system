@@ -35,7 +35,7 @@ namespace Piecework_wage_management_system
         private void RestoreOriginEmployee()
         {
             txt_EmployeeName.Text = OriginEmployee.Name;
-            txt_Department.Text = OriginEmployee.Department;
+            txt_Gender.Text = OriginEmployee.Gender;
             txt_EmployeeId.Text = OriginEmployee.Id.ToString();
             txt_Job.Text = OriginEmployee.Job;
             txt_Workshop.Text = OriginEmployee.Workshop;
@@ -58,7 +58,7 @@ namespace Piecework_wage_management_system
             }
             alteredEmployee.Name = txt_EmployeeName.Text;
             alteredEmployee.Id = int.Parse(txt_EmployeeId.Text);
-            alteredEmployee.Department = txt_Department.Text;
+            alteredEmployee.Gender = txt_Gender.Text;
             alteredEmployee.Workshop = txt_Workshop.Text;
             alteredEmployee.Job = txt_Job.Text;
             alteredEmployee.Telephone = txt_Telephone.Text;
@@ -93,7 +93,7 @@ namespace Piecework_wage_management_system
                 btn_AlterEmployee_Click(sender, e);
         }
 
-        private void txt_Department_KeyDown(object sender, KeyEventArgs e)
+        private void txt_Gender_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
                 btn_AlterEmployee_Click(sender, e);

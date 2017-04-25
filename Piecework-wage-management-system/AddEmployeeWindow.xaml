@@ -27,8 +27,8 @@
         <TextBox x:Name="txt_EmployeeName" Height="25" Width="180" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
         <TextBlock x:Name="tb_EmployeeId" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="EmployeeId:"/>
         <TextBox x:Name="txt_EmployeeId" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <TextBlock x:Name="tb_Department" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Department:"/>
-        <TextBox x:Name="txt_Department" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3"/>
+        <TextBlock x:Name="tb_Gender" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Gender:"/>
+        <TextBox x:Name="txt_Gender" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3"/>
         <TextBlock x:Name="tb_Workshop" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Workshop:"/>
         <TextBox x:Name="txt_Workshop" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="4"/>
         <TextBlock x:Name="tb_Job" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Job:"/>

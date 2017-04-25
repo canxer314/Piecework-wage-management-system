@@ -12,7 +12,7 @@ namespace Piecework_wage_management_system
         public string Name { get; set; }
         public string PyAbbr { get; set; }
         public string Password { get; set; }
-        public string Department { get; set; }
+        public string Gender { get; set; }
         public string Workshop { get; set; }
         public string Job { get; set; }
         public string Telephone { get; set; }

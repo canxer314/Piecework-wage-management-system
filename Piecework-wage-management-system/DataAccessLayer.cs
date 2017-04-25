@@ -31,10 +31,22 @@ namespace Piecework_wage_management_system
                 Name CHAR(20),
                 PyAbbr VARCHAR(20),
                 Password CHAR(20),
-                Department VARCHAR(20),
-                WorkShop VARCHAR(20),
-                Job VARCHAR(20),
+                Gender VARCHAR(6),
+                CONSTRAINT fk_Workshop FOREIGN KEY (Workshop_Name)
+                    REFERENCES tbl_Workshop (Name),
+                CONSTRAINT fk_Job FOREIGN KEY (Job_Name)
+                    REFERENCES tbl_Job (Name),
                 Telephone CHAR(13)
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Workshop (
+                Id INT PRIMARY KEY,
+                Name CHAR(20) UNIQUE KEY,
+                PyAbbr VARCHAR(20)
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Job (
+                Id INT PRIMARY KEY,
+                Name CHAR(20) UNIQUE KEY,
+                PyAbbr VARCHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT PRIMARY KEY,
@@ -127,8 +139,8 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Employee values "
-                     + "(@Id, @Name, @PyAbbr, @Password, @Department, @WorkShop, @Job, @Telephone)",
-                     new { Id = e.Id, Name=e.Name, PyAbbr=e.PyAbbr, Password=e.Password, Department=e.Department,
+                     + "(@Id, @Name, @PyAbbr, @Password, @Gender, @WorkShop, @Job, @Telephone)",
+                     new { Id = e.Id, Name=e.Name, PyAbbr=e.PyAbbr, Password=e.Password, Gender=e.Gender,
                          WorkShop =e.Workshop, Job=e.Job, Telephone=e.Telephone});
             }
         }
@@ -166,7 +178,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Department=@Department", new { Department = department });
+                return conn.Query<Employee>("select * from tbl_Employee where Gender=@Department", new { Department = department });
             }
         }
 

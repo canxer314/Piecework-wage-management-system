@@ -52,10 +52,10 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Employee Id can not be blank!");
                 return;
             }
-            if(txt_Department == null)
+            if(txt_Gender == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Department can not be blank!");
+                MessageBox.Show("Employee Gender can not be blank!");
                 return;
             }
             if(txt_Workshop == null)
@@ -84,7 +84,7 @@ namespace Piecework_wage_management_system
             employee.Id = int.Parse(txt_EmployeeId.Text);
             }
             catch { }
-            employee.Department = txt_Department.Text;
+            employee.Gender = txt_Gender.Text;
             employee.Password = txt_EmployeeId.Text;
             employee.Telephone = txt_Telephone.Text;
             employee.Workshop = txt_Workshop.Text;
@@ -101,7 +101,7 @@ namespace Piecework_wage_management_system
 
         private void btn_Clean_Click(object sender, RoutedEventArgs e)
         {
-            txt_Department.Text = null;
+            txt_Gender.Text = null;
             txt_EmployeeId.Text = null;
             txt_EmployeeName.Text = null;
             txt_Job.Text = null;
