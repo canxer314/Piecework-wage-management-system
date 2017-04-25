@@ -26,6 +26,16 @@ namespace Piecework_wage_management_system
                 Name CHAR(20) UNIQUE KEY,
                 Password CHAR(20)
             );
+            CREATE TABLE IF NOT EXISTS tbl_Workshop (
+                Id INT PRIMARY KEY,
+                Name CHAR(20) UNIQUE KEY,
+                PyAbbr VARCHAR(20)
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Job (
+                Id INT PRIMARY KEY,
+                Name CHAR(20) UNIQUE KEY,
+                PyAbbr VARCHAR(20)
+            );
             CREATE TABLE IF NOT EXISTS tbl_Employee (
                 Id INT PRIMARY KEY,
                 Name CHAR(20),
@@ -37,16 +47,6 @@ namespace Piecework_wage_management_system
                 CONSTRAINT fk_Job FOREIGN KEY (Job_Name)
                     REFERENCES tbl_Job (Name),
                 Telephone CHAR(13)
-            );
-            CREATE TABLE IF NOT EXISTS tbl_Workshop (
-                Id INT PRIMARY KEY,
-                Name CHAR(20) UNIQUE KEY,
-                PyAbbr VARCHAR(20)
-            );
-            CREATE TABLE IF NOT EXISTS tbl_Job (
-                Id INT PRIMARY KEY,
-                Name CHAR(20) UNIQUE KEY,
-                PyAbbr VARCHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT PRIMARY KEY,
@@ -174,11 +174,11 @@ namespace Piecework_wage_management_system
         }
 
         //根据Dept获取Employee对象的集合
-        public IEnumerable<Employee> QueryEmployeeByDept(string department)
+        public IEnumerable<Employee> QueryEmployeeByGender(string gender)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Gender=@Department", new { Department = department });
+                return conn.Query<Employee>("select * from tbl_Employee where Gender=@Gender", new { Gender = gender });
             }
         }
 

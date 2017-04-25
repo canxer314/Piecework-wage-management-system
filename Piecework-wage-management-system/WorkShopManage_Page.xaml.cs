@@ -24,5 +24,45 @@ namespace Piecework_wage_management_system
         {
             InitializeComponent();
         }
+
+        private void AddWorkshop_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ModifyWorkshop_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveWorkshop_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RefreshList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddWorker_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveWorker_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchWorkshop_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchWorker_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

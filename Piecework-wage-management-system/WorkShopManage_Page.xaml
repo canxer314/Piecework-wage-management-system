@@ -5,10 +5,57 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="602" d:DesignWidth="846"
       Title="WorkShopManage_Page">
 
-    <Grid>
-        <TextBox FontSize="25">Hello workshop manage page!</TextBox>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="BlanchedAlmond">
+            <MenuItem x:Name="AddWorkshop" Header="_Add Workshop" Click="AddWorkshop_Click"/>
+            <MenuItem x:Name="ModifyWorkshop" Header="_Modify Workshop" Click="ModifyWorkshop_Click"/>
+            <MenuItem x:Name="RemoveWorkshop" Header="_Remove Workshop" Click="RemoveWorkshop_Click"/>
+            <MenuItem x:Name="RefreshList" Header="Refresh _List" Click="RefreshList_Click"/>
+            <MenuItem x:Name="AddWorker" Header="_Add Worker" Click="AddWorker_Click"/>
+            <MenuItem x:Name="RemoveWorker" Header="_Remove Worker" Click="RemoveWorker_Click"/>
+        </Menu>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" >
+                <TextBox Name="txtSearchWorkshop" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <Button Name="btnSearchWorkshop" Content="Search By Category:" Margin="0,5,5,5" Click="btnSearchWorkshop_Click"/>
+                <RadioButton x:Name="rbtnWorkshopName" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
+                <RadioButton x:Name="rbtnWorkshopId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
+            </StackPanel>
+            <DataGrid x:Name="gridWorkshop" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,0,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Border Background="Gray" Grid.Row="1" Grid.Column="1"></Border>
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="txtSearchWorker" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <Button Name="btnSearchWorker" Content="Search By Category:" Margin="0,5,5,5" Click="btnSearchWorker_Click"/>
+                <RadioButton x:Name="rbtnWorkerName" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
+                <RadioButton x:Name="rbtnWorkerId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
+                <RadioButton x:Name="rbtnWorkerJob" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
+            </StackPanel>
+            <DataGrid x:Name="gridWorker" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,0,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    <DataGridTextColumn Binding="{Binding Job}" Header="Job"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Page>
