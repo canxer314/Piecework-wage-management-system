@@ -78,7 +78,6 @@ namespace Piecework_wage_management_system
             }
             Employee employee = new Employee();
             employee.Name = txt_EmployeeName.Text;
-            employee.PyAbbr = (new BusinessLogicLayer()).PinyinAbbreviationConvert(txt_EmployeeName.Text);
             try
             {
             employee.Id = int.Parse(txt_EmployeeId.Text);

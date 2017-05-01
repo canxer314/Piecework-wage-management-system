@@ -42,7 +42,7 @@ namespace Piecework_wage_management_system
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Already exists administrator named " + txt_Username + "!");
                 return;
-            }else if(pwd_Password.Password.Trim() == String.Empty || pwd_Password.Password.Trim() == String.Empty)
+            }else if(pwd_Password.Password.Trim() == String.Empty || pwd_Confirm.Password.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Please input the password!");
@@ -72,7 +72,7 @@ namespace Piecework_wage_management_system
 
         private void btn_Return_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

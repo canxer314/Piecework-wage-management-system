@@ -17,7 +17,7 @@ namespace Piecework_wage_management_system
         //初始化数据库
         public bool DataBaseInit()
         {
-            MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=abcd709394;");  
+            MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=abcd709394;");
             MySqlCommand cmd = new MySqlCommand(@"
             CREATE DATABASE IF NOT EXISTS gradulation_design_db CHARACTER SET GBK;
             USE gradulation_design_db;
@@ -28,18 +28,15 @@ namespace Piecework_wage_management_system
             );
             CREATE TABLE IF NOT EXISTS tbl_Workshop (
                 Id INT PRIMARY KEY,
-                Name CHAR(20) UNIQUE KEY,
-                PyAbbr VARCHAR(20)
+                Name CHAR(20) UNIQUE KEY
             );
             CREATE TABLE IF NOT EXISTS tbl_Job (
                 Id INT PRIMARY KEY,
-                Name CHAR(20) UNIQUE KEY,
-                PyAbbr VARCHAR(20)
+                Name CHAR(20) UNIQUE KEY
             );
             CREATE TABLE IF NOT EXISTS tbl_Employee (
                 Id INT PRIMARY KEY,
                 Name CHAR(20),
-                PyAbbr VARCHAR(20),
                 Password CHAR(20),
                 Gender VARCHAR(6),
                 CONSTRAINT fk_Workshop FOREIGN KEY (Workshop_Name)
@@ -51,12 +48,10 @@ namespace Piecework_wage_management_system
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
-                PyAbbr VARCHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Procedure (
                 Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
-                PyAbbr VARCHAR(20),
                 Sequence SMALLINT,
                 Product_Id INT,
                 CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
@@ -64,7 +59,6 @@ namespace Piecework_wage_management_system
             );
             CREATE TABLE IF NOT EXISTS tbl_Value (
                 Name CHAR(20) PRIMARY KEY,
-                PyAbbr VARCHAR(20),
                 Unit_Price SMALLINT,
                 Procedure_Id INT,
                 CONSTRAINT fk_Procedure FOREIGN KEY (Procedure_Id)
@@ -73,7 +67,7 @@ namespace Piecework_wage_management_system
             ", conn);
             try
             {
-                conn.Open();            
+                conn.Open();
             }
             catch
             {
@@ -93,13 +87,13 @@ namespace Piecework_wage_management_system
         }
 
         //插入Administrator对象
-        public int InsertAdministrator(Administrator a)
+        public int InsertAdministrator(Administrator admin)
         {
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Administrator values "
                      + "(@Id, @Name, @Password)",
-                     new { Id = a.Id, Name = a.Name, Password = a.Password });
+                     new { Id = admin.Id, Name = admin.Name, Password = admin.Password });
             }
         }
 
@@ -109,7 +103,7 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 const string query = "select * from tbl_Administrator order by Id asc";
-                return conn.Query<Administrator>(query,null);
+                return conn.Query<Administrator>(query, null);
             }
         }
         public IEnumerable<Administrator> QueryAdministratorByName(string name)
@@ -139,9 +133,17 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Employee values "
-                     + "(@Id, @Name, @PyAbbr, @Password, @Gender, @WorkShop, @Job, @Telephone)",
-                     new { Id = e.Id, Name=e.Name, PyAbbr=e.PyAbbr, Password=e.Password, Gender=e.Gender,
-                         WorkShop =e.Workshop, Job=e.Job, Telephone=e.Telephone});
+                     + "(@Id, @Name, @Password, @Gender, @WorkShop, @Job, @Telephone)",
+                     new
+                     {
+                         Id = e.Id,
+                         Name = e.Name,
+                         Password = e.Password,
+                         Gender = e.Gender,
+                         WorkShop = e.Workshop,
+                         Job = e.Job,
+                         Telephone = e.Telephone
+                     });
             }
         }
 
@@ -151,7 +153,7 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 const string query = "select * from tbl_Employee order by Id asc";
-                return conn.Query<Employee>(query,null);
+                return conn.Query<Employee>(query, null);
             }
         }
 
@@ -169,7 +171,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Employee>("select * from tbl_Employee where Id=@Id", new { Id=Id });
+                return conn.Query<Employee>("select * from tbl_Employee where Id=@Id", new { Id = Id });
             }
         }
 
@@ -220,6 +222,86 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("delete from tbl_Employee where Id=@Id", new { Id = id });
+            }
+        }
+        public int InsertWorkshop(Workshop workshop)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Workshop values "
+                     + "(@Id, @Name, @PyAbbr)",
+                     new { Id = workshop.Id, Name = workshop.Name });
+            }
+        }
+
+        //获取所有Workshop对象的集合
+        public IEnumerable<Workshop> QueryWorkshopByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Workshop order by Id asc";
+                return conn.Query<Workshop>(query, null);
+            }
+        }
+        public IEnumerable<Workshop> QueryWorkshopByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Workshop>("select * from tbl_Workshop where Name=@Name", new { Name = name });
+            }
+        }
+        public IEnumerable<Workshop> QueryWorkshopById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Workshop>("select * from tbl_Workshop where Id=@Id", new { Id = id });
+            }
+        }
+        public int DeleteWorkshopById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Workshop where Id=@Id", new { Id = id });
+            }
+        }
+        public int InsertJob(Job job)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Job values "
+                     + "(@Id, @Name, @PyAbbr)",
+                     new { Id = job.Id, Name = job.Name });
+            }
+        }
+
+        //获取所有Job对象的集合
+        public IEnumerable<Job> QueryJobByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Job order by Id asc";
+                return conn.Query<Job>(query, null);
+            }
+        }
+        public IEnumerable<Job> QueryJobByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Job>("select * from tbl_Job where Name=@Name", new { Name = name });
+            }
+        }
+        public IEnumerable<Job> QueryJobById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Job>("select * from tbl_Job where Id=@Id", new { Id = id });
+            }
+        }
+        public int DeleteJobById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Job where Id=@Id", new { Id = id });
             }
         }
     }

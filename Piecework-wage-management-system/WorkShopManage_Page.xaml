@@ -47,7 +47,7 @@
                 <Button Name="btnSearchWorker" Content="Search By Category:" Margin="0,5,5,5" Click="btnSearchWorker_Click"/>
                 <RadioButton x:Name="rbtnWorkerName" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
                 <RadioButton x:Name="rbtnWorkerId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
-                <RadioButton x:Name="rbtnWorkerJob" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
+                <RadioButton x:Name="rbtnWorkerJob" Content="Job" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
             </StackPanel>
             <DataGrid x:Name="gridWorker" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,0,0,0">
                 <DataGrid.Columns>

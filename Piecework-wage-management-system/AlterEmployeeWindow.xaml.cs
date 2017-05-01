@@ -62,7 +62,6 @@ namespace Piecework_wage_management_system
             alteredEmployee.Workshop = txt_Workshop.Text;
             alteredEmployee.Job = txt_Job.Text;
             alteredEmployee.Telephone = txt_Telephone.Text;
-            alteredEmployee.PyAbbr = (new BusinessLogicLayer()).PinyinAbbreviationConvert(txt_EmployeeName.Text);
             alteredEmployee.Password = OriginEmployee.Password;
             db.DeleteEmployeeById(OriginEmployee.Id);
             db.InsertEmployee(alteredEmployee);
