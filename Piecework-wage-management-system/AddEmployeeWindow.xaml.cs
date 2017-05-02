@@ -27,8 +27,14 @@ namespace Piecework_wage_management_system
             this.db = db;
             this.wmPage = wmPage;
             InitializeComponent();
+            BindingComboBoxItemsSource();
         }
 
+        private void BindingComboBoxItemsSource()
+        {
+            cmb_Workshop.ItemsSource = db.QueryWorkshopByAll();
+            cmb_Job.ItemsSource = db.QueryJobByAll();
+        }
         private void btn_AddEmployee_Click(object sender, RoutedEventArgs e)
         {
             foreach (Employee empl in db.QueryEmployeeByAll())
@@ -52,19 +58,19 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Employee Id can not be blank!");
                 return;
             }
-            if(txt_Gender == null)
+            if(cmb_Gender.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Gender can not be blank!");
                 return;
             }
-            if(txt_Workshop == null)
+            if(cmb_Workshop.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Workshop can not be blank!");
                 return;
             }
-            if(txt_Job == null)
+            if(cmb_Job.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Job can not be blank!");
@@ -83,11 +89,11 @@ namespace Piecework_wage_management_system
             employee.Id = int.Parse(txt_EmployeeId.Text);
             }
             catch { }
-            employee.Gender = txt_Gender.Text;
+            employee.Gender = cmb_Gender.SelectionBoxItem.ToString();
+            employee.Workshop = (cmb_Workshop.SelectedItem as Workshop).Name;
+            employee.Job = (cmb_Job.SelectedItem as Job).Name;
             employee.Password = txt_EmployeeId.Text;
             employee.Telephone = txt_Telephone.Text;
-            employee.Workshop = txt_Workshop.Text;
-            employee.Job = txt_Job.Text;
             db.InsertEmployee(employee);
             wmPage.FillListView();
             this.Close();
@@ -100,12 +106,12 @@ namespace Piecework_wage_management_system
 
         private void btn_Clean_Click(object sender, RoutedEventArgs e)
         {
-            txt_Gender.Text = null;
+            cmb_Gender.SelectedItem = null;
             txt_EmployeeId.Text = null;
             txt_EmployeeName.Text = null;
-            txt_Job.Text = null;
+            cmb_Job.SelectedItem = null;
             txt_Telephone.Text = null;
-            txt_Workshop.Text = null;
+            cmb_Workshop.SelectedItem = null;
             txt_EmployeeName.Focus();
         }
 

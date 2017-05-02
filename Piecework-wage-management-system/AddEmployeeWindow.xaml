@@ -28,11 +28,26 @@
         <TextBlock x:Name="tb_EmployeeId" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="EmployeeId:"/>
         <TextBox x:Name="txt_EmployeeId" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
         <TextBlock x:Name="tb_Gender" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Gender:"/>
-        <TextBox x:Name="txt_Gender" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3"/>
-        <TextBlock x:Name="tb_Workshop" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Workshop:"/>
-        <TextBox x:Name="txt_Workshop" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="4"/>
+        <ComboBox x:Name="cmb_Gender" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3">
+            <ComboBoxItem x:Name="Male">Male</ComboBoxItem>
+            <ComboBoxItem x:Name="Female">Female</ComboBoxItem>
+        </ComboBox>
+            <TextBlock x:Name="tb_Workshop" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Workshop:"/>
+        <ComboBox x:Name="cmb_Workshop" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="4">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="WorkshopName" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <TextBlock x:Name="tb_Job" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Job:"/>
-        <TextBox x:Name="txt_Job" Height="25" Width="180" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5"/>
+        <ComboBox x:Name="cmb_Job" Height="25" Width="180" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="JobName" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <TextBlock x:Name="tb_Telephone" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Telephone:"/>
         <TextBox x:Name="txt_Telephone" Height="25" Width="180" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="6"/>
         <Button x:Name="btn_Clean" Height="20" Width="50" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Click="btn_Clean_Click" TabIndex="8">Clean</Button>

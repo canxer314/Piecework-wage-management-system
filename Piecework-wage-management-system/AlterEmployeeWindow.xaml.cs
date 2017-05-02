@@ -35,10 +35,12 @@ namespace Piecework_wage_management_system
         private void RestoreOriginEmployee()
         {
             txt_EmployeeName.Text = OriginEmployee.Name;
-            txt_Gender.Text = OriginEmployee.Gender;
+            cmb_Gender.SelectedItem = OriginEmployee.Gender;
             txt_EmployeeId.Text = OriginEmployee.Id.ToString();
-            txt_Job.Text = OriginEmployee.Job;
-            txt_Workshop.Text = OriginEmployee.Workshop;
+            cmb_Job.ItemsSource = db.QueryJobByAll();
+            cmb_Job.SelectedItem = OriginEmployee.Job;
+            cmb_Workshop.SelectedItem = db.QueryWorkshopByAll();
+            cmb_Workshop.SelectedItem = OriginEmployee.Workshop;
             txt_Telephone.Text = OriginEmployee.Telephone;
         }
         private void btn_Restore_Click(object sender, RoutedEventArgs e)
@@ -58,9 +60,9 @@ namespace Piecework_wage_management_system
             }
             alteredEmployee.Name = txt_EmployeeName.Text;
             alteredEmployee.Id = int.Parse(txt_EmployeeId.Text);
-            alteredEmployee.Gender = txt_Gender.Text;
-            alteredEmployee.Workshop = txt_Workshop.Text;
-            alteredEmployee.Job = txt_Job.Text;
+            alteredEmployee.Gender = cmb_Gender.SelectedItem.ToString();
+            alteredEmployee.Workshop = cmb_Workshop.SelectedItem.ToString() ;
+            alteredEmployee.Job = cmb_Job.SelectedItem.ToString();
             alteredEmployee.Telephone = txt_Telephone.Text;
             alteredEmployee.Password = OriginEmployee.Password;
             db.DeleteEmployeeById(OriginEmployee.Id);
@@ -87,24 +89,6 @@ namespace Piecework_wage_management_system
         }
 
         private void txt_EmployeeId_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                btn_AlterEmployee_Click(sender, e);
-        }
-
-        private void txt_Gender_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                btn_AlterEmployee_Click(sender, e);
-        }
-
-        private void txt_Workshop_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                btn_AlterEmployee_Click(sender, e);
-        }
-
-        private void txt_Job_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
                 btn_AlterEmployee_Click(sender, e);

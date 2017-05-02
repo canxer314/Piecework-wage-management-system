@@ -38,16 +38,18 @@ namespace Piecework_wage_management_system
                 Id INT PRIMARY KEY,
                 Name CHAR(20),
                 Password CHAR(20),
-                Gender VARCHAR(6),
-                CONSTRAINT fk_Workshop FOREIGN KEY (Workshop_Name)
+                Gender VARCHAR(20),
+                Workshop CHAR(20),
+                Job CHAR(20),
+                CONSTRAINT fk_Workshop FOREIGN KEY (Workshop)
                     REFERENCES tbl_Workshop (Name),
-                CONSTRAINT fk_Job FOREIGN KEY (Job_Name)
+                CONSTRAINT fk_Job FOREIGN KEY (Job)
                     REFERENCES tbl_Job (Name),
                 Telephone CHAR(13)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT PRIMARY KEY,
-                Name CHAR(20) UNIQUE KEY,
+                Name CHAR(20) UNIQUE KEY
             );
             CREATE TABLE IF NOT EXISTS tbl_Procedure (
                 Id INT PRIMARY KEY,
@@ -229,7 +231,7 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Workshop values "
-                     + "(@Id, @Name, @PyAbbr)",
+                     + "(@Id, @Name)",
                      new { Id = workshop.Id, Name = workshop.Name });
             }
         }
@@ -269,7 +271,7 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Job values "
-                     + "(@Id, @Name, @PyAbbr)",
+                     + "(@Id, @Name)",
                      new { Id = job.Id, Name = job.Name });
             }
         }
