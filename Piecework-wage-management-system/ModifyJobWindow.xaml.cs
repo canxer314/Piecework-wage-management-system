@@ -23,7 +23,7 @@ namespace Piecework_wage_management_system
         private Job OriginJob { set; get; }
         private JobManage_Page jmPage { set; get; }
         private DataAccessLayer db { set; get; }
-        public ModifyJobWindow(Job job,JobManage_Page jmPage)
+        public ModifyJobWindow(Job job, JobManage_Page jmPage)
         {
             this.jmPage = jmPage;
             OriginJob = job;
@@ -39,18 +39,20 @@ namespace Piecework_wage_management_system
         private void btn_Modify_Click(object sender, RoutedEventArgs e)
         {
             Job modifiedJob = new Job();
-            if (db.QueryJobByName(txt_JobName.Text).Count() > 0)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists Job with name: " + txt_JobName.Text + "!");
-                return;
-            }
-            if (db.QueryJobById(int.Parse(txt_JobId.Text)).Count() > 0)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists Job with ID: " + txt_JobId.Text + "!");
-                return;
-            }
+            if (txt_JobName.Text != OriginJob.Name)
+                if (db.QueryJobByName(txt_JobName.Text).Count() > 0)
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Already exists Job with name: " + txt_JobName.Text + "!");
+                    return;
+                }
+            if (txt_JobId.Text != OriginJob.Id.ToString())
+                if (db.QueryJobById(int.Parse(txt_JobId.Text)).Count() > 0)
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Already exists Job with ID: " + txt_JobId.Text + "!");
+                    return;
+                }
             modifiedJob.Name = txt_JobName.Text;
             modifiedJob.Id = int.Parse(txt_JobId.Text);
             db.DeleteJobById(OriginJob.Id);

@@ -54,14 +54,24 @@ namespace Piecework_wage_management_system
             CREATE TABLE IF NOT EXISTS tbl_Procedure (
                 Id INT PRIMARY KEY,
                 Name CHAR(20) UNIQUE KEY,
-                Sequence SMALLINT,
                 Product_Id INT,
                 CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
                     REFERENCES tbl_Product (Id)
             );
+            CREATE TABLE IF NOT EXISTS tbl_Procedure_Relationship
+            (
+            	InputProcedure INT PRIMARY KEY,
+            	CONSTRAINT fk_InputProcedure FOREIGN KEY (InputProcedure)
+            		 REFERENCES tbl_Procedure(Id),
+            	OutputProceduce INT,
+            	CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProceduce)
+            		 REFERENCES tbl_Procedure(Id),
+            	Scale INT
+            );
             CREATE TABLE IF NOT EXISTS tbl_Value (
                 Name CHAR(20) PRIMARY KEY,
-                Unit_Price SMALLINT,
+                Unit CHAR(20),
+                Unit_Price INT,
                 Procedure_Id INT,
                 CONSTRAINT fk_Procedure FOREIGN KEY (Procedure_Id)
                     REFERENCES tbl_Procedure (Id)
@@ -304,6 +314,46 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("delete from tbl_Job where Id=@Id", new { Id = id });
+            }
+        }
+        public int InsertProduct(Product p)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Product values "
+                     + "(@Id, @Name)",
+                     new { Id = p.Id, Name = p.Name });
+            }
+        }
+
+        //获取所有Product对象的集合
+        public IEnumerable<Product> QueryProductByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Product order by Id asc";
+                return conn.Query<Product>(query, null);
+            }
+        }
+        public IEnumerable<Product> QueryProductByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Product>("select * from tbl_Product where Name=@Name", new { Name = name });
+            }
+        }
+        public IEnumerable<Product> QueryProductById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Product>("select * from tbl_Product where Id=@Id", new { Id = id });
+            }
+        }
+        public int DeleteProductById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Product where Id=@Id", new { Id = id });
             }
         }
     }

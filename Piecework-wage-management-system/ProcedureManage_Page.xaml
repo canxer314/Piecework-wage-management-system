@@ -1,0 +1,123 @@
+﻿<Page x:Class="Piecework_wage_management_system.ProcedureManage_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Piecework_wage_management_system"
+      mc:Ignorable="d" 
+      d:DesignHeight="602" d:DesignWidth="846"
+      Title="ProcedureManage_Page">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="0,-1,0,1">
+            <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF74CD1B">
+                <TextBlock FontWeight="Bold">PRODUCT:</TextBlock>
+                <MenuItem x:Name="AddProduct" Header="Add" Click="AddProduct_Click" />
+                <MenuItem x:Name="ModifyProduct" Header="Modify" Click="ModifyProduct_Click" />
+                <MenuItem x:Name="RemoveProduct" Header="Remove" Click="RemoveProduct_Click" />
+            </Menu>
+            <StackPanel Orientation="Horizontal" >
+                <TextBox Name="txtSearchProduct" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <Button Name="btnSearchProduct" Content="Search By" Margin="5" Click="btnSearchProduct_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <RadioButton x:Name="rbtnProductName" IsChecked="True" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnProductId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+            </StackPanel>
+            <Border Background="#FF74CD1B" Height="2"></Border>
+            <DataGrid x:Name="gridProduct" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Border Background="Gray" Grid.Column="1"></Border>
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
+            <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF7474DE">
+                <TextBlock FontWeight="Bold">PROCEDUCE:</TextBlock>
+                <MenuItem x:Name="AddProcedure" Header="Add" Click="AddProcedure_Click" />
+                <MenuItem x:Name="ModifyProcedure" Header="Modify" Click="ModifyProcedure_Click" />
+                <MenuItem x:Name="RemoveProcedure" Header="Remove" Click="RemoveProcedure_Click" />
+            </Menu>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="txtSearchProcedure" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+                <Button Name="btnSearchProcedure" Content="Search By" Click="btnSearchProcedure_Click" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="rbtnProcedureName" IsChecked="True" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnProcedureId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+            </StackPanel>
+            <Border Background="#FF7474DE" Height="2"></Border>
+            <DataGrid x:Name="gridProcedure" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Border Background="Gray" Grid.Column="3"></Border>
+        <Grid Grid.Row="0" Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="5" Orientation="Vertical">
+                <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFAF7BEE">
+                    <TextBlock FontWeight="Bold">RELATIONSHIP:</TextBlock>
+                    <MenuItem x:Name="AddRelationship" Header="Add" Click="AddRelationship_Click" />
+                    <MenuItem x:Name="ModifyRelationship" Header="Modify" Click="ModifyRelationship_Click" />
+                    <MenuItem x:Name="RemoveRelationship" Header="Remove" Click="RemoveRelationship_Click" />
+                </Menu>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="txtSearchRelationship" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+                    <Button Name="btnSearchRelationship" Content="Search By" Click="btnSearchValue_Click" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="rbtnInputProcedure" IsChecked="True" Content="Input" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                    <RadioButton x:Name="rbtnOutputProcedure" Content="Output" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                    <RadioButton x:Name="rbtnScale" Content="Scale" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                </StackPanel>
+                <Border Background="#FFAF7BEE" Height="2"></Border>
+                <DataGrid x:Name="gridProcedureRelationship" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Input"/>
+                        <DataGridTextColumn Binding="{Binding OutputProcedure}" Header="Output"/>
+                        <DataGridTextColumn Binding="{Binding Scale}" Header="Scale"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Vertical">
+                <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFF0E578">
+                    <TextBlock FontWeight="Bold">VALUE:</TextBlock>
+                    <MenuItem x:Name="AddValue" Header="Add" Click="AddValue_Click" />
+                    <MenuItem x:Name="ModifyValue" Header="Modify" Click="ModifyValue_Click" />
+                    <MenuItem x:Name="RemoveValue" Header="Remove" Click="RemoveValue_Click" />
+                </Menu>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="txtSearchValue" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+                    <Button Name="btnSearchValue" Content="Search By" Click="btnSearchValue_Click" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="rbtnValueName" IsChecked="True" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                    <RadioButton x:Name="rbtnValueUnit" Content="Unit" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                    <RadioButton x:Name="rbtnValuePrice" Content="Price" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                </StackPanel>
+                <Border Background="#FFF0E578" Height="2"></Border>
+                <DataGrid x:Name="gridValue" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Unit}" Header="Unit"/>
+                        <DataGridTextColumn Binding="{Binding Unit_Price}" Header="Price"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -41,7 +41,7 @@ namespace Piecework_wage_management_system
             cmb_Workshop.ItemsSource = db.QueryWorkshopByAll();
             IEnumerable<Workshop> ws = db.QueryWorkshopByAll();
             int i = -1;
-            foreach(var w in ws)
+            foreach (var w in ws)
             {
                 i++;
                 if (w.Name == OriginEmployee.Workshop)
@@ -52,7 +52,7 @@ namespace Piecework_wage_management_system
             cmb_Job.ItemsSource = db.QueryJobByAll();
             IEnumerable<Job> jobIE = db.QueryJobByAll();
             int j = -1;
-            foreach(var jTmp in jobIE)
+            foreach (var jTmp in jobIE)
             {
                 j++;
                 if (jTmp.Name == OriginEmployee.Job)
@@ -70,12 +70,13 @@ namespace Piecework_wage_management_system
         private void btn_AlterEmployee_Click(object sender, RoutedEventArgs e)
         {
             Employee alteredEmployee = new Employee();
-            if (db.QueryEmployeeByEID(int.Parse(txt_EmployeeId.Text)).Count() > 0)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists employee having eID:" + txt_EmployeeId.Text);
-                return;
-            }
+            if (txt_EmployeeId.Text != OriginEmployee.Id.ToString())
+                if (db.QueryEmployeeByEID(int.Parse(txt_EmployeeId.Text)).Count() > 0)
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Already exists employee with ID:" + txt_EmployeeId.Text);
+                    return;
+                }
             alteredEmployee.Name = txt_EmployeeName.Text;
             alteredEmployee.Id = int.Parse(txt_EmployeeId.Text);
             alteredEmployee.Gender = cmb_Gender.SelectionBoxItem.ToString();

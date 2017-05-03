@@ -18,9 +18,9 @@ namespace Piecework_wage_management_system
     /// <summary>
     /// ProceduceRecord_Page.xaml 的交互逻辑
     /// </summary>
-    public partial class ProceduceRecord_Page : Page
+    public partial class ProcedureRecord_Page : Page
     {
-        public ProceduceRecord_Page()
+        public ProcedureRecord_Page()
         {
             InitializeComponent();
         }

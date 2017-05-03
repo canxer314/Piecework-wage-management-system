@@ -59,9 +59,9 @@ namespace Piecework_wage_management_system
             this.MainFrame.Source = new Uri("WorkerManage_Page.xaml", UriKind.Relative);
         }
 
-        private void btnProceduceManage_Click(object sender, RoutedEventArgs e)
+        private void btnProcedureManage_Click(object sender, RoutedEventArgs e)
         {
-            this.MainFrame.Source = new Uri("ProceduceManage_Page.xaml", UriKind.Relative);
+            this.MainFrame.Source = new Uri("ProcedureManage_Page.xaml", UriKind.Relative);
         }
 
         private void btnProductionScheduling_Click(object sender, RoutedEventArgs e)
@@ -99,9 +99,9 @@ namespace Piecework_wage_management_system
             this.MainFrame.Source = new Uri("InitializeDatabase_Page.xaml", UriKind.Relative);
         }
 
-        private void btnProceduceRecord_Click(object sender, RoutedEventArgs e)
+        private void btnProcedureRecord_Click(object sender, RoutedEventArgs e)
         {
-            this.MainFrame.Source = new Uri("ProceduceRecord_Page.xaml", UriKind.Relative);
+            this.MainFrame.Source = new Uri("ProcedureRecord_Page.xaml", UriKind.Relative);
         }
     }
 }

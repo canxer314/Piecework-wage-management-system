@@ -1,4 +1,4 @@
-﻿<Page x:Class="Piecework_wage_management_system.ProceduceRecord_Page"
+﻿<Page x:Class="Piecework_wage_management_system.ProcedureRecord_Page"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

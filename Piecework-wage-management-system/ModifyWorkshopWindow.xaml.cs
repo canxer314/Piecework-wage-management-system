@@ -23,7 +23,7 @@ namespace Piecework_wage_management_system
         private Workshop OriginWorkshop { set; get; }
         private WorkShopManage_Page wsmPage { set; get; }
         private DataAccessLayer db { set; get; }
-        public ModifyWorkshopWindow(Workshop ws,WorkShopManage_Page wsmPage)
+        public ModifyWorkshopWindow(Workshop ws, WorkShopManage_Page wsmPage)
         {
             this.wsmPage = wsmPage;
             OriginWorkshop = ws;
@@ -46,18 +46,20 @@ namespace Piecework_wage_management_system
         private void btn_Modify_Click(object sender, RoutedEventArgs e)
         {
             Workshop modifiedWorkshop = new Workshop();
-            if (db.QueryWorkshopByName(txt_WorkshopName.Text).Count() > 0)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists Workshop with name: " + txt_WorkshopName.Text + "!");
-                return;
-            }
-            if (db.QueryWorkshopById(int.Parse(txt_WorkshopId.Text)).Count() > 0)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists Workshop with ID: " + txt_WorkshopId.Text + "!");
-                return;
-            }
+            if (txt_WorkshopName.Text != OriginWorkshop.Name)
+                if (db.QueryWorkshopByName(txt_WorkshopName.Text).Count() > 0)
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Already exists Workshop with name: " + txt_WorkshopName.Text + "!");
+                    return;
+                }
+            if (txt_WorkshopId.Text != OriginWorkshop.Id.ToString())
+                if (db.QueryWorkshopById(int.Parse(txt_WorkshopId.Text)).Count() > 0)
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Already exists Workshop with ID: " + txt_WorkshopId.Text + "!");
+                    return;
+                }
             modifiedWorkshop.Name = txt_WorkshopName.Text;
             modifiedWorkshop.Id = int.Parse(txt_WorkshopId.Text);
             db.DeleteWorkshopById(OriginWorkshop.Id);

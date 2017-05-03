@@ -8,13 +8,13 @@
         Title="AdminWindow" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
     <DockPanel>
         <Menu Background="AliceBlue" DockPanel.Dock="Top" FontSize="12" >
-            <MenuItem Header="_File">
+            <MenuItem Header="_File" Margin="5,0">
                 <MenuItem Header="Show _Book" Click="MenuItem_Click_Show_Book"/>
                 <MenuItem Header="Show Book_s" Click="MenuItem_Click_Show_Books"/>
                 <Separator />
                 <MenuItem Header="E_xit" Click="MenuItem_Click_Exit"/>
             </MenuItem>
-            <MenuItem Header="_Edit">
+            <MenuItem Header="_Edit" Margin="5,0">
                 <MenuItem Header="Undo" Command="Undo" />
                 <Separator />
                 <MenuItem Header="Cut" Command="Cut" />
@@ -28,7 +28,7 @@
                 <Button x:Name="btnWorkshopManage" Background="Beige" Content="Workshop Manage" FontSize="12" FontWeight="Bold" Click="btnWorkshopManage_Click" />
                 <Button x:Name="btnJobManage" Background="Beige" Content="Job Manage" FontSize="12" FontWeight="Bold" Click="btnJobManage_Click" />
                 <Button x:Name="btnWorkerManage" Background="Beige" Content="Worker Manage" FontSize="12" FontWeight="Bold" Click="btnWorkerManage_Click" />
-                <Button x:Name="btnProceduceManage" Background="Beige" Content="Proceduce Manage" FontSize="12" FontWeight="Bold" Click="btnProceduceManage_Click" />
+                <Button x:Name="btnProcedureManage" Background="Beige" Content="Procedure Manage" FontSize="12" FontWeight="Bold" Click="btnProcedureManage_Click" />
                 <Button x:Name="btnProductionScheduling" Background="Beige" Content="Production Scheduling" FontSize="12" FontWeight="Bold" Click="btnProductionScheduling_Click" />
                 <Button x:Name="btnReckonByThePiece" Background="Beige" Content="Reckon By Piece" FontWeight="Bold" FontSize="12" Click="btnReckonByThePiece_Click" />
                 <Button x:Name="btnWageRecord" Background="Beige" Content="Record Piece-Work Wage" FontWeight="Bold" FontSize="12" Click="btnWageRecord_Click"/>
@@ -36,7 +36,7 @@
                 <Button x:Name="btnPrintPayrollReckonByThePiece" Background="Beige" Content="Show Reckon Payroll" FontSize="12" FontWeight="Bold" Click="btnPrintPayrollReckonByThePiece_Click" />
                 <Button x:Name="btnPrintPayroll" Background="Beige" Content="Show Payroll" FontWeight="Bold" FontSize="12" Click="btnPrintPayroll_Click"/>
                 <Button x:Name="btnInitDatabase" Background="Beige" Content="Initialize Database" FontWeight="Bold" FontSize="12" Click="btnInitDatabase_Click" />
-                <Button x:Name="btnProceduceRecord" Background="Beige" Content="Proceduce Record" FontWeight="Bold" FontSize="12" Click="btnProceduceRecord_Click"/>
+                <Button x:Name="btnProcedureRecord" Background="Beige" Content="Procedure Record" FontWeight="Bold" FontSize="12" Click="btnProcedureRecord_Click"/>
             </UniformGrid>
         </Grid>
         <Frame x:Name="MainFrame" Source="MainPage.xaml" NavigationUIVisibility="Hidden" 

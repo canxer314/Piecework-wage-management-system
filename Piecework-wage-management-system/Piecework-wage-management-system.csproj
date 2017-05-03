@@ -76,6 +76,9 @@
     <Compile Include="AddJobWindow.xaml.cs">
       <DependentUpon>AddJobWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddProductWindow.xaml.cs">
+      <DependentUpon>AddProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddWorkshopWindow.xaml.cs">
       <DependentUpon>AddWorkshopWindow.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,9 @@
     <Compile Include="ModifyJobWindow.xaml.cs">
       <DependentUpon>ModifyJobWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModifyProductWindow.xaml.cs">
+      <DependentUpon>ModifyProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModifyWorkshopWindow.xaml.cs">
       <DependentUpon>ModifyWorkshopWindow.xaml</DependentUpon>
     </Compile>
@@ -119,12 +125,14 @@
     <Compile Include="PrintReckonPayroll_Page.xaml.cs">
       <DependentUpon>PrintReckonPayroll_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProceduceManage_Page.xaml.cs">
-      <DependentUpon>ProceduceManage_Page.xaml</DependentUpon>
+    <Compile Include="ProcedureManage_Page.xaml.cs">
+      <DependentUpon>ProcedureManage_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProceduceRecord_Page.xaml.cs">
-      <DependentUpon>ProceduceRecord_Page.xaml</DependentUpon>
+    <Compile Include="ProcedureRecord_Page.xaml.cs">
+      <DependentUpon>ProcedureRecord_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Procedure.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="ProductionScheduling_Page.xaml.cs">
       <DependentUpon>ProductionScheduling_Page.xaml</DependentUpon>
     </Compile>
@@ -159,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddJobWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +241,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ModifyProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModifyWorkshopWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,11 +257,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProceduceManage_Page.xaml">
+    <Page Include="ProcedureManage_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProceduceRecord_Page.xaml">
+    <Page Include="ProcedureRecord_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

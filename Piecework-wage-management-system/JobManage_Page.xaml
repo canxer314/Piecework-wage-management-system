@@ -14,16 +14,16 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="BlanchedAlmond">
-            <MenuItem x:Name="AddJob" Header="_Add Job" Click="AddJob_Click"/>
-            <MenuItem x:Name="ModifyJob" Header="_Modify Job" Click="ModifyJob_Click"/>
-            <MenuItem x:Name="RemoveJob" Header="_Remove Job" Click="RemoveJob_Click"/>
-            <MenuItem x:Name="RefreshList" Header="Refresh _List" Click="RefreshList_Click"/>
+            <MenuItem x:Name="AddJob" Header="_Add Job" Click="AddJob_Click" Margin="5,0"/>
+            <MenuItem x:Name="ModifyJob" Header="_Modify Job" Click="ModifyJob_Click" Margin="5,0"/>
+            <MenuItem x:Name="RemoveJob" Header="_Remove Job" Click="RemoveJob_Click" Margin="5,0"/>
+            <MenuItem x:Name="RefreshList" Header="Refresh _List" Click="RefreshList_Click" Margin="5,0"/>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" >
                 <TextBox Name="txtSearchJob" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <Button Name="btnSearchJob" Content="Search By Category:" Margin="0,5,5,5" Click="btnSearchJob_Click"/>
-                <RadioButton x:Name="rbtnJobName" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
+                <Button Name="btnSearchJob" Content="Search By" Margin="0,5,5,5" Click="btnSearchJob_Click"/>
+                <RadioButton x:Name="rbtnJobName" Content="Name" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
                 <RadioButton x:Name="rbtnJobId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
             </StackPanel>
             <DataGrid x:Name="gridJob" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,0,0,0">
