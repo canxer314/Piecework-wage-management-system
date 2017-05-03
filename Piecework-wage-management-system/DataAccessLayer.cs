@@ -45,7 +45,7 @@ namespace Piecework_wage_management_system
                     REFERENCES tbl_Workshop (Name),
                 CONSTRAINT fk_Job FOREIGN KEY (Job)
                     REFERENCES tbl_Job (Name),
-                Telephone CHAR(13)
+                Telephone CHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
                 Id INT PRIMARY KEY,

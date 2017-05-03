@@ -35,12 +35,30 @@ namespace Piecework_wage_management_system
         private void RestoreOriginEmployee()
         {
             txt_EmployeeName.Text = OriginEmployee.Name;
-            cmb_Gender.SelectedItem = OriginEmployee.Gender;
+            cmb_Gender.Text = OriginEmployee.Gender;
             txt_EmployeeId.Text = OriginEmployee.Id.ToString();
+
+            cmb_Workshop.ItemsSource = db.QueryWorkshopByAll();
+            IEnumerable<Workshop> ws = db.QueryWorkshopByAll();
+            int i = -1;
+            foreach(var w in ws)
+            {
+                i++;
+                if (w.Name == OriginEmployee.Workshop)
+                    break;
+            }
+            cmb_Workshop.SelectedIndex = i;
+
             cmb_Job.ItemsSource = db.QueryJobByAll();
-            cmb_Job.SelectedItem = OriginEmployee.Job;
-            cmb_Workshop.SelectedItem = db.QueryWorkshopByAll();
-            cmb_Workshop.SelectedItem = OriginEmployee.Workshop;
+            IEnumerable<Job> jobIE = db.QueryJobByAll();
+            int j = -1;
+            foreach(var jTmp in jobIE)
+            {
+                j++;
+                if (jTmp.Name == OriginEmployee.Job)
+                    break;
+            }
+            cmb_Job.SelectedIndex = j;
             txt_Telephone.Text = OriginEmployee.Telephone;
         }
         private void btn_Restore_Click(object sender, RoutedEventArgs e)
@@ -60,9 +78,9 @@ namespace Piecework_wage_management_system
             }
             alteredEmployee.Name = txt_EmployeeName.Text;
             alteredEmployee.Id = int.Parse(txt_EmployeeId.Text);
-            alteredEmployee.Gender = cmb_Gender.SelectedItem.ToString();
-            alteredEmployee.Workshop = cmb_Workshop.SelectedItem.ToString() ;
-            alteredEmployee.Job = cmb_Job.SelectedItem.ToString();
+            alteredEmployee.Gender = cmb_Gender.SelectionBoxItem.ToString();
+            alteredEmployee.Workshop = (cmb_Workshop.SelectedItem as Workshop).Name;
+            alteredEmployee.Job = (cmb_Job.SelectedItem as Job).Name;
             alteredEmployee.Telephone = txt_Telephone.Text;
             alteredEmployee.Password = OriginEmployee.Password;
             db.DeleteEmployeeById(OriginEmployee.Id);
