@@ -15,7 +15,7 @@
             <ColumnDefinition Width="2"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="0,-1,0,1">
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF74CD1B">
                 <TextBlock FontWeight="Bold">PRODUCT:</TextBlock>
                 <MenuItem x:Name="AddProduct" Header="Add" Click="AddProduct_Click" />
