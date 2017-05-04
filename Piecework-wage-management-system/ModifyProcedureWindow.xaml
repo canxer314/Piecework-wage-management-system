@@ -1,0 +1,40 @@
+﻿<Window x:Class="Piecework_wage_management_system.ModifyProcedureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Piecework_wage_management_system"
+        mc:Ignorable="d"
+        Title="ModifyProcedureWindow" Height="400" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Modify Procedure"/>
+        <TextBlock x:Name="tb_Product" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Product:"/>
+        <ComboBox x:Name="cmb_Product" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5"> <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="ProductName" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock x:Name="tb_ProcedureName" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Name:"/>
+        <TextBox x:Name="txt_ProcedureName" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
+        <TextBlock x:Name="tb_ProcedureId" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Id:"/>
+        <TextBox x:Name="txt_ProcedureId" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
+        <Button x:Name="btn_Restore" Height="20" Width="50" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Click="btn_Restore_Click" TabIndex="8">Restore</Button>
+        <Button x:Name="btn_ModifyProcedure" Height="20" Width="50" Grid.Row="5" Grid.Column="1" FontWeight="Bold" Click="btn_ModifyProcedure_Click" TabIndex="7">Modify</Button>
+        <Button x:Name="btn_Return" Height="20" Width="50" Grid.Row="5" Grid.Column="2" FontWeight="Bold" Click="btn_Return_Click" TabIndex="9">Return</Button>
+    </Grid>
+</Window>

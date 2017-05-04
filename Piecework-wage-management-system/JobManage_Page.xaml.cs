@@ -84,6 +84,11 @@ namespace Piecework_wage_management_system
 
         private void btnSearchJob_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrEmpty(txtSearchJob.Text.Trim()) == true)
+            {
+                gridJob.ItemsSource = db.QueryJobByAll();
+                return;
+            }
             if(rbtnJobName.IsChecked == true)
             {
                 gridJob.ItemsSource = db.QueryJobByName(txtSearchJob.Text);

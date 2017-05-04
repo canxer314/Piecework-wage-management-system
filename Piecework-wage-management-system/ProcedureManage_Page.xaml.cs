@@ -40,6 +40,17 @@ namespace Piecework_wage_management_system
 
             }
         }
+        public void FillGridView_Procedure()
+        {
+            try
+            {
+                gridProcedure.ItemsSource = db.QueryProcedureByAll();
+            }
+            catch
+            {
+
+            }
+        }
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
             AddProductWindow aProtWnd = new AddProductWindow(this);
@@ -61,9 +72,9 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Can not modify multiple Product information at one time.");
                 return;
             }
-            IEnumerable<Product> jobList;
-            jobList = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
-            ModifyProductWindow modifyProductWnd = new ModifyProductWindow(jobList.ElementAt(0),this);
+            IEnumerable<Product> tmpList;
+            tmpList = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
+            ModifyProductWindow modifyProductWnd = new ModifyProductWindow(tmpList.ElementAt(0), this);
             modifyProductWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyProductWnd.ShowDialog();
         }
@@ -83,44 +94,105 @@ namespace Piecework_wage_management_system
             FillGridView_Product();
         }
 
-        private void AddProcedure_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ModifyProcedure_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RemoveProcedure_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnSearchProduct_Click(object sender, RoutedEventArgs e)
         {
-            if(rbtnProductName.IsChecked == true)
+            if (String.IsNullOrEmpty(txtSearchProduct.Text.Trim()) == true)
+            {
+                gridProduct.ItemsSource = db.QueryProductByAll();
+                return;
+            }
+            if (rbtnProductName.IsChecked == true)
             {
                 gridProduct.ItemsSource = db.QueryProductByName(txtSearchProduct.Text);
-            }else if(rbtnProductId.IsChecked == true)
+            }
+            else if (rbtnProductId.IsChecked == true)
             {
                 gridProduct.ItemsSource = db.QueryProductById(int.Parse(txtSearchProduct.Text));
-            }else
+            }
+            else
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Please choose a search category!");
             }
         }
 
-        private void btnSearchProcedure_Click(object sender, RoutedEventArgs e)
+        private void AddProcedure_Click(object sender, RoutedEventArgs e)
         {
-
+            if (gridProduct.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select a Product before you add Procedure on it.");
+                return;
+            }
+            if (gridProduct.SelectedItems.Count > 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Can not add Procedure on multiple Product at one time.");
+                return;
+            }
+            IEnumerable<Product> tmpList;
+            tmpList = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
+            AddProcedureWindow aProcWnd = new AddProcedureWindow(this,tmpList.ElementAt(0));
+            aProcWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            aProcWnd.ShowDialog();
         }
 
-        private void btnSearchValue_Click(object sender, RoutedEventArgs e)
+        private void ModifyProcedure_Click(object sender, RoutedEventArgs e)
         {
+            if (gridProcedure.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select a Procedure in the table before you modify it.");
+                return;
+            }
+            if (gridProcedure.SelectedItems.Count > 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Can not modify multiple Procedure information at one time.");
+                return;
+            }
+            IEnumerable<Procedure> tmpList;
+            tmpList = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id);
+            ModifyProcedureWindow modifyProcedureWnd = new ModifyProcedureWindow(tmpList.ElementAt(0), this);
+            modifyProcedureWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            modifyProcedureWnd.ShowDialog();
+        }
 
+        private void RemoveProcedure_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridProcedure.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select at least one Procedure in the table before you remove it.");
+                return;
+            }
+            foreach (Procedure item in gridProcedure.SelectedItems)
+            {
+                db.DeleteProcedureById(item.Id);
+            }
+            FillGridView_Procedure();
+        }
+
+        private void btnSearchProcedure_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtSearchProcedure.Text.Trim()) == true)
+            {
+                gridProcedure.ItemsSource = db.QueryProcedureByAll();
+                return;
+            }
+            if (rbtnProcedureName.IsChecked == true)
+            {
+                gridProcedure.ItemsSource = db.QueryProcedureByName(txtSearchProcedure.Text);
+            }
+            else if (rbtnProcedureId.IsChecked == true)
+            {
+                gridProcedure.ItemsSource = db.QueryProcedureById(int.Parse(txtSearchProcedure.Text));
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Please choose a search category!");
+            }
         }
 
         private void AddValue_Click(object sender, RoutedEventArgs e)
@@ -138,6 +210,11 @@ namespace Piecework_wage_management_system
 
         }
 
+        private void btnSearchValue_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void AddRelationship_Click(object sender, RoutedEventArgs e)
         {
 
@@ -149,6 +226,11 @@ namespace Piecework_wage_management_system
         }
 
         private void RemoveRelationship_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchRelationship_Click(object sender, RoutedEventArgs e)
         {
 
         }

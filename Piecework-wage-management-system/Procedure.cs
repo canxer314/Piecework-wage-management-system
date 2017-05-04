@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Piecework_wage_management_system
 {
-    class Procedure
+    public class Procedure
     {
+        public int Id { set; get; }
+        public string Name { set; get; }
+        public int Product_Id { set; get; }
     }
 }

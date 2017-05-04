@@ -113,6 +113,9 @@
     <Compile Include="ModifyJobWindow.xaml.cs">
       <DependentUpon>ModifyJobWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModifyProcedureWindow.xaml.cs">
+      <DependentUpon>ModifyProcedureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModifyProductWindow.xaml.cs">
       <DependentUpon>ModifyProductWindow.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,9 @@
     </Compile>
     <Compile Include="TrackRecordWindow.xaml.cs">
       <DependentUpon>TrackRecordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddProcedureWindow.xaml.cs">
+      <DependentUpon>AddProcedureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkerManage_Page.xaml.cs">
       <DependentUpon>WorkerManage_Page.xaml</DependentUpon>
@@ -241,6 +247,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ModifyProcedureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ModifyProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TrackRecordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddProcedureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

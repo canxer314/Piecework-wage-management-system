@@ -77,7 +77,7 @@
                 </Menu>
                 <StackPanel Orientation="Horizontal">
                     <TextBox Name="txtSearchRelationship" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
-                    <Button Name="btnSearchRelationship" Content="Search By" Click="btnSearchValue_Click" Margin="5"/>
+                    <Button Name="btnSearchRelationship" Content="Search By" Click="btnSearchRelationship_Click" Margin="5"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <RadioButton x:Name="rbtnInputProcedure" IsChecked="True" Content="Input" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />

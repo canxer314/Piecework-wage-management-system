@@ -356,5 +356,55 @@ namespace Piecework_wage_management_system
                 return conn.Execute("delete from tbl_Product where Id=@Id", new { Id = id });
             }
         }
+        public int InsertProcedure(Procedure p)
+        {
+            //Id INT PRIMARY KEY,
+            //Name CHAR(20) UNIQUE KEY,
+            //Product_Id INT,
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Procedure values "
+                     + "(@Id, @Name, @Product_Id)",
+                     new { Id = p.Id, Name = p.Name, Product_Id = p.Product_Id });
+            }
+        }
+
+        //获取所有Procedure对象的集合
+        public IEnumerable<Procedure> QueryProcedureByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Procedure order by Id asc";
+                return conn.Query<Procedure>(query, null);
+            }
+        }
+        public IEnumerable<Procedure> QueryProcedureByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Procedure>("select * from tbl_Procedure where Name=@Name", new { Name = name });
+            }
+        }
+        public IEnumerable<Procedure> QueryProcedureById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Procedure>("select * from tbl_Procedure where Id=@Id", new { Id = id });
+            }
+        }
+        public IEnumerable<Procedure> QueryProcedureByProduct_Id(int p_id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Procedure>("select * from tbl_Procedure where Product_Id=@Product_Id", new { Product_Id = p_id });
+            }
+        }
+        public int DeleteProcedureById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Procedure where Id=@Id", new { Id = id });
+            }
+        }
     }
 }

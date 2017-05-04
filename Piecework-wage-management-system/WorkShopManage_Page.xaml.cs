@@ -101,6 +101,11 @@ namespace Piecework_wage_management_system
 
         private void btnSearchWorkshop_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrEmpty(txtSearchWorkshop.Text.Trim()) == true)
+            {
+                gridWorkshop.ItemsSource = db.QueryWorkshopByAll();
+                return;
+            }
             if(rbtnWorkshopName.IsChecked == true)
             {
                 gridWorkshop.ItemsSource = db.QueryWorkshopByName(txtSearchWorkshop.Text);
