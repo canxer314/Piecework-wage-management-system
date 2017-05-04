@@ -406,5 +406,63 @@ namespace Piecework_wage_management_system
                 return conn.Execute("delete from tbl_Procedure where Id=@Id", new { Id = id });
             }
         }
+        public int InsertValue(Value v)
+        {
+               // Name CHAR(20) PRIMARY KEY,
+               // Unit CHAR(20),
+               // Unit_Price INT,
+               // Procedure_Id INT,
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Value values "
+                     + "(@Name, @Unit, @Unit_Price, @Procedure_Id)",
+                     new { Name = v.Name, Unit = v.Unit, Unit_Price = v.Unit_Price, Procedure_Id = v.Procedure_Id });
+            }
+        }
+
+        //获取所有Value对象的集合
+        public IEnumerable<Value> QueryValueByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Value";
+                return conn.Query<Value>(query, null);
+            }
+        }
+        public IEnumerable<Value> QueryValueByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where Name=@Name", new { Name = name });
+            }
+        }
+        public IEnumerable<Value> QueryValueByUnit(string unit)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where Unit=@Unit", new { Unit = unit });
+            }
+        }
+        public IEnumerable<Value> QueryValueByUnitPrice(int price)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where Unit_Price=@Unit_Price", new { Unit_Price = price });
+            }
+        }
+        public IEnumerable<Value> QueryValueByProcedureId(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where Procedure_Id=@Procedure_Id", new { Procedure_Id = id });
+            }
+        }
+        public int DeleteValueByName(string name)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Value where Name=@Name", new { Name = name });
+            }
+        }
     }
 }

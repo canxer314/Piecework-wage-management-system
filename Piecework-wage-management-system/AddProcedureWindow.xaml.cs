@@ -35,13 +35,13 @@ namespace Piecework_wage_management_system
 
         private void BindingComboBoxItemSource()
         {
-            IEnumerable<Product> ws = db.QueryProductByAll();
-            cmb_Product.ItemsSource = ws;
+            IEnumerable<Product> ps = db.QueryProductByAll();
+            cmb_Product.ItemsSource = ps;
             int i = -1;
-            foreach (var w in ws)
+            foreach (var p in ps)
             {
                 i++;
-                if (w.Name == SelectedProduct.Name)
+                if (p.Name == SelectedProduct.Name)
                     break;
             }
             cmb_Product.SelectedIndex = i;
@@ -56,9 +56,9 @@ namespace Piecework_wage_management_system
 
         private void btn_AddProcedure_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Procedure empl in db.QueryProcedureByAll())
+            foreach (Procedure proc in db.QueryProcedureByAll())
             {
-                if (txt_ProcedureId.Text == empl.Id.ToString())
+                if (txt_ProcedureId.Text == proc.Id.ToString())
                 {
                     SystemSounds.Beep.Play();
                     MessageBox.Show("Already exists Procedure with ID:" + txt_ProcedureId.Text);

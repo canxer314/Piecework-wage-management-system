@@ -31,7 +31,7 @@
                 <RadioButton x:Name="rbtnProductId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
             </StackPanel>
             <Border Background="#FF74CD1B" Height="2"></Border>
-            <DataGrid x:Name="gridProduct" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+            <DataGrid x:Name="gridProduct" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" SelectionChanged="gridProduct_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
                     <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
@@ -55,7 +55,7 @@
                 <RadioButton x:Name="rbtnProcedureId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
             </StackPanel>
             <Border Background="#FF7474DE" Height="2"></Border>
-            <DataGrid x:Name="gridProcedure" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+            <DataGrid x:Name="gridProcedure" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" SelectionChanged="gridProcedure_SelectionChanged" Margin="5,5,0,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
                     <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
