@@ -60,12 +60,15 @@ namespace Piecework_wage_management_system
             );
             CREATE TABLE IF NOT EXISTS tbl_Procedure_Relationship
             (
-            	InputProcedure INT PRIMARY KEY,
+            	InputProcedure CHAR(20) PRIMARY KEY,
             	CONSTRAINT fk_InputProcedure FOREIGN KEY (InputProcedure)
-            		 REFERENCES tbl_Procedure(Id),
-            	OutputProceduce INT,
-            	CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProceduce)
-            		 REFERENCES tbl_Procedure(Id),
+            		 REFERENCES tbl_Procedure(Name),
+            	OutputProcedure CHAR(20),
+            	CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProcedure)
+            		 REFERENCES tbl_Procedure(Name),
+                Product_Id INT,
+                CONSTRAINT fk_Product_Id FOREIGN KEY (Product_Id)
+                    REFERENCES tbl_Procedure (Product_Id),
             	Scale INT
             );
             CREATE TABLE IF NOT EXISTS tbl_Value (
@@ -462,6 +465,77 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("delete from tbl_Value where Name=@Name", new { Name = name });
+            }
+        }
+        public int InsertRelationship(Relationship r)
+        {
+            //InputProcedure CHAR(20) PRIMARY KEY,
+            //CONSTRAINT fk_InputProcedure FOREIGN KEY (InputProcedure)
+            //	 REFERENCES tbl_Procedure(Name),
+            //OutputProcedure CHAR(20),
+            //CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProcedure)
+            //	 REFERENCES tbl_Procedure(Name),
+            //Product_Id INT,
+            //CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
+            //    REFERENCES tbl_Procedure (Product_Id),
+            //Scale INT
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Procedure_Relationship values "
+                     + "(@InputProcedure, @OutputProcedure, @Product_Id, @Scale)",
+                     new { InputProcedure = r.InputProcedure, OutputProcedure = r.OutputProcedure, Product_Id = r.Product_Id, Scale = r.Scale });
+            }
+        }
+
+        //获取所有Relationship对象的集合
+        public IEnumerable<Relationship> QueryRelationshipByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                const string query = "select * from tbl_Procedure_Relationship";
+                return conn.Query<Relationship>(query, null);
+            }
+        }
+        public IEnumerable<Relationship> QueryRelationshipByInputProcedure(string input)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Relationship>("select * from tbl_Procedure_Relationship where InputProcedure=@InputProcedure", new { InputProcedure = input });
+            }
+        }
+        public IEnumerable<Relationship> QueryRelationshipByOutputProcedure(string output)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Relationship>("select * from tbl_Procedure_Relationship where OutputProcedure=@OutputProcedure", new { OutputProcedure = output });
+            }
+        }
+        public IEnumerable<Relationship> QueryRelationshipByProduct_Id(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Relationship>("select * from tbl_Procedure_Relationship where Product_Id=@Product_Id", new { Product_Id = id });
+            }
+        }
+        public IEnumerable<Relationship> QueryRelationshipByScale(int scale)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Relationship>("select * from tbl_Procedure_Relationship where Scale=@Scale", new { Scale = scale });
+            }
+        }
+        public int DeleteRelationshipByInputProcedure(string input)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Procedure_Relationship where InputProcedure=@InputProcedure", new { InputProcedure = input });
+            }
+        }
+        public IEnumerable<Procedure> QueryProcedureNotInRelationshipByProductId(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Procedure>("select * from tbl_procedure where Product_Id = @Product_Id and Name not in (select InputProcedure from tbl_procedure_relationship)", new { Product_Id = id });
             }
         }
     }

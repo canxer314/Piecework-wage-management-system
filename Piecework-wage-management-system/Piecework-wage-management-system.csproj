@@ -79,6 +79,9 @@
     <Compile Include="AddProductWindow.xaml.cs">
       <DependentUpon>AddProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddRelationshipWindow.xaml.cs">
+      <DependentUpon>AddRelationshipWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddValueWindow.xaml.cs">
       <DependentUpon>AddValueWindow.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,9 @@
     <Compile Include="ModifyProductWindow.xaml.cs">
       <DependentUpon>ModifyProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModifyRelationshipWindow.xaml.cs">
+      <DependentUpon>ModifyRelationshipWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModifyValueWindow.xaml.cs">
       <DependentUpon>ModifyValueWindow.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,7 @@
       <DependentUpon>ProcedureRecord_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Procedure.cs" />
+    <Compile Include="Relationship.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductionScheduling_Page.xaml.cs">
       <DependentUpon>ProductionScheduling_Page.xaml</DependentUpon>
@@ -184,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRelationshipWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModifyProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModifyRelationshipWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

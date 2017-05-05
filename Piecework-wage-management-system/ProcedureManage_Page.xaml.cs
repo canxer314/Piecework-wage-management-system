@@ -46,12 +46,33 @@ namespace Piecework_wage_management_system
             {
                 if (gridProduct.SelectedItems.Count != 1)
                 {
-                    gridProcedure.ItemsSource = db.QueryProcedureByAll();
+                    //gridProcedure.ItemsSource = db.QueryProcedureByAll();
                     return;
                 }
                 IEnumerable<Product> tmpList;
                 tmpList = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
                 gridProcedure.ItemsSource = db.QueryProcedureByProduct_Id(tmpList.ElementAt(0).Id);
+            }
+            catch
+            {
+
+            }
+        }
+        public void FillGridView_Relationship()
+        {
+            try
+            {
+                if (gridProcedure.SelectedItems.Count != 1)
+                {
+                    gridProcedureRelationship.ItemsSource = db.QueryRelationshipByAll();
+                    return;
+                }
+                IEnumerable<Procedure> tmpList;
+                tmpList = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id);
+                //MessageBox.Show(tmpList.ElementAt(0).Name);
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByOutputProcedure(tmpList.ElementAt(0).Name);
+                //gridProcedureRelationship.ItemsSource = db.QueryRelationshipByAll();
+                return;
             }
             catch
             {
@@ -64,7 +85,7 @@ namespace Piecework_wage_management_system
             {
                 if (gridProcedure.SelectedItems.Count != 1)
                 {
-                    gridValue.ItemsSource = db.QueryValueByAll();
+                    //gridValue.ItemsSource = db.QueryValueByAll();
                     return;
                 }
                 IEnumerable<Procedure> tmpList;
@@ -273,7 +294,9 @@ namespace Piecework_wage_management_system
             }
             IEnumerable<Value> tmpList;
             tmpList = db.QueryValueByName((gridValue.SelectedItem as Value).Name);
-            ModifyValueWindow modifyValueWnd = new ModifyValueWindow(tmpList.ElementAt(0), this);
+            IEnumerable<Product> tmpList2;
+            tmpList2 = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
+            ModifyValueWindow modifyValueWnd = new ModifyValueWindow(tmpList.ElementAt(0),tmpList2.ElementAt(0), this);
             modifyValueWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyValueWnd.ShowDialog();
         }
@@ -329,22 +352,94 @@ namespace Piecework_wage_management_system
 
         private void AddRelationship_Click(object sender, RoutedEventArgs e)
         {
-
+            if (gridProcedure.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select a Procedure before you add Relation on it.");
+                return;
+            }
+            if (gridProcedure.SelectedItems.Count > 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Can not add Relation on multiple Procedure at one time.");
+                return;
+            }
+            IEnumerable<Procedure> tmpList;
+            tmpList = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id);
+            AddRelationshipWindow aRwnd = new AddRelationshipWindow(this, tmpList.ElementAt(0));
+            aRwnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            aRwnd.ShowDialog();
         }
 
         private void ModifyRelationship_Click(object sender, RoutedEventArgs e)
         {
+            if (gridProcedureRelationship.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select a Relationship in the table before you modify it.");
+                return;
+            }
+            if (gridProcedureRelationship.SelectedItems.Count > 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Can not modify multiple Relationship information at one time.");
+                return;
+            }
+            IEnumerable<Relationship> tmpList;
+            tmpList = db.QueryRelationshipByInputProcedure((gridProcedureRelationship.SelectedItem as Relationship).InputProcedure);
+            ModifyRelationshipWindow modifyRelationshipWnd = new ModifyRelationshipWindow(tmpList.ElementAt(0),this);
+            modifyRelationshipWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            modifyRelationshipWnd.ShowDialog();
 
         }
 
         private void RemoveRelationship_Click(object sender, RoutedEventArgs e)
         {
-
+            if (gridProcedureRelationship.SelectedItems.Count < 1)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must first select at least one Relationship in the table before you remove it.");
+                return;
+            }
+            foreach (Relationship item in gridProcedureRelationship.SelectedItems)
+            {
+                db.DeleteRelationshipByInputProcedure(item.InputProcedure);
+            }
+            FillGridView_Relationship();
         }
 
         private void btnSearchRelationship_Click(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrEmpty(txtSearchRelationship.Text.Trim()) == true)
+            {
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByAll();
+                return;
+            }
+            if (rbtnInputProcedure.IsChecked == true)
+            {
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByInputProcedure(txtSearchRelationship.Text);
+            }
+            else if (rbtnOutputProcedure.IsChecked == true)
+            {
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByOutputProcedure(txtSearchRelationship.Text);
+            }
+            else if (rbtnScale.IsChecked == true)
+            {
+                try
+                {
+                    int query = int.Parse(txtSearchRelationship.Text);
+                    gridProcedureRelationship.ItemsSource = db.QueryRelationshipByScale(query);
+                }
+                catch
+                {
 
+                }
+            }
+            else
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Please choose a search category!");
+            }
         }
 
         private void gridProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -355,6 +450,7 @@ namespace Piecework_wage_management_system
         private void gridProcedure_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FillGridView_Value();
+            FillGridView_Relationship();
         }
     }
 }

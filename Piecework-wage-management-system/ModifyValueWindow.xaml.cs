@@ -21,10 +21,12 @@ namespace Piecework_wage_management_system
     public partial class ModifyValueWindow : Window
     {
         private Value OriginValue { set; get; }
+        private Product OriginProduct { set; get; }
         private ProcedureManage_Page PmPage { set; get; }
         private DataAccessLayer Db { set; get; }
-        public ModifyValueWindow(Value originValue, ProcedureManage_Page pmPage)
+        public ModifyValueWindow(Value originValue, Product originProduct, ProcedureManage_Page pmPage)
         {
+            OriginProduct = originProduct;
             OriginValue = originValue;
             PmPage = pmPage;
             Db = new DataAccessLayer();
@@ -37,9 +39,7 @@ namespace Piecework_wage_management_system
             txt_ValueName.Text = OriginValue.Name;
             txt_ValueUnit.Text = OriginValue.Unit;
             txt_ValueUnitPrice.Text = OriginValue.Unit_Price.ToString();
-            IEnumerable<Procedure> procedureList = Db.QueryProcedureById(OriginValue.Procedure_Id);
-            IEnumerable<Product> productList = Db.QueryProductById(procedureList.ElementAt(0).Product_Id);
-            IEnumerable<Procedure> procedure = Db.QueryProcedureByProduct_Id(productList.ElementAt(0).Id);
+            IEnumerable<Procedure> procedure = Db.QueryProcedureByProduct_Id(OriginProduct.Id);
             cmb_Procedure.ItemsSource = procedure;
             int i = -1;
             foreach (var p in procedure)

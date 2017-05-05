@@ -87,8 +87,8 @@
                 <Border Background="#FFAF7BEE" Height="2"></Border>
                 <DataGrid x:Name="gridProcedureRelationship" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Input"/>
                         <DataGridTextColumn Binding="{Binding OutputProcedure}" Header="Output"/>
+                        <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Input"/>
                         <DataGridTextColumn Binding="{Binding Scale}" Header="Scale"/>
                     </DataGrid.Columns>
                 </DataGrid>
