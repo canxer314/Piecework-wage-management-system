@@ -55,7 +55,16 @@ namespace Piecework_wage_management_system
             {
                 Workshop ws = new Workshop();
                 ws.Name = txt_WorkshopName.Text;
-                ws.Id = int.Parse(txt_WorkshopId.Text);
+                try
+                {
+                    ws.Id = int.Parse(txt_WorkshopId.Text);
+                }
+                catch
+                {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Workshop Id must be numberic!");
+                return;
+                }
                 db.InsertWorkshop(ws);
                 wsmPage.FillListView();
                 this.Close();

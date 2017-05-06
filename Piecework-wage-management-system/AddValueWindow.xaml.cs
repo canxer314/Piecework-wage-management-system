@@ -75,7 +75,7 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Value Unit can not be blank!");
                 return;
             }
-            if (txt_ValueUnit_Price == null)
+            if (string.IsNullOrWhiteSpace(txt_ValueUnit_Price.Text) == true)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Value Price can not be blank!");
@@ -87,10 +87,21 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Belong to what Procedure can not be blank!");
                 return;
             }
+            double price = 0;
+            try
+            {
+                price = double.Parse(txt_ValueUnit_Price.Text);
+            }
+            catch(FormatException except)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must only input numberic in Price!");
+                return;
+            }
             Value value = new Value();
             value.Name = txt_ValueName.Text;
             value.Unit = txt_ValueUnit.Text;
-            value.Unit_Price = int.Parse(txt_ValueUnit_Price.Text);
+            value.Unit_Price = price;
             value.Procedure_Id = (cmb_Procedure.SelectedItem as Procedure).Id;
             Db.InsertValue(value);
             PmPage.FillGridView_Value();

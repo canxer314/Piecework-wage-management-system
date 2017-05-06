@@ -89,7 +89,11 @@ namespace Piecework_wage_management_system
             {
                 p.Id = int.Parse(txt_ProcedureId.Text);
             }
-            catch { }
+            catch {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Procedure Id must be numberic!");
+                return;
+            }
             p.Product_Id = (cmb_Product.SelectedItem as Product).Id;
             db.InsertProcedure(p);
             pmPage.FillGridView_Procedure();

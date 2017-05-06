@@ -35,12 +35,14 @@ namespace Piecework_wage_management_system
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Please input the job name!");
                 return;
-            } else if (db.QueryJobByName(txt_JobName.Text).Count() > 0)
+            }
+            else if (db.QueryJobByName(txt_JobName.Text).Count() > 0)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Already exists job named " + txt_JobName + "!");
                 return;
-            } else if (txt_JobId.Text.Trim() == String.Empty)
+            }
+            else if (txt_JobId.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Please input the job id!");
@@ -51,11 +53,21 @@ namespace Piecework_wage_management_system
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Already exists job with id: " + txt_JobId.Text + "!");
                 return;
-            }else
+            }
+            else
             {
                 Job job = new Job();
                 job.Name = txt_JobName.Text;
-                job.Id = int.Parse(txt_JobId.Text);
+                try
+                {
+                    job.Id = int.Parse(txt_JobId.Text);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Job id must be numberic!");
+                    return;
+                }
                 db.InsertJob(job);
                 jmPage.FillListView();
                 this.Close();

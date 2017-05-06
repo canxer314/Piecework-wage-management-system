@@ -35,12 +35,14 @@ namespace Piecework_wage_management_system
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Please input the product name!");
                 return;
-            } else if (db.QueryProductByName(txt_ProductName.Text).Count() > 0)
+            }
+            else if (db.QueryProductByName(txt_ProductName.Text).Count() > 0)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Already exists product named " + txt_ProductName + "!");
                 return;
-            } else if (txt_ProductId.Text.Trim() == String.Empty)
+            }
+            else if (txt_ProductId.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Please input the job id!");
@@ -51,12 +53,22 @@ namespace Piecework_wage_management_system
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Already exists product with id: " + txt_ProductId.Text + "!");
                 return;
-            }else
+            }
+            else
             {
-                Product job = new Product();
-                job.Name = txt_ProductName.Text;
-                job.Id = int.Parse(txt_ProductId.Text);
-                db.InsertProduct(job);
+                Product p = new Product();
+                p.Name = txt_ProductName.Text;
+                try
+                {
+                    p.Id = int.Parse(txt_ProductId.Text);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Product Id must be numberic!");
+                    return;
+                }
+                db.InsertProduct(p);
                 pmPage.FillGridView_Product();
                 this.Close();
             }

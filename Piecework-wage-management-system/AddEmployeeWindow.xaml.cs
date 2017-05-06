@@ -39,44 +39,44 @@ namespace Piecework_wage_management_system
         {
             foreach (Employee empl in db.QueryEmployeeByAll())
             {
-                if(txt_EmployeeId.Text == empl.Id.ToString())
+                if (txt_EmployeeId.Text == empl.Id.ToString())
                 {
                     SystemSounds.Beep.Play();
                     MessageBox.Show("Already exists employee having eID:" + txt_EmployeeId.Text);
                     return;
                 }
             }
-            if(txt_EmployeeName == null)
+            if (txt_EmployeeName == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Name can not be blank!");
                 return;
             }
-            if(txt_EmployeeId == null)
+            if (txt_EmployeeId == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Id can not be blank!");
                 return;
             }
-            if(cmb_Gender.SelectedItem == null)
+            if (cmb_Gender.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Gender can not be blank!");
                 return;
             }
-            if(cmb_Workshop.SelectedItem == null)
+            if (cmb_Workshop.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Workshop can not be blank!");
                 return;
             }
-            if(cmb_Job.SelectedItem == null)
+            if (cmb_Job.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Job can not be blank!");
                 return;
             }
-            if(txt_Telephone == null)
+            if (txt_Telephone == null)
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Employee Telephone can not be blank!");
@@ -86,9 +86,14 @@ namespace Piecework_wage_management_system
             employee.Name = txt_EmployeeName.Text;
             try
             {
-            employee.Id = int.Parse(txt_EmployeeId.Text);
+                employee.Id = int.Parse(txt_EmployeeId.Text);
             }
-            catch { }
+            catch
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Employee Id must be numberic!");
+                return;
+            }
             employee.Gender = cmb_Gender.SelectionBoxItem.ToString();
             employee.Workshop = (cmb_Workshop.SelectedItem as Workshop).Name;
             employee.Job = (cmb_Job.SelectedItem as Job).Name;
@@ -118,7 +123,7 @@ namespace Piecework_wage_management_system
         private void txt_Telephone_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                btn_AddEmployee_Click(sender,e);
+                btn_AddEmployee_Click(sender, e);
         }
     }
 }

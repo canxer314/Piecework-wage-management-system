@@ -33,60 +33,39 @@ namespace Piecework_wage_management_system
             Db = new DataAccessLayer();
             procedureIEnum = Db.QueryProcedureByProduct_Id(originRelationship.Product_Id);
             InitializeComponent();
-            Db.DeleteRelationshipByInputProcedure(originRelationship.InputProcedure);
+            Db.DeleteRelationshipByName(originRelationship.Procedure_Name);
             RestoreOriginRelationship();
         }
 
         private void RestoreOriginRelationship()
         {
-            cmb_OutputProcedure.ItemsSource = procedureIEnum;
+            List<int> sequenceList = new List<int>();
+            int sequenceNumber = procedureIEnum.Count();
+            for(int x = 1;x <= sequenceNumber;x++)
+            {
+                sequenceList.Add(x);
+            }
+            cmb_Sequence_Number.ItemsSource = sequenceList;
             int i = -1;
-            foreach (var p in procedureIEnum)
+            foreach (var p in sequenceList)
             {
                 i++;
-                if (p.Name == OriginRelationship.OutputProcedure)
+                if (p == OriginRelationship.Sequence_Number)
                     break;
             }
-            cmb_OutputProcedure.SelectedIndex = i;
+            cmb_Sequence_Number.SelectedIndex = i;
             List<Procedure> tmpList = Db.QueryProcedureNotInRelationshipByProductId(OriginRelationship.Product_Id).ToList();
-            //i = 0;
-            //foreach (var p in tmpList)
-            //{
-            //    if (p.Name != OriginRelationship.InputProcedure)
-            //        i++;
-            //    else
-            //    {
-            //        tmpList.RemoveAt(i);
-            //        break;
-            //    }
-            //}
-            cmb_InputProcedure.ItemsSource = tmpList;
+            cmb_Procedure_Name.ItemsSource = tmpList;
             i = -1;
             foreach (var p in tmpList)
             {
-                    i++;
-                if (p.Name == OriginRelationship.InputProcedure)
+                i++;
+                if (p.Name == OriginRelationship.Procedure_Name)
                     break;
             }
-            cmb_InputProcedure.SelectedIndex = i;
+            cmb_Procedure_Name.SelectedIndex = i;
+            txt_Ratio.Text = OriginRelationship.Input_Output_Ratio.ToString();
             IsModified = false;
-        }
-        private void BindingComboBoxItemSourceDynamic()
-        {
-            //List<Procedure> tmpList = Db.QueryProcedureNotInRelationshipByProductId(OriginRelationship.Product_Id).ToList();
-            //int i = 0;
-            //foreach (var p in tmpList)
-            //{
-            //    if (p.Id != (cmb_OutputProcedure.SelectedItem as Procedure).Id)
-            //        i++;
-            //    else
-            //    {
-            //        tmpList.RemoveAt(i);
-            //        break;
-            //    }
-            //}
-            //cmb_InputProcedure.ItemsSource = tmpList;
-            cmb_InputProcedure.SelectedIndex = -1;
         }
         private void btn_Restore_Click(object sender, RoutedEventArgs e)
         {
@@ -97,9 +76,18 @@ namespace Piecework_wage_management_system
         private void btn_Modify_Click(object sender, RoutedEventArgs e)
         {
             Relationship alteredRelationship = new Relationship();
-            alteredRelationship.Scale = int.Parse(txt_Scale.Text);
-            alteredRelationship.InputProcedure = (cmb_InputProcedure.SelectedItem as Procedure).Name;
-            alteredRelationship.OutputProcedure = (cmb_OutputProcedure.SelectedItem as Procedure).Name;
+            try
+            {
+                alteredRelationship.Input_Output_Ratio = int.Parse(txt_Ratio.Text);
+            }
+            catch
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Input output ratio must be numberic!");
+                return;
+            }
+            alteredRelationship.Procedure_Name = (cmb_Procedure_Name.SelectedItem as Procedure).Name;
+            alteredRelationship.Sequence_Number = (int)cmb_Sequence_Number.SelectedItem;
             alteredRelationship.Product_Id = OriginRelationship.Product_Id;
             Db.InsertRelationship(alteredRelationship);
             PmPage.FillGridView_Relationship();
@@ -111,11 +99,6 @@ namespace Piecework_wage_management_system
         {
             IsModified = false;
             this.Close();
-        }
-
-        private void cmb_OutputProcedure_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            BindingComboBoxItemSourceDynamic();
         }
 
         private void Window_Closed(object sender, EventArgs e)

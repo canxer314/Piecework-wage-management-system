@@ -8,13 +8,19 @@ namespace Piecework_wage_management_system
 {
     public class Relationship
     {
-        //InputProcedure INT PRIMARY KEY,
-        //OutputProceduce INT,
+        //Id INT AUTO_INCREMENT PRIMARY KEY,
+        //Sequence_Number INT,
+        //Procedure_Name char(20) UNIQUE KEY,
+        //CONSTRAINT fk_Procedure_Name FOREIGN KEY (Procedure_Name)
+        //	REFERENCES tbl_Procedure(Name),
+        //Input_Output_Ratio INT,
         //Product_Id INT,
-        //Scale INT
-        public string InputProcedure { set; get; }
-        public string OutputProcedure { set; get; }
+        //CONSTRAINT fk_Product_Id FOREIGN KEY (Product_Id)
+        //	REFERENCES tbl_Procedure (Product_Id)
+        public int Id { set; get; }
+        public int Sequence_Number { set; get; }
+        public string Procedure_Name { set; get; }
+        public int Input_Output_Ratio { set; get; }
         public int Product_Id { set; get; }
-        public int Scale { set; get; }
     }
 }

@@ -20,105 +20,83 @@ namespace Piecework_wage_management_system
     /// </summary>
     public partial class AddRelationshipWindow : Window
     {
-        private Procedure SelectedProcedure { set; get; }
-        private IEnumerable<Procedure> procedureIEnum { set; get; }
-        private List<Procedure> tmpList { set; get; }
+        private Product SelectedProduct { set; get; }
         private DataAccessLayer Db { set; get; }
         private ProcedureManage_Page PmPage { set; get; }
-        public AddRelationshipWindow(ProcedureManage_Page pmPage, Procedure procedure)
+        public AddRelationshipWindow(ProcedureManage_Page pmPage, Product product)
         {
             PmPage = pmPage;
-            SelectedProcedure = procedure;
+            SelectedProduct = product;
             Db = new DataAccessLayer();
-            procedureIEnum = Db.QueryProcedureByProduct_Id(procedure.Product_Id);
-            tmpList = Db.QueryProcedureNotInRelationshipByProductId(SelectedProcedure.Product_Id).ToList();
             InitializeComponent();
             BindingComboBoxItemSource();
         }
         private void BindingComboBoxItemSource()
         {
-            cmb_OutputProcedure.ItemsSource = procedureIEnum;
-            int i = -1;
-            foreach (var p in procedureIEnum)
+            IEnumerable<Procedure> procedureIEnum = Db.QueryProcedureByProduct_Id(SelectedProduct.Id);
+            //cmb_OutputProcedure.ItemsSource = procedureIEnum;
+            List<int> sequenceList = new List<int>();
+            int sequenceNumber = procedureIEnum.Count();
+            for(int x = 1;x <= sequenceNumber;x++)
             {
-                i++;
-                if (p.Id == SelectedProcedure.Id)
-                    break;
+                sequenceList.Add(x);
             }
-            cmb_OutputProcedure.SelectedIndex = i;
-            i = 0;
-            foreach (var p in tmpList)
-            {
-                if (p.Id != SelectedProcedure.Id)
-                    i++;
-                else
-                {
-                    tmpList.RemoveAt(i);
-                    break;
-                }
-            }
-            cmb_InputProcedure.ItemsSource = tmpList;
-        }
-        private void BindingComboBoxItemSourceDynamic()
-        {
-            int i = 0;
-            foreach (var p in tmpList)
-            {
-                if (p.Id != (cmb_OutputProcedure.SelectedItem as Procedure).Id)
-                    i++;
-                else
-                {
-                    tmpList.RemoveAt(i);
-                    break;
-                }
-            }
-            cmb_InputProcedure.ItemsSource = tmpList;
-            cmb_InputProcedure.SelectedIndex = -1;
+            cmb_Sequence_Number.ItemsSource = sequenceList;
+
+            IEnumerable<Procedure> tmpList = Db.QueryProcedureNotInRelationshipByProductId(SelectedProduct.Id);
+            cmb_Procedure_Name.ItemsSource = tmpList;
+            cmb_Procedure_Name.SelectedIndex = -1;
+            cmb_Sequence_Number.SelectedIndex = -1;
+            txt_Ratio.Text = "1";
         }
         private void btn_Clean_Click(object sender, RoutedEventArgs e)
         {
             BindingComboBoxItemSource();
-            txt_Scale.Text = null;
+            txt_Ratio = null;
         }
 
         private void btn_AddRelationship_Click(object sender, RoutedEventArgs e)
         {
             foreach (Relationship relate in Db.QueryRelationshipByAll())
             {
-                if ((cmb_InputProcedure.SelectedItem as Procedure).Name == relate.InputProcedure)
+                if ((cmb_Procedure_Name.SelectedItem as Procedure).Name == relate.Procedure_Name)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Relationship with inputProcedure:" + (cmb_InputProcedure.SelectedItem as Procedure).Name);
+                    MessageBox.Show("Already exists Relation with Procedure Name:" + (cmb_Procedure_Name.SelectedItem as Procedure).Name);
                     return;
                 }
             }
-            if (cmb_InputProcedure.SelectedIndex == -1)
+            if (cmb_Procedure_Name.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a input procedure.");
+                MessageBox.Show("You must select a procedure.");
                 return;
             }
-            if (cmb_OutputProcedure.SelectedIndex == -1)
+            if (cmb_Sequence_Number.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a output procedure.");
+                MessageBox.Show("You must select a sequence number.");
                 return;
             }
-            if (String.IsNullOrEmpty(txt_Scale.Text.Trim()) == true)
+            if (String.IsNullOrEmpty(txt_Ratio.Text.Trim()) == true)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Scale must not be blank!");
+                MessageBox.Show("Ratio must not be blank!");
                 return;
             }
             Relationship r = new Relationship();
-            r.InputProcedure = (cmb_InputProcedure.SelectedItem as Procedure).Name;
-            r.OutputProcedure = (cmb_OutputProcedure.SelectedItem as Procedure).Name;
+            r.Product_Id = SelectedProduct.Id;
+            r.Procedure_Name = (cmb_Procedure_Name.SelectedItem as Procedure).Name;
+            r.Sequence_Number = (int)cmb_Sequence_Number.SelectionBoxItem;
             try
             {
-                r.Scale = int.Parse(txt_Scale.Text);
+                r.Input_Output_Ratio = int.Parse(txt_Ratio.Text);
             }
-            catch { }
-            r.Product_Id = SelectedProcedure.Product_Id;
+            catch {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Ratio must be numberic!");
+                return;
+            }
             Db.InsertRelationship(r);
             PmPage.FillGridView_Relationship();
             this.Close();
@@ -129,9 +107,5 @@ namespace Piecework_wage_management_system
             this.Close();
         }
 
-        private void cmb_OutputProcedure_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            BindingComboBoxItemSourceDynamic();
-        }
     }
 }

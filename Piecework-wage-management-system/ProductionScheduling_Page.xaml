@@ -5,10 +5,77 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="602" d:DesignWidth="846"
       Title="ProductionScheduling_Page">
 
-    <Grid>
-        <TextBox FontSize="25">Hello production scheduling manage page!</TextBox>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF74CD1B">
+                <TextBlock FontWeight="Bold">Production Task:</TextBlock>
+                <MenuItem x:Name="AddForm" Header="Add" />
+                <MenuItem x:Name="ModifyForm" Header="Modify" />
+                <MenuItem x:Name="RemoveForm" Header="Remove" />
+            </Menu>
+            <DataGrid x:Name="gridProductionForm" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Task num"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Product"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Value"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Border Background="Gray" Grid.Column="1"></Border>
+        <Grid Grid.Column="2" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF7474DE">
+                    <TextBlock FontWeight="Bold">Procedure</TextBlock>
+                </Menu>
+                <DataGrid x:Name="gridProcedure" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <Border Background="Gray" Grid.Column="1"></Border>
+            <StackPanel Grid.Column="2" Orientation="Vertical">
+                <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFAF7BEE">
+                    <TextBlock FontWeight="Bold">Price</TextBlock>
+                </Menu>
+                <DataGrid x:Name="gridPrice" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Unit"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Price"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <Border Background="Gray" Grid.Column="3"></Border>
+            <StackPanel Grid.Column="4" Orientation="Vertical">
+                <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFFFF51A">
+                    <TextBlock FontWeight="Bold">Employee:</TextBlock>
+                    <MenuItem x:Name="AddEmployee" Header="Add" />
+                    <MenuItem x:Name="RemoveEmployee" Header="Remove" />
+                </Menu>
+                <DataGrid x:Name="gridEmployee" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

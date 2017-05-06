@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Piecework_wage_management_system
 {
-    public class Value
+    public class ValuePrice
     {
         public int Id { set; get; }
-        public int TaskNum { set; get; }
-        public string Name { set; get; }
-        public int Product_Id { set; get; }
+        public string Unit { set; get; }
+        public double Unit_Price { set; get; }
+        public int Value_Id { set; get; }
+        public int Procedure_Id { set; get; }
     }
 }

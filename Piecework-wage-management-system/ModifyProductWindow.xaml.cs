@@ -60,7 +60,16 @@ namespace Piecework_wage_management_system
                     return;
                 }
             modifiedProduct.Name = txt_ProductName.Text;
+            try
+            {
             modifiedProduct.Id = int.Parse(txt_ProductId.Text);
+            }
+            catch
+            {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Product Id must be numberic!");
+                    return;
+            }
             db.DeleteProductById(OriginProduct.Id);
             db.InsertProduct(modifiedProduct);
             pmPage.FillGridView_Product();

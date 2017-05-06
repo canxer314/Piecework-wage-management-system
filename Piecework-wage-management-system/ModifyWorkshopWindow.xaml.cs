@@ -61,7 +61,16 @@ namespace Piecework_wage_management_system
                     return;
                 }
             modifiedWorkshop.Name = txt_WorkshopName.Text;
-            modifiedWorkshop.Id = int.Parse(txt_WorkshopId.Text);
+            try
+            {
+                modifiedWorkshop.Id = int.Parse(txt_WorkshopId.Text);
+            }
+            catch
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Workshop Id must be numberic!");
+                return;
+            }
             db.DeleteWorkshopById(OriginWorkshop.Id);
             db.InsertWorkshop(modifiedWorkshop);
             wsmPage.FillListView();

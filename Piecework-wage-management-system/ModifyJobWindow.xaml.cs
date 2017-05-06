@@ -54,7 +54,16 @@ namespace Piecework_wage_management_system
                     return;
                 }
             modifiedJob.Name = txt_JobName.Text;
-            modifiedJob.Id = int.Parse(txt_JobId.Text);
+            try
+            {
+                modifiedJob.Id = int.Parse(txt_JobId.Text);
+            }
+            catch
+            {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Job Id must be numberic!");
+                    return;
+            }
             db.DeleteJobById(OriginJob.Id);
             db.InsertJob(modifiedJob);
             jmPage.FillListView();

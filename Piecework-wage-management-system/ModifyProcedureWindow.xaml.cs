@@ -76,7 +76,16 @@ namespace Piecework_wage_management_system
                     return;
                 }
             alteredProcedure.Name = txt_ProcedureName.Text;
+            try
+            {
             alteredProcedure.Id = int.Parse(txt_ProcedureId.Text);
+            }
+            catch
+            {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("Procedure Id must be numberic!");
+                    return;
+            }
             alteredProcedure.Product_Id = (cmb_Product.SelectedItem as Product).Id;
             Db.DeleteProcedureById(OriginProcedure.Id);
             Db.InsertProcedure(alteredProcedure);

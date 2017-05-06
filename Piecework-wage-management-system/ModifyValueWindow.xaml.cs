@@ -74,9 +74,20 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("There must no be blank in any textbox.");
                 return;
             }
+            double price = 0;
+            try
+            {
+                price = double.Parse(txt_ValueUnitPrice.Text);
+            }
+            catch(FormatException except)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("You must only input numberic in Price!");
+                return;
+            }
             alteredValue.Name = txt_ValueName.Text;
             alteredValue.Unit = txt_ValueUnit.Text;
-            alteredValue.Unit_Price = int.Parse(txt_ValueUnitPrice.Text);
+            alteredValue.Unit_Price = price;
             alteredValue.Procedure_Id = (cmb_Procedure.SelectedItem as Procedure).Id;
             Db.DeleteValueByName(OriginValue.Name);
             Db.InsertValue(alteredValue);

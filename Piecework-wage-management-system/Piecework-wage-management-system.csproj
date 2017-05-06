@@ -82,8 +82,8 @@
     <Compile Include="AddRelationshipWindow.xaml.cs">
       <DependentUpon>AddRelationshipWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddValueWindow.xaml.cs">
-      <DependentUpon>AddValueWindow.xaml</DependentUpon>
+    <Compile Include="AddTaskWindow.xaml.cs">
+      <DependentUpon>AddTaskWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddWorkshopWindow.xaml.cs">
       <DependentUpon>AddWorkshopWindow.xaml</DependentUpon>
@@ -128,9 +128,6 @@
     <Compile Include="ModifyRelationshipWindow.xaml.cs">
       <DependentUpon>ModifyRelationshipWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModifyValueWindow.xaml.cs">
-      <DependentUpon>ModifyValueWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ModifyWorkshopWindow.xaml.cs">
       <DependentUpon>ModifyWorkshopWindow.xaml</DependentUpon>
     </Compile>
@@ -171,6 +168,7 @@
       <DependentUpon>AddProcedureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Value.cs" />
+    <Compile Include="ValuePrice.cs" />
     <Compile Include="WorkerManage_Page.xaml.cs">
       <DependentUpon>WorkerManage_Page.xaml</DependentUpon>
     </Compile>
@@ -198,7 +196,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddValueWindow.xaml">
+    <Page Include="AddTaskWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,10 +276,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModifyRelationshipWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ModifyValueWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
