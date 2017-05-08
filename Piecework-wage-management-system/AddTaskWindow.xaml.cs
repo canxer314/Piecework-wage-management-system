@@ -53,6 +53,7 @@ namespace Piecework_wage_management_system
             else
             {
                 v.Product_Id = (cmb_Product.SelectedItem as Product).Id;
+                v.Product_Name = (cmb_Product.SelectedItem as Product).Name;
             }
             try
             {
@@ -76,21 +77,34 @@ namespace Piecework_wage_management_system
             }
             //if (Db.QueryValueByName(txt_Value.Text).Count() == 0)
             // QueryValueByNameNotInProduct
+            if (Db.QueryValueByNameAndProductId(txt_Value.Text, v.Product_Id).Count() == 0)
             {
                 v.Name = txt_Value.Text;
             }
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Task number must be numberic!");
+                MessageBox.Show("Already exists value with name:" + txt_Value.Text);
+                txt_Value = null;
                 return;
             }
             Db.InsertValue(v);
+            IEnumerable<Relationship> relateList = Db.QueryRelationshipByProduct_Id(v.Product_Id);
+            foreach(Relationship item in relateList)
+            {
+                ValuePrice price = new ValuePrice();
+                price.Procedure_Id = Db.QueryProcedureByName(item.Procedure_Name).Single().Id;
+                price.Value_Id = Db.QueryValueByTaskNum(v.TaskNum).Single().Id;
+                price.Sequence = item.Sequence_Number;
+                Db.InsertValuePrice(price);
+            }
             PsPage.FillGridTask();
+            this.Close();
         }
 
         private void btn_Return_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
         }
     }
 }

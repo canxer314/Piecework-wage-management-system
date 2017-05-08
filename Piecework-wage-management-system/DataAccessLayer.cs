@@ -74,6 +74,7 @@ namespace Piecework_wage_management_system
                 Id INT AUTO_INCREMENT PRIMARY KEY,
                 TaskNum INT UNIQUE KEY,
                 Name CHAR(20),
+                Product_Name CHAR(20),
             	Product_Id INT,
             	CONSTRAINT fk_Value_Product_Id FOREIGN KEY (Product_Id)
                 	REFERENCES tbl_Product (Id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -82,17 +83,18 @@ namespace Piecework_wage_management_system
                 Id INT AUTO_INCREMENT PRIMARY KEY,
                 Unit CHAR(20),
                 Unit_Price FLOAT,
+            	Sequence INT,
             	Value_Id INT,
-            	CONSTRAINT fk_Value_Id FOREIGN KEY (Value_Id)
+            	CONSTRAINT fk_Price_Value_Id FOREIGN KEY (Value_Id)
                 	REFERENCES tbl_Value (Id) ON DELETE CASCADE ON UPDATE CASCADE,
                 Procedure_Id INT,
-                CONSTRAINT fk_ProcedureId FOREIGN KEY (Procedure_Id)
+                CONSTRAINT fk_Price_ProcedureId FOREIGN KEY (Procedure_Id)
                     REFERENCES tbl_Procedure (Id) ON DELETE CASCADE ON UPDATE CASCADE
             );
-            CREATE TABLE IF NOT EXISTS tbl_Reckon (
+            CREATE TABLE IF NOT EXISTS tbl_Assign (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
                 EmployeeId INT,
-                CONSTRAINT fk_EmployeeId FOREIGN KEY (EmployeeId)
+                CONSTRAINT fk_Reckon_EmployeeId FOREIGN KEY (EmployeeId)
                     REFERENCES tbl_Employee (Id) ON DELETE CASCADE ON UPDATE CASCADE,
             	Value_Id INT,
             	CONSTRAINT fk_Reckon_Value_Id FOREIGN KEY (Value_Id)
@@ -433,14 +435,11 @@ namespace Piecework_wage_management_system
         }
         public int InsertValue(Value v)
         {
-            //Id INT AUTO_INCREMENT PRIMARY KEY,
-            //Name CHAR(20),
-            //Product_Id INT,
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Value values "
-                     + "(@Id, @Name, @Product_Id)",
-                     new { Id = v.Id, Name = v.Name, Product_Id = v.Product_Id});
+                     + "(@Id, @TaskNum, @Name, @Product_Name, @Product_Id)",
+                     new { Id = v.Id, TaskNum = v.TaskNum, Name = v.Name, Product_Name = v.Product_Name, Product_Id = v.Product_Id });
             }
         }
 
@@ -451,6 +450,27 @@ namespace Piecework_wage_management_system
             {
                 const string query = "select * from tbl_Value";
                 return conn.Query<Value>(query, null);
+            }
+        }
+        public IEnumerable<Value> QueryValueById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where Id=@Id", new { Id = id });
+            }
+        }
+        public IEnumerable<Value> QueryValueByTaskNum(int num)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where TaskNum=@TaskNum", new { TaskNum = num });
+            }
+        }
+        public IEnumerable<Value> QueryValueByNameAndProductId(string name, int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Value>("select * from tbl_Value where Name=@Name and Product_Id=@Product_Id", new { Name = name, Product_Id = id });
             }
         }
         public IEnumerable<Value> QueryValueByName(string name)
@@ -465,6 +485,13 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Query<Value>("select * from tbl_Value where Product_Id=@Product_Id", new { Product_Id = id });
+            }
+        }
+        public int UpdateValue(Value modifiedTask)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Value set TaskNum=@TaskNum, Name=@Name where Id=@Id", new { TaskNum = modifiedTask.TaskNum, Name = modifiedTask.Name, Id = modifiedTask.Id });
             }
         }
         public int DeleteValueById(int id)
@@ -489,7 +516,7 @@ namespace Piecework_wage_management_system
             {
                 return conn.Execute("Insert into tbl_Relationship values "
                      + "(@Id, @Sequence_Number, @Procedure_Name, @Input_Output_Ratio, @Product_Id)",
-                     new { Id=r.Id, Sequence_Number = r.Sequence_Number, Procedure_Name = r.Procedure_Name, Input_Output_Ratio = r.Input_Output_Ratio, Product_Id = r.Product_Id });
+                     new { Id = r.Id, Sequence_Number = r.Sequence_Number, Procedure_Name = r.Procedure_Name, Input_Output_Ratio = r.Input_Output_Ratio, Product_Id = r.Product_Id });
             }
         }
 
@@ -520,7 +547,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Relationship>("select * from tbl_Relationship where Product_Id=@Product_Id", new { Product_Id = id });
+                return conn.Query<Relationship>("select * from tbl_Relationship where Product_Id=@Product_Id order by Sequence_Number", new { Product_Id = id });
             }
         }
         public IEnumerable<Relationship> QueryRelationshipByRatio(int ratio)
@@ -549,6 +576,9 @@ namespace Piecework_wage_management_system
             //Id INT AUTO_INCREMENT PRIMARY KEY,
             //Unit CHAR(20),
             //Unit_Price FLOAT,
+            //Sequence INT,
+            //CONSTRAINT fk_Sequence FOREIGN KEY (Sequence)
+            //	REFERENCES tbl_Relationship (Sequence_Number) ON DELETE CASCADE ON UPDATE CASCADE,
             //Value_Id INT,
             //CONSTRAINT fk_Value_Id FOREIGN KEY (Value_Id)
             //	REFERENCES tbl_Value (Id)
@@ -557,9 +587,63 @@ namespace Piecework_wage_management_system
             //    REFERENCES tbl_Procedure (Id)
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("Insert into tbl_Relationship values "
-                     + "(@Id, @Unit, @Unit_Price, @Value_Id, @Procedure_Id)",
-                     new { Id=p.Id, Unit = p.Unit, Unit_Price = p.Unit_Price, Value_Id = p.Value_Id, Procedure_Id = p.Procedure_Id });
+                return conn.Execute("Insert into tbl_Value_Price values "
+                     + "(@Id, @Unit, @Unit_Price, @Sequence, @Value_Id, @Procedure_Id)",
+                     new { Id = p.Id, Unit = p.Unit, Unit_Price = p.Unit_Price, Sequence = p.Sequence, Value_Id = p.Value_Id, Procedure_Id = p.Procedure_Id });
+            }
+        }
+        public IEnumerable<ValuePrice> QueryValuePriceByAll()
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price order by Sequence");
+            }
+        }
+        public IEnumerable<ValuePrice> QueryValuePriceByValueId(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Value_Id=@Value_Id order by Sequence", new { Value_Id = id });
+            }
+        }
+        public int UpdatePrice(ValuePrice price)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Value_Price set Unit=@Unit, Unit_Price=@Unit_Price where Id=@Id", new { Unit = price.Unit, Unit_Price = price.Unit_Price, Id = price.Id });
+            }
+        }
+        public int InsertAssign(Assign a)
+        {
+            //Id INT AUTO_INCREMENT PRIMARY KEY,
+            //EmployeeId INT,
+            //CONSTRAINT fk_Reckon_EmployeeId FOREIGN KEY (EmployeeId)
+            //    REFERENCES tbl_Employee (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+            //Value_Id INT,
+            //CONSTRAINT fk_Reckon_Value_Id FOREIGN KEY (Value_Id)
+            //	REFERENCES tbl_Value (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+            //Procedure_Id INT,
+            //CONSTRAINT fk_Reckon_Procedure_Id FOREIGN KEY (Procedure_Id)
+            //    REFERENCES tbl_Procedure (Id) ON DELETE CASCADE ON UPDATE CASCADE
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Assign values "
+                     + "(@Id, @EmployeeId, @Value_Id, @Procedure_Id)",
+                     new { Id = a.Id, EmployeeId = a.EmployeeId, Value_Id = a.Value_Id, Procedure_Id = a.Procedure_Id });
+            }
+        }
+        public IEnumerable<Assign> QueryAssignByValueId(int value_id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Assign>("select * from tbl_Assign where Value_Id=@Value_Id", new { Value_Id = value_id });
+            }
+        }
+        public int DeleteAssignById(int id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Assign where Id=@Id", new { Id = id });
             }
         }
     }

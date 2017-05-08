@@ -18,15 +18,15 @@
         <StackPanel Grid.Column="0" Orientation="Vertical">
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF74CD1B">
                 <TextBlock FontWeight="Bold">Production Task:</TextBlock>
-                <MenuItem x:Name="AddForm" Header="Add" />
-                <MenuItem x:Name="ModifyForm" Header="Modify" />
-                <MenuItem x:Name="RemoveForm" Header="Remove" />
+                <MenuItem x:Name="AddTask" Header="Add" Click="AddTask_Click"/>
+                <MenuItem x:Name="ModifyTask" Header="Modify" Click="ModifyTask_Click"/>
+                <MenuItem x:Name="RemoveTask" Header="Remove" Click="RemoveTask_Click"/>
             </Menu>
-            <DataGrid x:Name="gridProductionForm" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+            <DataGrid x:Name="gridTask" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" SelectionChanged="gridTask_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Task num"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Product"/>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Value"/>
+                    <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task num"/>
+                    <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -43,10 +43,10 @@
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF7474DE">
                     <TextBlock FontWeight="Bold">Procedure</TextBlock>
                 </Menu>
-                <DataGrid x:Name="gridProcedure" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                <DataGrid x:Name="gridProcedure" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" CanUserSortColumns="False" SelectionChanged="gridProcedure_SelectionChanged" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                        <DataGridTextColumn Binding="{Binding Sequence_Number}" Header="No."/>
+                        <DataGridTextColumn Binding="{Binding Procedure_Name}" Header="Name"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -54,11 +54,12 @@
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFAF7BEE">
                     <TextBlock FontWeight="Bold">Price</TextBlock>
+                    <MenuItem x:Name="ModifyPrice" Header="Edit" Click="ModifyPrice_Click"/>
                 </Menu>
-                <DataGrid x:Name="gridPrice" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                <DataGrid x:Name="gridPrice" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" CanUserSortColumns="False" SelectionChanged="gridPrice_SelectionChanged" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Unit"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Price"/>
+                        <DataGridTextColumn Binding="{Binding Unit}" Header="Unit"/>
+                        <DataGridTextColumn Binding="{Binding Unit_Price}" Header="Price"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -66,8 +67,8 @@
             <StackPanel Grid.Column="4" Orientation="Vertical">
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFFFF51A">
                     <TextBlock FontWeight="Bold">Employee:</TextBlock>
-                    <MenuItem x:Name="AddEmployee" Header="Add" />
-                    <MenuItem x:Name="RemoveEmployee" Header="Remove" />
+                    <MenuItem x:Name="AddEmployee" Click="AddEmployee_Click" Header="Assign" />
+                    <MenuItem x:Name="RemoveEmployee" Click="RemoveEmployee_Click" Header="Del" />
                 </Menu>
                 <DataGrid x:Name="gridEmployee" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
                     <DataGrid.Columns>
