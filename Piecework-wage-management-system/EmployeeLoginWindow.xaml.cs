@@ -19,12 +19,10 @@ namespace Piecework_wage_management_system
     /// </summary>
     public partial class EmployeeLoginWindow : Window
     {
-        public static int functionEntry { set; get; }
         private Window fatherWnd { set; get; }
         public static bool IsLogin { get; set; }
-        public EmployeeLoginWindow(int entry, Window wnd)
+        public EmployeeLoginWindow(Window wnd)
         {
-            functionEntry = entry;
             fatherWnd = wnd;
             IsLogin = false;
             InitializeComponent();
@@ -34,28 +32,16 @@ namespace Piecework_wage_management_system
             //processing with the database
             DataAccessLayer dataAccessLayer = new DataAccessLayer();
             foreach (Employee employee in dataAccessLayer.QueryEmployeeByAll())
-                if(txtID.Text.ToString() == employee.Id.ToString() && passwordBox.Password == employee.Password)
+                if (txtID.Text.ToString() == employee.Id.ToString() && passwordBox.Password == employee.Password)
                 {
                     IsLogin = true;
-                    switch(functionEntry)
-                    {
-                        case 1:
-                            //call reckonByPiece
-                            ReckonByThePieceWindow reckonByThePieceWindow = new ReckonByThePieceWindow();
-                            reckonByThePieceWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                            reckonByThePieceWindow.Show();
-                            break;
-                        case 2:
-                            //call Performance query
-                            TrackRecordWindow trackRecordWindow = new TrackRecordWindow();
-                            trackRecordWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                            trackRecordWindow.Show();
-                            break;
-                    }
+                    EmployeeWindow reckonByThePieceWindow = new EmployeeWindow(employee);
+                    reckonByThePieceWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    reckonByThePieceWindow.Show();
                     fatherWnd.Close();
                     this.Close();
                 }
-            if(IsLogin == false)
+            if (IsLogin == false)
             {
                 MessageBox.Show("帐号或密码错误！");
                 passwordBox.Password = null;
@@ -71,7 +57,7 @@ namespace Piecework_wage_management_system
         private void passwordBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                btnLogin_Click(sender,e);
+                btnLogin_Click(sender, e);
         }
     }
 }

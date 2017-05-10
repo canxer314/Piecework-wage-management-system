@@ -37,11 +37,11 @@ namespace Piecework_wage_management_system
         private void btn_Clean_Click(object sender, RoutedEventArgs e)
         {
             cmb_Product.SelectedIndex = -1;
-            txt_TaskNum = null;
-            txt_Value = null;
+            txt_TaskNum.Text = string.Empty;
+            txt_Value.Text = string.Empty;
         }
 
-        private void btn_AddProcedure_Click(object sender, RoutedEventArgs e)
+        private void btn_AddTask_Click(object sender, RoutedEventArgs e)
         {
             Value v = new Value();
             if (cmb_Product.SelectedIndex == -1)
@@ -70,7 +70,7 @@ namespace Piecework_wage_management_system
             }
             catch (FormatException fe)
             {
-                txt_TaskNum = null;
+                txt_TaskNum.Text = string.Empty;
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Task number must be numberic!");
                 return;
@@ -85,9 +85,10 @@ namespace Piecework_wage_management_system
             {
                 SystemSounds.Beep.Play();
                 MessageBox.Show("Already exists value with name:" + txt_Value.Text);
-                txt_Value = null;
+                txt_Value.Text = string.Empty;
                 return;
             }
+            v.TaskDate = DateTime.Now;
             Db.InsertValue(v);
             IEnumerable<Relationship> relateList = Db.QueryRelationshipByProduct_Id(v.Product_Id);
             foreach(Relationship item in relateList)

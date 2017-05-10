@@ -24,16 +24,6 @@ namespace Piecework_wage_management_system
             InitializeComponent();
         }
 
-        private void MenuItem_Click_Show_Book(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItem_Click_Show_Books(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -102,6 +92,13 @@ namespace Piecework_wage_management_system
         private void btnProcedureRecord_Click(object sender, RoutedEventArgs e)
         {
             this.MainFrame.Source = new Uri("ProcedureRecord_Page.xaml", UriKind.Relative);
+        }
+
+        private void btnLoginOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWnd = new MainWindow();
+            mainWnd.Show();
+            this.Close();
         }
     }
 }

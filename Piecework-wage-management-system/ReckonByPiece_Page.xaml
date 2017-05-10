@@ -5,10 +5,64 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="650" d:DesignWidth="1024"
       Title="ReckonByPiece_Page">
-
     <Grid>
-        <TextBox FontSize="25">Hello reckon by the piece page!</TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFE8E81C">
+            <TextBlock HorizontalAlignment="Center">
+                Current Task
+            </TextBlock>
+        </Border>
+        <DataGrid Name="gridTask" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectionChanged="gridTask_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task num"/>
+                <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
+                <DataGridTextColumn Binding="{Binding TaskDate}" Header="Date"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Grid.Column="0" Background="#FFBD43BD">
+                <TextBlock HorizontalAlignment="Center">
+                Procedure Price
+                </TextBlock>
+            </Border>
+            <DataGrid Name="gridPrice" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" SelectionChanged="gridPrice_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ProcedureName}" Header="Procedure"/>
+                    <DataGridTextColumn Binding="{Binding Unit}" Header="Unit"/>
+                    <DataGridTextColumn Binding="{Binding Price}" Header="Price"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Border Grid.Row="0" Grid.Column="1" Background="#FF5EDC2E">
+                <TextBlock HorizontalAlignment="Center">
+                Reckon
+                </TextBlock>
+            </Border>
+            <StackPanel Grid.Row="1" Grid.Column="1" Background="White" Orientation="Vertical">
+                <TextBlock Text="Please input the count:" Margin="30,30,30,0" HorizontalAlignment="Center"/>
+                <TextBox Name="txt_Count" Width="130" Height="20" Margin="30,30,30,0" HorizontalAlignment="Center"/>
+                <Button Name="btn_submit" Width="50" Height="20" Background="#FFFD2828" Margin="30,30,30,0" Click="btn_submit_Click">Submit</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

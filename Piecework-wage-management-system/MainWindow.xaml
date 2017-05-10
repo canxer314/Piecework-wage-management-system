@@ -6,10 +6,23 @@
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
         Title="计件工资管理系统" Height="460" Width="380" ResizeMode="NoResize" Background="LightYellow" Activated="Window_Activated">
-    <UniformGrid Rows="5">
-        <Label x:Name="lblWelcome" Content="欢迎使用计件工资管理系统！" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="50" Width="315" FontSize="24"/>
-        <Button x:Name="btnReckonByPiece" Content="计件" HorizontalAlignment="Center"  Width="160" Height="50" FontSize="22" Background="LightGreen" Click="btnReckonByThePiece_Click"/>
-        <Button x:Name="btnTrackRecord" Content="业绩查询" HorizontalAlignment="Center"  Width="160" Height="50" FontSize="22" Background="LightBlue" Click="btnTrackRecord_Click"/>
-        <Button x:Name="btnAdministratorLogin" Content="管理员登录" HorizontalAlignment="Center"  Width="160" Height="50" FontSize="22" Background="#FFFF4242" Click="btnAdministratorLogin_Click"/>
-    </UniformGrid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="欢迎使用计件工资管理系统！" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="24"/>
+        <Button Name="btnReckonByPiece" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="员工登录" HorizontalAlignment="Center" FontSize="22" Background="LightGreen" Click="btnReckonByThePiece_Click" Width="188"/>
+        <Button Name="btnAdministratorLogin" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="管理员登录" HorizontalAlignment="Center" FontSize="22" Background="#FFFF4242" Click="btnAdministratorLogin_Click" Width="188"/>
+    </Grid>
 </Window>

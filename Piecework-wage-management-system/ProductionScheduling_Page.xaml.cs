@@ -51,11 +51,13 @@ namespace Piecework_wage_management_system
 
         public void FillEmployee()
         {
-            List<Assign> assignList = Db.QueryAssignByValueId((gridPrice.SelectedItem as ValuePrice).Value_Id).ToList();
+            if (gridPrice.SelectedItems.Count != 1)
+                return;
+            List<Assign> assignList = Db.QueryAssignByValuePrice((gridPrice.SelectedItem as ValuePrice)).ToList();
             List<Employee> employeeList = new List<Employee>();
             foreach (Assign a in assignList)
             {
-                Employee e = Db.QueryEmployeeByEID(a.EmployeeId) as Employee;
+                Employee e = Db.QueryEmployeeByEID(a.EmployeeId).Single();
                 employeeList.Add(e);
             }
             gridEmployee.ItemsSource = employeeList;
@@ -116,6 +118,7 @@ namespace Piecework_wage_management_system
         private void gridPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             gridProcedure.SelectedIndex = gridPrice.SelectedIndex;
+            FillEmployee();
         }
 
         private void gridProcedure_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -125,6 +128,12 @@ namespace Piecework_wage_management_system
 
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
+            if (gridPrice.SelectedItems.Count == 0)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Please choose a procedure!");
+                return;
+            }
             AssignEmployeeWindow aeWnd = new AssignEmployeeWindow(this,gridPrice.SelectedItem as ValuePrice);
             aeWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             aeWnd.ShowDialog();
@@ -132,8 +141,22 @@ namespace Piecework_wage_management_system
 
         private void RemoveEmployee_Click(object sender, RoutedEventArgs e)
         {
+            if(gridEmployee.SelectedItems.Count == 0)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Please choose at least one employee!");
+                return;
+            }
             foreach(Employee employee in gridEmployee.SelectedItems)
             {
+                Value v = gridTask.SelectedItem as Value;
+                Relationship r = gridProcedure.SelectedItem as Relationship;
+                Procedure p = Db.QueryProcedureByName(r.Procedure_Name).Single();
+                ValuePrice vp = gridPrice.SelectedItem as ValuePrice;
+                foreach(Employee eTmp in gridEmployee.SelectedItems)
+                {
+                    Db.DeleteAssignByValueIdAndProcedureIdAndEmployeeId(v.Id, p.Id, eTmp.Id);
+                }
             }
         }
     }

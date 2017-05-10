@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Piecework_wage_management_system
 {
     /// <summary>
-    /// ReckonByThePieceWindow.xaml 的交互逻辑
+    /// ShowReckonPayroll_Page.xaml 的交互逻辑
     /// </summary>
-    public partial class ReckonByThePieceWindow : Window
+    public partial class ShowReckonPayroll_Page : Page
     {
-        public ReckonByThePieceWindow()
+        public ShowReckonPayroll_Page()
         {
             InitializeComponent();
         }

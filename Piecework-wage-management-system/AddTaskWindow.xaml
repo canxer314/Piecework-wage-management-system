@@ -34,7 +34,7 @@
         <TextBlock x:Name="tb_Value" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Value:"/>
         <TextBox x:Name="txt_Value" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
         <Button x:Name="btn_Clean" Height="20" Width="50" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Click="btn_Clean_Click" TabIndex="8">Clean</Button>
-        <Button x:Name="btn_AddProcedure" Height="20" Width="50" Grid.Row="5" Grid.Column="1" FontWeight="Bold" Click="btn_AddProcedure_Click" TabIndex="7">Add</Button>
+        <Button x:Name="btn_AddTask" Height="20" Width="50" Grid.Row="5" Grid.Column="1" FontWeight="Bold" Click="btn_AddTask_Click" TabIndex="7">Add</Button>
         <Button x:Name="btn_Return" Height="20" Width="50" Grid.Row="5" Grid.Column="2" FontWeight="Bold" Click="btn_Return_Click" TabIndex="9">Return</Button>
     </Grid>
 </Window>

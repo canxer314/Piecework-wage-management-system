@@ -27,6 +27,7 @@
                     <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task num"/>
                     <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
+                    <DataGridTextColumn Binding="{Binding TaskDate}" Header="Date"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -72,8 +73,8 @@
                 </Menu>
                 <DataGrid x:Name="gridEmployee" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
                         <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

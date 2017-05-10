@@ -33,7 +33,12 @@
         <ComboBox x:Name="cmb_Employee" Height="24" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock x:Name="Employee" Text="{Binding Name}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="("/>
+                        <TextBlock Text="{Binding Id}"/>
+                        <TextBlock Text=")"/>
+                    </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

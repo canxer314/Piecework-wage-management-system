@@ -20,9 +20,95 @@ namespace Piecework_wage_management_system
     /// </summary>
     public partial class ReckonByPiece_Page : Page
     {
-        public ReckonByPiece_Page()
+        private Employee LoginedEmployee { set; get; }
+        private List<P_Price> priceList { set; get; }
+        private DataAccessLayer Db { set; get; }
+        public ReckonByPiece_Page(Employee employee)
         {
+            Db = new DataAccessLayer();
+            LoginedEmployee = employee;
             InitializeComponent();
+            FillGridTask();
+        }
+
+        private void FillGridTask()
+        {
+            List<Assign> assignList = Db.QueryAssignByEmployeeId(LoginedEmployee.Id).ToList();
+            List<Value> valueList = new List<Value>();
+            bool isExist = false;
+            foreach(Assign a in assignList)
+            {
+                isExist = false;
+                int id = Db.QueryValuePriceById(a.Price_Id).Single().Value_Id;
+                foreach(Value v in valueList)
+                {
+                    if (id == v.Id)
+                    {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (isExist == false)
+                    valueList.Add(Db.QueryValueById(id).Single());
+            }
+            gridTask.ItemsSource = valueList;
+        }
+
+        private void FillGridPrice()
+        {
+            if (gridTask.SelectedItems.Count != 1)
+                return;
+            Value v = gridTask.SelectedItem as Value;
+            List<ValuePrice> vpList = Db.QueryValuePriceByValueId(v.Id).ToList();
+            List<Assign> assignList = Db.QueryAssignByEmployeeId(LoginedEmployee.Id).ToList();
+            priceList = new List<P_Price>();
+            foreach(Assign a in assignList)
+            {
+                foreach(ValuePrice vp in vpList)
+                {
+                    if(a.Price_Id == vp.Id)
+                    {
+                        P_Price p = new P_Price();
+                        p.AssignId = a.Id;
+                        p.Price = vp.Unit_Price;
+                        p.PriceId = vp.Id;
+                        p.ProcedureName = Db.QueryProcedureById(vp.Procedure_Id).Single().Name;
+                        p.Unit = vp.Unit;
+                        priceList.Add(p);
+                    }
+                }
+            }
+            gridPrice.ItemsSource = priceList;
+        }
+
+        private void btn_submit_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridPrice.SelectedItems.Count != 1)
+                return;
+            P_Price p = gridPrice.SelectedItem as P_Price;
+            Reckon r = Db.QueryReckonByAssignId(p.AssignId).Single();
+            try
+            {
+                r.Count = int.Parse(txt_Count.Text);
+                Db.UpdateReckonCount(r);
+            }
+            catch
+            {
+            }
+        }
+
+        private void gridTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FillGridPrice();
+        }
+
+        private void gridPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (gridPrice.SelectedItems.Count != 1)
+                return;
+            P_Price p = gridPrice.SelectedItem as P_Price;
+            Reckon r = Db.QueryReckonByAssignId(p.AssignId).Single();
+            txt_Count.Text = r.Count.ToString();
         }
     }
 }

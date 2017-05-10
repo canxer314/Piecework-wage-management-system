@@ -73,6 +73,7 @@ namespace Piecework_wage_management_system
             CREATE TABLE IF NOT EXISTS tbl_Value (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
                 TaskNum INT UNIQUE KEY,
+                TaskDate DateTime,
                 Name CHAR(20),
                 Product_Name CHAR(20),
             	Product_Id INT,
@@ -96,12 +97,15 @@ namespace Piecework_wage_management_system
                 EmployeeId INT,
                 CONSTRAINT fk_Reckon_EmployeeId FOREIGN KEY (EmployeeId)
                     REFERENCES tbl_Employee (Id) ON DELETE CASCADE ON UPDATE CASCADE,
-            	Value_Id INT,
-            	CONSTRAINT fk_Reckon_Value_Id FOREIGN KEY (Value_Id)
-                	REFERENCES tbl_Value (Id) ON DELETE CASCADE ON UPDATE CASCADE,
-                Procedure_Id INT,
-                CONSTRAINT fk_Reckon_Procedure_Id FOREIGN KEY (Procedure_Id)
-                    REFERENCES tbl_Procedure (Id) ON DELETE CASCADE ON UPDATE CASCADE
+                Price_Id INT,
+                CONSTRAINT fk_Assign_Price_Id FOREIGN KEY (Price_Id)
+                    REFERENCES tbl_Value_Price (Id) ON DELETE CASCADE ON UPDATE CASCADE
+            );
+            CREATE TABLE IF NOT EXISTS tbl_Reckon (
+                Assign_Id INT PRIMARY KEY,
+                CONSTRAINT fk_Assign_Id FOREIGN KEY (Assign_Id)
+                    REFERENCES tbl_Assign (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+                Count INT 
             );
             ", conn);
             try
@@ -247,6 +251,24 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Query<Employee>("select * from tbl_Employee where Telephone=@Telephone", new { Telephone = telephone });
+            }
+        }
+        public int UpdateEmployee(Employee e)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                //Id INT PRIMARY KEY,
+                //Name CHAR(20),
+                //Password CHAR(20),
+                //Gender VARCHAR(20),
+                //Workshop CHAR(20),
+                //Job CHAR(20),
+                //CONSTRAINT fk_Workshop FOREIGN KEY (Workshop)
+                //    REFERENCES tbl_Workshop (Name) ON DELETE SET NULL ON UPDATE SET NULL,
+                //CONSTRAINT fk_Job FOREIGN KEY (Job)
+                //    REFERENCES tbl_Job (Name) ON DELETE SET NULL ON UPDATE SET NULL,
+                //Telephone CHAR(20)
+                return conn.Execute("update tbl_Employee set Name=@Name, Password=@Password, Gender=@Gender, Workshop=@Workshop, Job=@Job, Telephone=@Telephone where Id=@Id", new { Name = e.Name, Password = e.Password, Gender = e.Gender, Workshop = e.Workshop, Job = e.Job, Telephone = e.Telephone, Id = e.Id });
             }
         }
         public int UpdateEmployeePasswordById(int id, string password)
@@ -438,8 +460,8 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Value values "
-                     + "(@Id, @TaskNum, @Name, @Product_Name, @Product_Id)",
-                     new { Id = v.Id, TaskNum = v.TaskNum, Name = v.Name, Product_Name = v.Product_Name, Product_Id = v.Product_Id });
+                     + "(@Id, @TaskNum, @TaskDate, @Name, @Product_Name, @Product_Id)",
+                     new { Id = v.Id, TaskNum = v.TaskNum, TaskDate = v.TaskDate, Name = v.Name, Product_Name = v.Product_Name, Product_Id = v.Product_Id });
             }
         }
 
@@ -599,11 +621,18 @@ namespace Piecework_wage_management_system
                 return conn.Query<ValuePrice>("select * from tbl_Value_Price order by Sequence");
             }
         }
-        public IEnumerable<ValuePrice> QueryValuePriceByValueId(int id)
+        public IEnumerable<ValuePrice> QueryValuePriceById(int id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Value_Id=@Value_Id order by Sequence", new { Value_Id = id });
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Id=@Id order by Sequence", new { Id = id });
+            }
+        }
+        public IEnumerable<ValuePrice> QueryValuePriceByValueId(int v_id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Value_Id=@Value_Id order by Sequence", new { Value_Id = v_id });
             }
         }
         public int UpdatePrice(ValuePrice price)
@@ -615,28 +644,32 @@ namespace Piecework_wage_management_system
         }
         public int InsertAssign(Assign a)
         {
-            //Id INT AUTO_INCREMENT PRIMARY KEY,
-            //EmployeeId INT,
-            //CONSTRAINT fk_Reckon_EmployeeId FOREIGN KEY (EmployeeId)
-            //    REFERENCES tbl_Employee (Id) ON DELETE CASCADE ON UPDATE CASCADE,
-            //Value_Id INT,
-            //CONSTRAINT fk_Reckon_Value_Id FOREIGN KEY (Value_Id)
-            //	REFERENCES tbl_Value (Id) ON DELETE CASCADE ON UPDATE CASCADE,
-            //Procedure_Id INT,
-            //CONSTRAINT fk_Reckon_Procedure_Id FOREIGN KEY (Procedure_Id)
-            //    REFERENCES tbl_Procedure (Id) ON DELETE CASCADE ON UPDATE CASCADE
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Assign values "
-                     + "(@Id, @EmployeeId, @Value_Id, @Procedure_Id)",
-                     new { Id = a.Id, EmployeeId = a.EmployeeId, Value_Id = a.Value_Id, Procedure_Id = a.Procedure_Id });
+                     + "(@Id, @EmployeeId, @Price_Id)",
+                     new { Id = a.Id, EmployeeId = a.EmployeeId, Price_Id = a.Price_Id });
             }
         }
-        public IEnumerable<Assign> QueryAssignByValueId(int value_id)
+        public IEnumerable<Assign> QueryAssignByEmployeeId(int e_id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Assign>("select * from tbl_Assign where Value_Id=@Value_Id", new { Value_Id = value_id });
+                return conn.Query<Assign>("select * from tbl_Assign where EmployeeId=@EmployeeId", new { EmployeeId = e_id });
+            }
+        }
+        public IEnumerable<Assign> QueryAssignByValuePrice(ValuePrice v)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Assign>("select * from tbl_Assign where Price_Id=@Price_Id", new { Price_Id = v.Id });
+            }
+        }
+        public IEnumerable<Assign> QueryAssignWhetherExsit(Assign a)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Assign>("select * from tbl_Assign where EmployeeId=@EmployeeId and Price_Id=@Price_Id", new { EmployeeId = a.EmployeeId, Price_Id = a.Price_Id });
             }
         }
         public int DeleteAssignById(int id)
@@ -644,6 +677,50 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("delete from tbl_Assign where Id=@Id", new { Id = id });
+            }
+        }
+        public int DeleteAssignByValueIdAndProcedureIdAndEmployeeId(int v_id, int p_id, int e_id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Assign where Value_Id=@Value_Id and Procedure_Id=@Procedure_Id and EmployeeId=EmployeeId", new { Value_Id = v_id, Procedure_Id = p_id, EmployeeId = e_id });
+            }
+        }
+        public int InsertReckon(Reckon r)
+        {
+            //Assign_Id INT PRIMAEY KEY,
+            //CONSTRAINT fk_Assign_Id FOREIGN KEY (Assign_Id)
+            //    REFERENCES tbl_Assign (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+            //Price_Id INT,
+            //CONSTRAINT fk_Price_Id FOREIGN KEY (Price_Id)
+            //    REFERENCES tbl_Value_Price (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+            //Count INT 
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("Insert into tbl_Reckon values "
+                     + "(@Assign_Id, @Count)",
+                     new { Assign_Id = r.Assign_Id, Count = r.Count });
+            }
+        }
+        public IEnumerable<Reckon> QueryReckonByAssignId(int a_id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Query<Reckon>("select * from tbl_Reckon where Assign_Id=@Assign_Id", new { Assign_Id = a_id });
+            }
+        }
+        public int UpdateReckonCount(Reckon r)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Reckon set Count=@Count where Assign_Id=@Assign_Id", new { Count = r.Count, Assign_Id = r.Assign_Id });
+            }
+        }
+        public int DeleteReckonByAssignId(int assign_id)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("delete from tbl_Reckon where Assign_Id=@Assign_Id", new { Assign_Id = assign_id });
             }
         }
     }

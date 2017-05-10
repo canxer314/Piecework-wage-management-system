@@ -78,14 +78,15 @@ namespace Piecework_wage_management_system
                     return;
                 }
             alteredEmployee.Name = txt_EmployeeName.Text;
-            alteredEmployee.Id = int.Parse(txt_EmployeeId.Text);
+            alteredEmployee.Id = OriginEmployee.Id;
             alteredEmployee.Gender = cmb_Gender.SelectionBoxItem.ToString();
             alteredEmployee.Workshop = (cmb_Workshop.SelectedItem as Workshop).Name;
             alteredEmployee.Job = (cmb_Job.SelectedItem as Job).Name;
             alteredEmployee.Telephone = txt_Telephone.Text;
             alteredEmployee.Password = OriginEmployee.Password;
-            db.DeleteEmployeeById(OriginEmployee.Id);
-            db.InsertEmployee(alteredEmployee);
+            //db.DeleteEmployeeById(OriginEmployee.Id);
+            //db.InsertEmployee(alteredEmployee);
+            db.UpdateEmployee(alteredEmployee);
             wmPage.FillListView();
             this.Close();
         }

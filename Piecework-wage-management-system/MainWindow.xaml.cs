@@ -52,14 +52,7 @@ namespace Piecework_wage_management_system
 
         private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
         {
-            EmployeeLoginWindow employLoginWnd = new EmployeeLoginWindow(1,this);
-            employLoginWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            employLoginWnd.ShowDialog();
-        }
-
-        private void btnTrackRecord_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeLoginWindow employLoginWnd = new EmployeeLoginWindow(2,this);
+            EmployeeLoginWindow employLoginWnd = new EmployeeLoginWindow(this);
             employLoginWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             employLoginWnd.ShowDialog();
         }

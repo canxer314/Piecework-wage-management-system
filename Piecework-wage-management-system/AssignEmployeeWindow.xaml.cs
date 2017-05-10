@@ -29,6 +29,7 @@ namespace Piecework_wage_management_system
             SelectedPrice = selectedPrice;
             Db = new DataAccessLayer();
             InitializeComponent();
+            BindingComboBoxSource();
         }
 
         private void BindingComboBoxSource()
@@ -37,7 +38,7 @@ namespace Piecework_wage_management_system
             Value value = Db.QueryValueById(SelectedPrice.Value_Id).Single();
             txt_Product.Text = (Db.QueryProductById(value.Product_Id)).Single().Name;
             txt_Value.Text = (Db.QueryValueById(SelectedPrice.Value_Id)).Single().Name;
-            txt_SearchBox = null;
+            txt_SearchBox.Text = string.Empty;
             cmb_Employee.ItemsSource = Db.QueryEmployeeByAll();
         }
 
@@ -45,10 +46,23 @@ namespace Piecework_wage_management_system
         {
             Assign a = new Assign();
             a.EmployeeId = (cmb_Employee.SelectedItem as Employee).Id;
-            a.Procedure_Id = SelectedPrice.Procedure_Id;
-            a.Value_Id = SelectedPrice.Value_Id;
+            a.Price_Id = SelectedPrice.Id;
+            if (Db.QueryAssignWhetherExsit(a).Count() > 0)
+            {
+                SystemSounds.Beep.Play();
+                string str = @"Already assign this employee to the procedure!
+Please choose another one!";
+                MessageBox.Show(str);
+                return;
+            }
             Db.InsertAssign(a);
+            Assign a0 = Db.QueryAssignWhetherExsit(a).Single();
+            Reckon r = new Reckon();
+            r.Assign_Id = a0.Id;
+            r.Count = 0;
+            Db.InsertReckon(r);
             PsPage.FillEmployee();
+            this.Close();
         }
 
         private void btn_Return_Click(object sender, RoutedEventArgs e)
@@ -82,17 +96,17 @@ namespace Piecework_wage_management_system
 
         private void btn_SearchByEmployeeName_Click(object sender, RoutedEventArgs e)
         {
-                for (int i = 0; i < cmb_Employee.Items.Count; i++)
+            for (int i = 0; i < cmb_Employee.Items.Count; i++)
+            {
+                if ((cmb_Employee.Items.GetItemAt(i) as Employee).Name == txt_SearchBox.Text)
                 {
-                    if ((cmb_Employee.Items.GetItemAt(i) as Employee).Name == txt_SearchBox.Text)
-                    {
-                        cmb_Employee.SelectedIndex = i;
-                        return;
-                    }
+                    cmb_Employee.SelectedIndex = i;
+                    return;
                 }
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Can not found Employee with name:" + txt_SearchBox.Text + "!");
-                return;
+            }
+            SystemSounds.Beep.Play();
+            MessageBox.Show("Can not found Employee with name:" + txt_SearchBox.Text + "!");
+            return;
         }
 
     }

@@ -25,16 +25,16 @@ namespace Piecework_wage_management_system
         private ValuePrice OriginPrice { set; get; }
         public ModifyPriceWindow(ProductionScheduling_Page psPage, ValuePrice selectedPrice)
         {
+            InitializeComponent();
             PsPage = psPage;
             OriginPrice = selectedPrice;
             Db = new DataAccessLayer();
-            InitializeComponent();
             RestoreOriginPrice();
         }
 
         private void RestoreOriginPrice()
         {
-            txt_ProductName.Text = (Db.QueryValueById(OriginPrice.Value_Id) as Value).Product_Name;
+            txt_ProductName.Text = (Db.QueryValueById(OriginPrice.Value_Id).Single()).Product_Name;
             txt_ValueName.Text = Db.QueryValueById(OriginPrice.Value_Id).Single().Name;
             txt_ProcedureName.Text = Db.QueryProcedureById(OriginPrice.Procedure_Id).Single().Name;
             txt_Price.Text = OriginPrice.Unit_Price.ToString();

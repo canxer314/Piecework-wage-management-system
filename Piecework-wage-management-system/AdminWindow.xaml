@@ -8,9 +8,8 @@
         Title="AdminWindow" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
     <DockPanel>
         <Menu Background="AliceBlue" DockPanel.Dock="Top" FontSize="12" >
-            <MenuItem Header="_File" Margin="5,0">
-                <MenuItem Header="Show _Book" Click="MenuItem_Click_Show_Book"/>
-                <MenuItem Header="Show Book_s" Click="MenuItem_Click_Show_Books"/>
+            <MenuItem Header="_Account" Margin="5,0">
+                <MenuItem Name="btnLoginOut" Header="Login out" Click="btnLoginOut_Click"/>
                 <Separator />
                 <MenuItem Header="E_xit" Click="MenuItem_Click_Exit"/>
             </MenuItem>

@@ -27,7 +27,7 @@
         <TextBlock x:Name="tb_EmployeeName" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Name:"/>
         <TextBox x:Name="txt_EmployeeName" Height="25" Width="180" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1" KeyDown="txt_EmployeeName_KeyDown"/>
         <TextBlock x:Name="tb_EmployeeId" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="EmployeeId:"/>
-        <TextBox x:Name="txt_EmployeeId" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2" KeyDown="txt_EmployeeId_KeyDown" />
+        <TextBox x:Name="txt_EmployeeId" IsReadOnly="True" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2" KeyDown="txt_EmployeeId_KeyDown" />
         <TextBlock x:Name="tb_Gender" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Gender:"/>
         <ComboBox x:Name="cmb_Gender" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3">
             <ComboBoxItem x:Name="Male">Male</ComboBoxItem>
