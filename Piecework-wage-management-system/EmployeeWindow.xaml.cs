@@ -26,8 +26,9 @@ namespace Piecework_wage_management_system
         {
             LoginedEmployee = employee;
             rPage = new ReckonByPiece_Page(LoginedEmployee);
-            sPage = new ShowReckonPayroll_Page();
+            sPage = new ShowReckonPayroll_Page(LoginedEmployee);
             InitializeComponent();
+            frmMain.Content = rPage;
         }
 
         private void btn_Reckon_Click(object sender, RoutedEventArgs e)

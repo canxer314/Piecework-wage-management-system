@@ -59,26 +59,6 @@ namespace Piecework_wage_management_system
             this.MainFrame.Source = new Uri("ProductionScheduling_Page.xaml", UriKind.Relative);
         }
 
-        private void btnReckonByThePiece_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Source = new Uri("ReckonByPiece_Page.xaml", UriKind.Relative);
-        }
-
-        private void btnWageRecord_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Source = new Uri("RecordPieceWorkWage_Page.xaml", UriKind.Relative);
-        }
-
-        private void btnSalaryRecord_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Source = new Uri("RecordRegularSalary_Page.xaml", UriKind.Relative);
-        }
-
-        private void btnPrintPayrollReckonByThePiece_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Source = new Uri("PrintReckonPayroll_Page.xaml", UriKind.Relative);
-        }
-
         private void btnPrintPayroll_Click(object sender, RoutedEventArgs e)
         {
             this.MainFrame.Source = new Uri("PrintPayroll_Page.xaml", UriKind.Relative);
@@ -89,16 +69,16 @@ namespace Piecework_wage_management_system
             this.MainFrame.Source = new Uri("InitializeDatabase_Page.xaml", UriKind.Relative);
         }
 
-        private void btnProcedureRecord_Click(object sender, RoutedEventArgs e)
-        {
-            this.MainFrame.Source = new Uri("ProcedureRecord_Page.xaml", UriKind.Relative);
-        }
-
         private void btnLoginOut_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWnd = new MainWindow();
             mainWnd.Show();
             this.Close();
+        }
+
+        private void btnProductionState_Click(object sender, RoutedEventArgs e)
+        {
+            this.MainFrame.Source = new Uri("ProductionState_Page.xaml", UriKind.Relative);
         }
     }
 }

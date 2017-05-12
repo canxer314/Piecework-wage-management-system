@@ -24,5 +24,20 @@ namespace Piecework_wage_management_system
         {
             InitializeComponent();
         }
+
+        private void lst_Employee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void lst_Months_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void lv_Task_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

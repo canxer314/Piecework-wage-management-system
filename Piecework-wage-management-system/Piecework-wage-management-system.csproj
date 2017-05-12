@@ -148,15 +148,12 @@
     <Compile Include="PrintPayroll_Page.xaml.cs">
       <DependentUpon>PrintPayroll_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PrintReckonPayroll_Page.xaml.cs">
-      <DependentUpon>PrintReckonPayroll_Page.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ProcedureManage_Page.xaml.cs">
       <DependentUpon>ProcedureManage_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProcedurePrice.cs" />
-    <Compile Include="ProcedureRecord_Page.xaml.cs">
-      <DependentUpon>ProcedureRecord_Page.xaml</DependentUpon>
+    <Compile Include="ProductionState_Page.xaml.cs">
+      <DependentUpon>ProductionState_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Procedure.cs" />
     <Compile Include="Reckon.cs" />
@@ -167,12 +164,6 @@
     </Compile>
     <Compile Include="ReckonByPiece_Page.xaml.cs">
       <DependentUpon>ReckonByPiece_Page.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RecordPieceWorkWage_Page.xaml.cs">
-      <DependentUpon>RecordPieceWorkWage_Page.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RecordRegularSalary_Page.xaml.cs">
-      <DependentUpon>RecordRegularSalary_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShowReckonPayroll_Page.xaml.cs">
       <DependentUpon>ShowReckonPayroll_Page.xaml</DependentUpon>
@@ -185,6 +176,7 @@
     </Compile>
     <Compile Include="Value.cs" />
     <Compile Include="ValuePrice.cs" />
+    <Compile Include="wage.cs" />
     <Compile Include="WorkerManage_Page.xaml.cs">
       <DependentUpon>WorkerManage_Page.xaml</DependentUpon>
     </Compile>
@@ -319,15 +311,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PrintReckonPayroll_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ProcedureManage_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProcedureRecord_Page.xaml">
+    <Page Include="ProductionState_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,14 +324,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReckonByPiece_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RecordPieceWorkWage_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RecordRegularSalary_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

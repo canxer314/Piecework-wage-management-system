@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="EmployeeWindow" Height="650" Width="1024">
+        Title="EmployeeWindow" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -32,7 +32,7 @@
             </MenuItem>
         </Menu>
         <UniformGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Columns="2">
-            <Button Name="btn_Reckon" HorizontalContentAlignment="Center" Click="btn_Reckon_Click" Background="White">Reckon By Piece</Button>
+            <Button Name="btn_Reckon" HorizontalContentAlignment="Center" Click="btn_Reckon_Click" Background="#FFDEFFC6">Reckon By Piece</Button>
             <Button Name="btn_ShowPayroll" HorizontalContentAlignment="Center" Click="btn_ShowPayroll_Click" Background="Wheat">Show Payroll</Button>
         </UniformGrid>
         <Frame Name="frmMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" VerticalContentAlignment="Top" />

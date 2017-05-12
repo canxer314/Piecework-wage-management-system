@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Piecework_wage_management_system
 {
     /// <summary>
-    /// PrintReckonPayroll_Page.xaml 的交互逻辑
+    /// ProceduceRecord_Page.xaml 的交互逻辑
     /// </summary>
-    public partial class PrintReckonPayroll_Page : Page
+    public partial class ProductionState_Page : Page
     {
-        public PrintReckonPayroll_Page()
+        public ProductionState_Page()
         {
             InitializeComponent();
         }

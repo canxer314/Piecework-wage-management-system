@@ -5,10 +5,69 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="602" d:DesignWidth="846"
       Title="PrintPayroll_Page">
 
     <Grid>
-        <TextBox FontSize="25">Hello print payroll page!</TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Background="GreenYellow">
+            <TextBlock HorizontalAlignment="Center">
+            Months
+            </TextBlock>
+        </Border>
+        <ListBox Name="lst_Months" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" SelectionChanged="lst_Months_SelectionChanged"/>
+        <Border Grid.Row="0" Grid.Column="1" Background="#FFFFA02F">
+            <TextBlock HorizontalAlignment="Center">
+            Employee
+            </TextBlock>
+        </Border>
+        <ListBox Name="lst_Employee" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" SelectionChanged="lst_Employee_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="2">
+                        <TextBlock Text="{Binding Id}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListView Name="lv_Task" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="5" SelectionChanged="lv_Task_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Date"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Product}" Header="Product"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Procedure}" Header="Procedure"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Unit}" Header="Unit"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Price"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Count"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Wage}" Header="Wage"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <UniformGrid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Columns="2" Background="#FFB3F7F7">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
+                <TextBlock FontSize="18" >Month Wage:</TextBlock>
+                <TextBlock Name="tb_MonthWage" FontSize="18" ></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
+                <TextBlock FontSize="18" Margin="0" >Day Wage:</TextBlock>
+                <TextBlock Name="tb_DayWage" FontSize="18" ></TextBlock>
+            </StackPanel>
+        </UniformGrid>
     </Grid>
 </Page>
