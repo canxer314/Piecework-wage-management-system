@@ -99,7 +99,7 @@ namespace Piecework_wage_management_system
 
         private void CalculateDayWage()
         {
-            if (lv_Task.SelectedItems.Count == 0)
+            if (lv_Task.SelectedItems.Count != 1)
                 return;
             wage w = lv_Task.SelectedItem as wage;
             double dayWage = 0;

@@ -22,27 +22,23 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.Column="0" Background="GreenYellow">
-            <TextBlock HorizontalAlignment="Center">
-            Months
-            </TextBlock>
-        </Border>
-        <ListBox Name="lst_Months" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" SelectionChanged="lst_Months_SelectionChanged"/>
-        <Border Grid.Row="0" Grid.Column="1" Background="#FFFFA02F">
+        <Border Grid.Row="0" Grid.Column="0" Background="#FFFFA02F">
             <TextBlock HorizontalAlignment="Center">
             Employee
             </TextBlock>
         </Border>
-        <ListBox Name="lst_Employee" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" SelectionChanged="lst_Employee_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <UniformGrid Columns="2">
-                        <TextBlock Text="{Binding Id}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Left"/>
-                    </UniformGrid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <DataGrid Name="grid_Employee" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="grid_Employee_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="0" Grid.Column="1" Background="GreenYellow">
+            <TextBlock HorizontalAlignment="Center">
+            Months
+            </TextBlock>
+        </Border>
+        <ListBox Name="lst_Months" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" SelectionChanged="lst_Months_SelectionChanged"/>
         <ListView Name="lv_Task" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="5" SelectionChanged="lv_Task_SelectionChanged">
             <ListView.View>
                 <GridView>
