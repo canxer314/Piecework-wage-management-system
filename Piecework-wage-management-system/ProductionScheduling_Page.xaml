@@ -22,7 +22,7 @@
                 <MenuItem x:Name="ModifyTask" Header="Modify" Click="ModifyTask_Click"/>
                 <MenuItem x:Name="RemoveTask" Header="Remove" Click="RemoveTask_Click"/>
             </Menu>
-            <DataGrid x:Name="gridTask" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" SelectionChanged="gridTask_SelectionChanged">
+            <DataGrid x:Name="gridTask" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="gridTask_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task num"/>
                     <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
@@ -44,7 +44,7 @@
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF7474DE">
                     <TextBlock FontWeight="Bold">Procedure</TextBlock>
                 </Menu>
-                <DataGrid x:Name="gridProcedure" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" CanUserSortColumns="False" SelectionChanged="gridProcedure_SelectionChanged" >
+                <DataGrid x:Name="gridProcedure" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gridProcedure_SelectionChanged" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Sequence_Number}" Header="No."/>
                         <DataGridTextColumn Binding="{Binding Procedure_Name}" Header="Name"/>
@@ -57,7 +57,7 @@
                     <TextBlock FontWeight="Bold">Price</TextBlock>
                     <MenuItem x:Name="ModifyPrice" Header="Edit" Click="ModifyPrice_Click"/>
                 </Menu>
-                <DataGrid x:Name="gridPrice" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" CanUserSortColumns="False" SelectionChanged="gridPrice_SelectionChanged" >
+                <DataGrid x:Name="gridPrice" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gridPrice_SelectionChanged" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Unit}" Header="Unit"/>
                         <DataGridTextColumn Binding="{Binding Unit_Price}" Header="Price"/>
@@ -71,7 +71,7 @@
                     <MenuItem x:Name="AddEmployee" Click="AddEmployee_Click" Header="Assign" />
                     <MenuItem x:Name="RemoveEmployee" Click="RemoveEmployee_Click" Header="Del" />
                 </Menu>
-                <DataGrid x:Name="gridEmployee" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" >
+                <DataGrid x:Name="gridEmployee" IsReadOnly="True" AutoGenerateColumns="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
                         <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>

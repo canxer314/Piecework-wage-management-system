@@ -101,6 +101,7 @@
     <Compile Include="AssignEmployeeWindow.xaml.cs">
       <DependentUpon>AssignEmployeeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProcedureState.cs" />
     <Compile Include="P_Price.cs" />
     <Compile Include="EmployeeLoginWindow.xaml.cs">
       <DependentUpon>EmployeeLoginWindow.xaml</DependentUpon>

@@ -10,22 +10,48 @@
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="23"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListBox Name="lst_Months" Grid.Row="0" Grid.Column="0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <Border Grid.Row="0" Grid.Column="0" Background="CadetBlue">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+                Months
+            </TextBlock>
+        </Border>
+        <ListBox Name="lst_Months" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" SelectionChanged="lst_Months_SelectionChanged">
         </ListBox>
+        <Border Grid.Row="0" Grid.Column="1" Background="CadetBlue">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+                Days
+            </TextBlock>
+        </Border>
+        <ListBox Name="lst_Days" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" SelectionChanged="lst_Days_SelectionChanged">
+        </ListBox>
+        <DataGrid Name="gridTask" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" CanUserSortColumns="False" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="gridTask_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task No."/>
+                <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="gridProcedure" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="3" CanUserSortColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Sequence}" Header="Sequence"/>
+                <DataGridTextColumn Binding="{Binding ProcedureName}" Header="Procedure"/>
+                <DataGridTextColumn Binding="{Binding Ratio}" Header="Ratio"/>
+                <DataGridTextColumn Binding="{Binding EmployeeName}" Header="EmployeeName"/>
+                <DataGridTextColumn Binding="{Binding EmployeeId}" Header="EmployeeId"/>
+                <DataGridTextColumn Binding="{Binding Count}" Header="Count"/>
+                <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
