@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -90,6 +91,12 @@ namespace Piecework_wage_management_system
             try
             {
                 r.Count = int.Parse(txt_Count.Text);
+                if(r.Count < 0)
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("The count can not be minus!");
+                    return;
+                }
                 Db.UpdateReckonCount(r);
             }
             catch

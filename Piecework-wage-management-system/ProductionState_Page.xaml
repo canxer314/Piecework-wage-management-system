@@ -50,7 +50,7 @@
                 <DataGridTextColumn Binding="{Binding EmployeeId}" Header="EmployeeId"/>
                 <DataGridTextColumn Binding="{Binding Count}" Header="Count"/>
                 <DataGridTextColumn Binding="{Binding State}" Header="State"/>
-                <DataGridTextColumn Binding="{Binding ProcedureBehind}" Header="OutputProcedure"/>
+                <DataGridTextColumn Binding="{Binding ProcedureBehind}" Header="Output"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

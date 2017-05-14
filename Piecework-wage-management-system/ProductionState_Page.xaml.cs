@@ -114,10 +114,10 @@ namespace Piecework_wage_management_system
             List<ValuePrice> vpList = Db.QueryValuePriceByValueId(pickedTask.Id).ToList();
             if (vpList.Count == 0)
                 return;
-            foreach(ValuePrice vp in vpList)
+            foreach (ValuePrice vp in vpList)
             {
                 List<Assign> aList = Db.QueryAssignByValuePrice(vp).ToList();
-                foreach(Assign a in aList)
+                foreach (Assign a in aList)
                 {
                     ProcedureState ps = new ProcedureState();
                     ps.Count = Db.QueryReckonByAssignId(a.Id).Single().Count;
@@ -125,7 +125,7 @@ namespace Piecework_wage_management_system
                     ps.EmployeeName = Db.QueryEmployeeByEID(a.EmployeeId).Single().Name;
                     ps.ProcedureName = Db.QueryProcedureById(vp.Procedure_Id).Single().Name;
                     ps.Ratio = Db.QueryRelationshipByInput(ps.ProcedureName).Single().Input_Output_Ratio;
-                    ps.State = "";
+                    ps.State = "Normal";
                     ps.ProcedureBehind = Db.QueryRelationshipByInput(ps.ProcedureName).Single().OutputProcedure;
                     psList.Add(ps);
                 }
@@ -139,7 +139,26 @@ namespace Piecework_wage_management_system
         {
             if (psList.Count == 0)
                 return;
-            psList = psList;
+            foreach (ProcedureState ps1 in psList)
+            {
+                int outputCount = ps1.Count;
+                int maxInputCount = -1;
+                foreach (ProcedureState ps2 in psList)
+                {
+                    //ps2 is the procedure in front of ps1
+                    if (ps2.ProcedureBehind == ps1.ProcedureName)
+                    {
+                        if (ps2.Count / ps2.Ratio < maxInputCount || maxInputCount < 0)
+                        {
+                            maxInputCount = ps2.Count / ps2.Ratio;
+                        }
+                    }
+                }
+                if (outputCount > maxInputCount && maxInputCount >= 0)
+                {
+                    ps1.State = "Exceed!";
+                }
+            }
         }
 
         private void lst_Months_SelectionChanged(object sender, SelectionChangedEventArgs e)
