@@ -94,9 +94,8 @@ namespace Piecework_wage_management_system
             foreach(Relationship item in relateList)
             {
                 ValuePrice price = new ValuePrice();
-                price.Procedure_Id = Db.QueryProcedureByName(item.Procedure_Name).Single().Id;
+                price.Procedure_Id = Db.QueryProcedureByName(item.InputProcedure).Single().Id;
                 price.Value_Id = Db.QueryValueByTaskNum(v.TaskNum).Single().Id;
-                price.Sequence = item.Sequence_Number;
                 Db.InsertValuePrice(price);
             }
             PsPage.FillGridTask();

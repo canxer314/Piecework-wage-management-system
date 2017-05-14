@@ -18,8 +18,8 @@ namespace Piecework_wage_management_system
         //CONSTRAINT fk_Product_Id FOREIGN KEY (Product_Id)
         //	REFERENCES tbl_Procedure (Product_Id)
         public int Id { set; get; }
-        public int Sequence_Number { set; get; }
-        public string Procedure_Name { set; get; }
+        public string InputProcedure { set; get; }
+        public string OutputProcedure { set; get; }
         public int Input_Output_Ratio { set; get; }
         public int Product_Id { set; get; }
     }

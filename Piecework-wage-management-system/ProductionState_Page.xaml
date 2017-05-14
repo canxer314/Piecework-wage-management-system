@@ -44,13 +44,13 @@
         </DataGrid>
         <DataGrid Name="gridProcedure" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="3" CanUserSortColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Sequence}" Header="Sequence"/>
                 <DataGridTextColumn Binding="{Binding ProcedureName}" Header="Procedure"/>
                 <DataGridTextColumn Binding="{Binding Ratio}" Header="Ratio"/>
                 <DataGridTextColumn Binding="{Binding EmployeeName}" Header="EmployeeName"/>
                 <DataGridTextColumn Binding="{Binding EmployeeId}" Header="EmployeeId"/>
                 <DataGridTextColumn Binding="{Binding Count}" Header="Count"/>
                 <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                <DataGridTextColumn Binding="{Binding ProcedureBehind}" Header="OutputProcedure"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

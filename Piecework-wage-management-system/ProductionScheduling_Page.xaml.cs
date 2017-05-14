@@ -151,7 +151,7 @@ namespace Piecework_wage_management_system
             {
                 Value v = gridTask.SelectedItem as Value;
                 Relationship r = gridProcedure.SelectedItem as Relationship;
-                Procedure p = Db.QueryProcedureByName(r.Procedure_Name).Single();
+                Procedure p = Db.QueryProcedureByName(r.InputProcedure).Single();
                 ValuePrice vp = gridPrice.SelectedItem as ValuePrice;
                 foreach(Employee eTmp in gridEmployee.SelectedItems)
                 {

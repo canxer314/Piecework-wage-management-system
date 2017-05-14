@@ -46,8 +46,7 @@
                 </Menu>
                 <DataGrid x:Name="gridProcedure" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gridProcedure_SelectionChanged" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Sequence_Number}" Header="No."/>
-                        <DataGridTextColumn Binding="{Binding Procedure_Name}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Name"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

@@ -211,15 +211,14 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Can not modify multiple Procedure information at one time.");
                 return;
             }
-            IEnumerable<Procedure> tmpList;
-            tmpList = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id);
-            if(db.QueryRelationshipByName(tmpList.ElementAt(0).Name).Count()!=0)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify Procedure which have relations under it.");
-                return;
-            }
-            ModifyProcedureWindow modifyProcedureWnd = new ModifyProcedureWindow(tmpList.ElementAt(0), this);
+            Procedure p = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id).Single();
+            //if(db.QueryRelationshipByInput(p.Name).Count()!=0)
+            //{
+            //    SystemSounds.Beep.Play();
+            //    MessageBox.Show("Can not modify Procedure which have relations under it.");
+            //    return;
+            //}
+            ModifyProcedureWindow modifyProcedureWnd = new ModifyProcedureWindow(p, this);
             modifyProcedureWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyProcedureWnd.ShowDialog();
         }
@@ -402,9 +401,8 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Can not modify multiple Relationship information at one time.");
                 return;
             }
-            IEnumerable<Relationship> tmpList;
-            tmpList = db.QueryRelationshipByName((gridProcedureRelationship.SelectedItem as Relationship).Procedure_Name);
-            ModifyRelationshipWindow modifyRelationshipWnd = new ModifyRelationshipWindow(tmpList.ElementAt(0),this);
+            Relationship r = db.QueryRelationshipByInput((gridProcedureRelationship.SelectedItem as Relationship).InputProcedure).Single();
+            ModifyRelationshipWindow modifyRelationshipWnd = new ModifyRelationshipWindow(r,this);
             modifyRelationshipWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyRelationshipWnd.ShowDialog();
 
@@ -420,7 +418,7 @@ namespace Piecework_wage_management_system
             }
             foreach (Relationship item in gridProcedureRelationship.SelectedItems)
             {
-                db.DeleteRelationshipByName(item.Procedure_Name);
+                db.DeleteRelationshipByName(item.InputProcedure);
             }
             FillGridView_Relationship();
         }
@@ -432,24 +430,13 @@ namespace Piecework_wage_management_system
                 gridProcedureRelationship.ItemsSource = db.QueryRelationshipByAll();
                 return;
             }
-            if (rbtnSequence.IsChecked == true)
+            if (rbtnInput.IsChecked == true)
             {
-                int i = 0;
-                try
-                {
-                    i = int.Parse(txtSearchRelationship.Text);
-                }
-                catch
-                {
-                    SystemSounds.Beep.Play();
-                    MessageBox.Show("You must only input numberic when search by Sequence!");
-                    return;
-                }
-                gridProcedureRelationship.ItemsSource = db.QueryRelationshipBySequence_Number(i);
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByInput(txtSearchRelationship.Text);
             }
-            else if (rbtnProcedure.IsChecked == true)
+            else if (rbtnOutput.IsChecked == true)
             {
-                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByName(txtSearchRelationship.Text);
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByOutput(txtSearchRelationship.Text);
             }
             else if (rbtnRatio.IsChecked == true)
             {

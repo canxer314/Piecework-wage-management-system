@@ -60,7 +60,6 @@ namespace Piecework_wage_management_system
             }
             modifiedPrice.Id = OriginPrice.Id;
             modifiedPrice.Procedure_Id = OriginPrice.Procedure_Id;
-            modifiedPrice.Sequence = OriginPrice.Sequence;
             modifiedPrice.Value_Id = OriginPrice.Value_Id;
             modifiedPrice.Unit = txt_Unit.Text;
             Db.UpdatePrice(modifiedPrice);

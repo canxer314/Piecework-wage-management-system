@@ -8,7 +8,7 @@ namespace Piecework_wage_management_system
 {
     public class ProcedureState
     {
-        public int Sequence { set; get; }
+        public string ProcedureBehind {set;get;}
         public string ProcedureName {set;get;}
         public int Ratio { set; get; }
         public string EmployeeName {set;get;}

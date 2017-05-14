@@ -75,15 +75,15 @@
                 <Button Name="btnSearchRelationship" Content="Search By" Click="btnSearchRelationship_Click" Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="rbtnSequence" IsChecked="True" Content="Sequence" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <RadioButton x:Name="rbtnProcedure" Content="Procedure" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnInput" IsChecked="True" Content="Input" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnOutput" Content="Output" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
                 <RadioButton x:Name="rbtnRatio" Content="Ratio" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
             </StackPanel>
             <Border Background="#FFAF7BEE" Height="2"></Border>
             <DataGrid x:Name="gridProcedureRelationship" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Sequence_Number}" Header="Sequence"/>
-                    <DataGridTextColumn Binding="{Binding Procedure_Name}" Header="Procedure"/>
+                    <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Input"/>
+                    <DataGridTextColumn Binding="{Binding OutputProcedure}" Header="Output"/>
                     <DataGridTextColumn Binding="{Binding Input_Output_Ratio}" Header="Ratio"/>
                 </DataGrid.Columns>
             </DataGrid>

@@ -22,11 +22,16 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Add new Relation"/>
-        <TextBlock x:Name="tb_Sequence_Number" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Sequence Num:"/>
-        <ComboBox x:Name="cmb_Sequence_Number" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5" >
+        <TextBlock x:Name="tb_Input" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Input:"/>
+        <ComboBox x:Name="cmb_Input" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="4" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock x:Name="Procedure_NameName" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock x:Name="tb_Procedure_Name" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Procdure:"/>
-        <ComboBox x:Name="cmb_Procedure_Name" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5" >
+        <TextBlock x:Name="tb_Output" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Output:"/>
+        <ComboBox x:Name="cmb_Output" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock x:Name="Procedure_NameName" Text="{Binding Name}"/>

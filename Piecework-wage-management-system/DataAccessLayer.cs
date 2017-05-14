@@ -61,9 +61,11 @@ namespace Piecework_wage_management_system
             CREATE TABLE IF NOT EXISTS tbl_Relationship
             (
             	Id INT AUTO_INCREMENT PRIMARY KEY,
-            	Sequence_Number INT,
-            	Procedure_Name char(20) UNIQUE KEY,
-            	CONSTRAINT fk_Procedure_Name FOREIGN KEY (Procedure_Name)
+            	InputProcedure char(20) UNIQUE KEY,
+            	CONSTRAINT fk_InputProcedure FOREIGN KEY (InputProcedure)
+            		REFERENCES tbl_Procedure(Name) ON DELETE CASCADE ON UPDATE CASCADE,
+            	OutputProcedure char(20),
+            	CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProcedure)
             		REFERENCES tbl_Procedure(Name) ON DELETE CASCADE ON UPDATE CASCADE,
             	Input_Output_Ratio INT,
             	Product_Id INT,
@@ -84,7 +86,6 @@ namespace Piecework_wage_management_system
                 Id INT AUTO_INCREMENT PRIMARY KEY,
                 Unit CHAR(20),
                 Unit_Price FLOAT,
-            	Sequence INT,
             	Value_Id INT,
             	CONSTRAINT fk_Price_Value_Id FOREIGN KEY (Value_Id)
                 	REFERENCES tbl_Value (Id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -526,19 +527,21 @@ namespace Piecework_wage_management_system
         public int InsertRelationship(Relationship r)
         {
             //Id INT AUTO_INCREMENT PRIMARY KEY,
-            //Sequence_Number INT,
-            //Procedure_Name char(20) UNIQUE KEY,
-            //CONSTRAINT fk_Procedure_Name FOREIGN KEY (Procedure_Name)
-            //	REFERENCES tbl_Procedure(Name),
+            //InputProcedure char(20) UNIQUE KEY,
+            //CONSTRAINT fk_InputProcedure FOREIGN KEY (InputProcedure)
+            //	REFERENCES tbl_Procedure(Name) ON DELETE CASCADE ON UPDATE CASCADE,
+            //OutputProcedure char(20),
+            //CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProcedure)
+            //	REFERENCES tbl_Procedure(Name) ON DELETE CASCADE ON UPDATE CASCADE,
             //Input_Output_Ratio INT,
             //Product_Id INT,
             //CONSTRAINT fk_Product_Id FOREIGN KEY (Product_Id)
-            //	REFERENCES tbl_Procedure (Product_Id)
+            //	REFERENCES tbl_Procedure (Product_Id) ON DELETE CASCADE ON UPDATE CASCADE
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Relationship values "
-                     + "(@Id, @Sequence_Number, @Procedure_Name, @Input_Output_Ratio, @Product_Id)",
-                     new { Id = r.Id, Sequence_Number = r.Sequence_Number, Procedure_Name = r.Procedure_Name, Input_Output_Ratio = r.Input_Output_Ratio, Product_Id = r.Product_Id });
+                     + "(@Id, @InputProcedure, @OutputProcedure, @Input_Output_Ratio, @Product_Id)",
+                     new { Id = r.Id, InputProcedure = r.InputProcedure, OutputProcedure = r.OutputProcedure, Input_Output_Ratio = r.Input_Output_Ratio, Product_Id = r.Product_Id });
             }
         }
 
@@ -547,29 +550,29 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                const string query = "select * from tbl_Relationship order by Sequence_Number";
+                const string query = "select * from tbl_Relationship";
                 return conn.Query<Relationship>(query, null);
             }
         }
-        public IEnumerable<Relationship> QueryRelationshipByName(string name)
+        public IEnumerable<Relationship> QueryRelationshipByInput(string name)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Relationship>("select * from tbl_Relationship where Procedure_Name=@Procedure_Name", new { Procedure_Name = name });
+                return conn.Query<Relationship>("select * from tbl_Relationship where InputProcedure=@InputProcedure", new { InputProcedure = name });
             }
         }
-        public IEnumerable<Relationship> QueryRelationshipBySequence_Number(int order)
+        public IEnumerable<Relationship> QueryRelationshipByOutput(string name)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Relationship>("select * from tbl_Relationship where Sequence_Number=@Sequence_Number", new { Sequence_Number = order });
+                return conn.Query<Relationship>("select * from tbl_Relationship where OutputProcedure=@OutputProcedure", new { OutputProcedure = name });
             }
         }
         public IEnumerable<Relationship> QueryRelationshipByProduct_Id(int id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Relationship>("select * from tbl_Relationship where Product_Id=@Product_Id order by Sequence_Number", new { Product_Id = id });
+                return conn.Query<Relationship>("select * from tbl_Relationship where Product_Id=@Product_Id", new { Product_Id = id });
             }
         }
         public IEnumerable<Relationship> QueryRelationshipByRatio(int ratio)
@@ -577,6 +580,13 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Query<Relationship>("select * from tbl_Relationship where Input_Output_Ratio=@Input_Output_Ratio", new { Input_Output_Ratio = ratio });
+            }
+        }
+        public int UpdateRelationship(Relationship modifiedRelationship)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Relationship set OutputProcedure=@OutputProcedure, Input_Output_Ratio=@Input_Output_Ratio where InputProcedure=@InputProcedure", new { OutputProcedure = modifiedRelationship.OutputProcedure, Input_Output_Ratio = modifiedRelationship.Input_Output_Ratio, InputProcedure = modifiedRelationship.InputProcedure });
             }
         }
         public int DeleteRelationshipByName(string name)
@@ -590,7 +600,7 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Procedure>("select * from tbl_procedure where Product_Id = @Product_Id and Name not in (select Procedure_Name from tbl_Relationship)", new { Product_Id = id });
+                return conn.Query<Procedure>("select * from tbl_procedure where Product_Id = @Product_Id and Name not in (select InputProcedure from tbl_Relationship)", new { Product_Id = id });
             }
         }
         public int InsertValuePrice(ValuePrice p)
@@ -598,9 +608,6 @@ namespace Piecework_wage_management_system
             //Id INT AUTO_INCREMENT PRIMARY KEY,
             //Unit CHAR(20),
             //Unit_Price FLOAT,
-            //Sequence INT,
-            //CONSTRAINT fk_Sequence FOREIGN KEY (Sequence)
-            //	REFERENCES tbl_Relationship (Sequence_Number) ON DELETE CASCADE ON UPDATE CASCADE,
             //Value_Id INT,
             //CONSTRAINT fk_Value_Id FOREIGN KEY (Value_Id)
             //	REFERENCES tbl_Value (Id)
@@ -610,29 +617,29 @@ namespace Piecework_wage_management_system
             using (IDbConnection conn = OpenConnection())
             {
                 return conn.Execute("Insert into tbl_Value_Price values "
-                     + "(@Id, @Unit, @Unit_Price, @Sequence, @Value_Id, @Procedure_Id)",
-                     new { Id = p.Id, Unit = p.Unit, Unit_Price = p.Unit_Price, Sequence = p.Sequence, Value_Id = p.Value_Id, Procedure_Id = p.Procedure_Id });
+                     + "(@Id, @Unit, @Unit_Price, @Value_Id, @Procedure_Id)",
+                     new { Id = p.Id, Unit = p.Unit, Unit_Price = p.Unit_Price, Value_Id = p.Value_Id, Procedure_Id = p.Procedure_Id });
             }
         }
         public IEnumerable<ValuePrice> QueryValuePriceByAll()
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<ValuePrice>("select * from tbl_Value_Price order by Sequence");
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price");
             }
         }
         public IEnumerable<ValuePrice> QueryValuePriceById(int id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Id=@Id order by Sequence", new { Id = id });
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Id=@Id", new { Id = id });
             }
         }
         public IEnumerable<ValuePrice> QueryValuePriceByValueId(int v_id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Value_Id=@Value_Id order by Sequence", new { Value_Id = v_id });
+                return conn.Query<ValuePrice>("select * from tbl_Value_Price where Value_Id=@Value_Id", new { Value_Id = v_id });
             }
         }
         public int UpdatePrice(ValuePrice price)

@@ -33,20 +33,10 @@ namespace Piecework_wage_management_system
         }
         private void BindingComboBoxItemSource()
         {
-            IEnumerable<Procedure> procedureIEnum = Db.QueryProcedureByProduct_Id(SelectedProduct.Id);
-            //cmb_OutputProcedure.ItemsSource = procedureIEnum;
-            List<int> sequenceList = new List<int>();
-            int sequenceNumber = procedureIEnum.Count();
-            for(int x = 1;x <= sequenceNumber;x++)
-            {
-                sequenceList.Add(x);
-            }
-            cmb_Sequence_Number.ItemsSource = sequenceList;
-
-            IEnumerable<Procedure> tmpList = Db.QueryProcedureNotInRelationshipByProductId(SelectedProduct.Id);
-            cmb_Procedure_Name.ItemsSource = tmpList;
-            cmb_Procedure_Name.SelectedIndex = -1;
-            cmb_Sequence_Number.SelectedIndex = -1;
+            IEnumerable<Procedure> inputList = Db.QueryProcedureNotInRelationshipByProductId(SelectedProduct.Id);
+            cmb_Input.ItemsSource = inputList;
+            IEnumerable<Procedure> outputList = Db.QueryProcedureByProduct_Id(SelectedProduct.Id);
+            cmb_Output.ItemsSource = outputList;
             txt_Ratio.Text = "1";
         }
         private void btn_Clean_Click(object sender, RoutedEventArgs e)
@@ -57,25 +47,16 @@ namespace Piecework_wage_management_system
 
         private void btn_AddRelationship_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Relationship relate in Db.QueryRelationshipByAll())
-            {
-                if ((cmb_Procedure_Name.SelectedItem as Procedure).Name == relate.Procedure_Name)
-                {
-                    SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Relation with Procedure Name:" + (cmb_Procedure_Name.SelectedItem as Procedure).Name);
-                    return;
-                }
-            }
-            if (cmb_Procedure_Name.SelectedIndex == -1)
+            if (cmb_Input.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a procedure.");
+                MessageBox.Show("You must select a input procedure.");
                 return;
             }
-            if (cmb_Sequence_Number.SelectedIndex == -1)
+            if (cmb_Output.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a sequence number.");
+                MessageBox.Show("You must select a output procedure.");
                 return;
             }
             if (String.IsNullOrEmpty(txt_Ratio.Text.Trim()) == true)
@@ -84,10 +65,16 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Ratio must not be blank!");
                 return;
             }
+            if((cmb_Input.SelectedItem as Procedure).Name == (cmb_Output.SelectedItem as Procedure).Name)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Input procedure and Output procedure can not be same!");
+                return;
+            }
             Relationship r = new Relationship();
             r.Product_Id = SelectedProduct.Id;
-            r.Procedure_Name = (cmb_Procedure_Name.SelectedItem as Procedure).Name;
-            r.Sequence_Number = (int)cmb_Sequence_Number.SelectionBoxItem;
+            r.InputProcedure = (cmb_Input.SelectedItem as Procedure).Name;
+            r.OutputProcedure = (cmb_Output.SelectionBoxItem as Procedure).Name;
             try
             {
                 r.Input_Output_Ratio = int.Parse(txt_Ratio.Text);

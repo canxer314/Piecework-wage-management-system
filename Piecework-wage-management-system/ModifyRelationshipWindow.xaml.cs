@@ -20,52 +20,34 @@ namespace Piecework_wage_management_system
     /// </summary>
     public partial class ModifyRelationshipWindow : Window
     {
-        private bool IsModified { set; get; }
         private Relationship OriginRelationship { set; get; }
         private IEnumerable<Procedure> procedureIEnum { set; get; }
         private ProcedureManage_Page PmPage { set; get; }
         private DataAccessLayer Db { set; get; }
         public ModifyRelationshipWindow(Relationship originRelationship, ProcedureManage_Page pmPage)
         {
-            IsModified = false;
             OriginRelationship = originRelationship;
             PmPage = pmPage;
             Db = new DataAccessLayer();
             procedureIEnum = Db.QueryProcedureByProduct_Id(originRelationship.Product_Id);
             InitializeComponent();
-            Db.DeleteRelationshipByName(originRelationship.Procedure_Name);
+            //Db.DeleteRelationshipByName(originRelationship.Procedure_Name);
             RestoreOriginRelationship();
         }
 
         private void RestoreOriginRelationship()
         {
-            List<int> sequenceList = new List<int>();
-            int sequenceNumber = procedureIEnum.Count();
-            for(int x = 1;x <= sequenceNumber;x++)
-            {
-                sequenceList.Add(x);
-            }
-            cmb_Sequence_Number.ItemsSource = sequenceList;
+            tb_Input.Text = OriginRelationship.InputProcedure;
+            IEnumerable<Procedure> tmpList = Db.QueryProcedureByProduct_Id(OriginRelationship.Product_Id);
             int i = -1;
-            foreach (var p in sequenceList)
-            {
-                i++;
-                if (p == OriginRelationship.Sequence_Number)
-                    break;
-            }
-            cmb_Sequence_Number.SelectedIndex = i;
-            List<Procedure> tmpList = Db.QueryProcedureNotInRelationshipByProductId(OriginRelationship.Product_Id).ToList();
-            cmb_Procedure_Name.ItemsSource = tmpList;
-            i = -1;
             foreach (var p in tmpList)
             {
                 i++;
-                if (p.Name == OriginRelationship.Procedure_Name)
+                if (p.Name == OriginRelationship.OutputProcedure)
                     break;
             }
-            cmb_Procedure_Name.SelectedIndex = i;
+            cmb_Output.SelectedIndex = i;
             txt_Ratio.Text = OriginRelationship.Input_Output_Ratio.ToString();
-            IsModified = false;
         }
         private void btn_Restore_Click(object sender, RoutedEventArgs e)
         {
@@ -76,6 +58,12 @@ namespace Piecework_wage_management_system
         private void btn_Modify_Click(object sender, RoutedEventArgs e)
         {
             Relationship alteredRelationship = new Relationship();
+            if(tb_Input.Text == (cmb_Output.SelectedItem as Procedure).Name)
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("Input procedure and Output procedure can not be same!");
+                return;
+            }
             try
             {
                 alteredRelationship.Input_Output_Ratio = int.Parse(txt_Ratio.Text);
@@ -86,25 +74,17 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("Input output ratio must be numberic!");
                 return;
             }
-            alteredRelationship.Procedure_Name = (cmb_Procedure_Name.SelectedItem as Procedure).Name;
-            alteredRelationship.Sequence_Number = (int)cmb_Sequence_Number.SelectedItem;
+            alteredRelationship.InputProcedure = OriginRelationship.InputProcedure;
+            alteredRelationship.OutputProcedure = (cmb_Output.SelectedItem as Procedure).Name;
             alteredRelationship.Product_Id = OriginRelationship.Product_Id;
-            Db.InsertRelationship(alteredRelationship);
+            Db.UpdateRelationship(alteredRelationship);
             PmPage.FillGridView_Relationship();
-            IsModified = true;
             this.Close();
         }
 
         private void btn_Return_Click(object sender, RoutedEventArgs e)
         {
-            IsModified = false;
             this.Close();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            if (IsModified == false)
-                Db.InsertRelationship(OriginRelationship);
         }
     }
 }

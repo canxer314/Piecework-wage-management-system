@@ -124,25 +124,22 @@ namespace Piecework_wage_management_system
                     ps.EmployeeId = a.EmployeeId;
                     ps.EmployeeName = Db.QueryEmployeeByEID(a.EmployeeId).Single().Name;
                     ps.ProcedureName = Db.QueryProcedureById(vp.Procedure_Id).Single().Name;
-                    ps.Ratio = Db.QueryRelationshipByName(ps.ProcedureName).Single().Input_Output_Ratio;
-                    ps.Sequence = vp.Sequence;
+                    ps.Ratio = Db.QueryRelationshipByInput(ps.ProcedureName).Single().Input_Output_Ratio;
                     ps.State = "";
+                    ps.ProcedureBehind = Db.QueryRelationshipByInput(ps.ProcedureName).Single().OutputProcedure;
                     psList.Add(ps);
                 }
             }
             //process the state
             processState(ref psList);
             gridProcedure.ItemsSource = psList;
-
         }
 
         private void processState(ref List<ProcedureState> psList)
         {
             if (psList.Count == 0)
                 return;
-            //
-
-            //
+            psList = psList;
         }
 
         private void lst_Months_SelectionChanged(object sender, SelectionChangedEventArgs e)
