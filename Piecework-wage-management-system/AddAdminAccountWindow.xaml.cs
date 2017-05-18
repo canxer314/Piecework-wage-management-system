@@ -33,19 +33,19 @@ namespace Piecework_wage_management_system
             if(txt_Username.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the username!");
+                MessageBox.Show("请输入用户名！");
                 pwd_Password.Password = null;
                 pwd_Confirm.Password = null;
                 return;
             }else if(dataAccesslayer.QueryAdministratorByName(txt_Username.Text).Count()>0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists administrator named " + txt_Username + "!");
+                MessageBox.Show("已存在管理员：" + txt_Username + "！");
                 return;
             }else if(pwd_Password.Password.Trim() == String.Empty || pwd_Confirm.Password.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the password!");
+                MessageBox.Show("请输入密码！");
                 pwd_Password.Password = null;
                 pwd_Confirm.Password = null;
                 return;
@@ -63,7 +63,7 @@ namespace Piecework_wage_management_system
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("The two passwords not match!");
+                MessageBox.Show("两次输入的密码不一致！");
                 pwd_Password.Password = null;
                 pwd_Confirm.Password = null;
                 return;

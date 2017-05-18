@@ -42,44 +42,44 @@ namespace Piecework_wage_management_system
                 if (txt_EmployeeId.Text == empl.Id.ToString())
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists employee having eID:" + txt_EmployeeId.Text);
+                    MessageBox.Show("已存在员工号:" + txt_EmployeeId.Text);
                     return;
                 }
             }
             if (txt_EmployeeName == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Name can not be blank!");
+                MessageBox.Show("员工姓名不能为空！");
                 return;
             }
             if (txt_EmployeeId == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Id can not be blank!");
+                MessageBox.Show("员工号不能为空！");
                 return;
             }
             if (cmb_Gender.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Gender can not be blank!");
+                MessageBox.Show("员工性别不能为空！");
                 return;
             }
             if (cmb_Workshop.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Workshop can not be blank!");
+                MessageBox.Show("工作车间不能为空！");
                 return;
             }
             if (cmb_Job.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Job can not be blank!");
+                MessageBox.Show("工种不能为空！");
                 return;
             }
             if (txt_Telephone == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Telephone can not be blank!");
+                MessageBox.Show("手机号码不能为空！");
                 return;
             }
             Employee employee = new Employee();
@@ -91,7 +91,7 @@ namespace Piecework_wage_management_system
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Employee Id must be numberic!");
+                MessageBox.Show("员工号必须为数字！");
                 return;
             }
             employee.Gender = cmb_Gender.SelectionBoxItem.ToString();

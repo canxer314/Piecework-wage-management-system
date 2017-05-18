@@ -43,14 +43,14 @@ namespace Piecework_wage_management_system
                 if (db.QueryJobByName(txt_JobName.Text).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Job with name: " + txt_JobName.Text + "!");
+                    MessageBox.Show("已存在工种名称：" + txt_JobName.Text + "!");
                     return;
                 }
             if (txt_JobId.Text != OriginJob.Id.ToString())
                 if (db.QueryJobById(int.Parse(txt_JobId.Text)).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Job with ID: " + txt_JobId.Text + "!");
+                    MessageBox.Show("已存在工种编号：" + txt_JobId.Text + "!");
                     return;
                 }
             modifiedJob.Name = txt_JobName.Text;
@@ -61,7 +61,7 @@ namespace Piecework_wage_management_system
             catch
             {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Job Id must be numberic!");
+                    MessageBox.Show("工种编号必须为数字！");
                     return;
             }
             db.DeleteJobById(OriginJob.Id);

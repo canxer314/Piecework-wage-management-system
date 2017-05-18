@@ -48,7 +48,12 @@ namespace Piecework_wage_management_system
             this.Close();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void btn_ModifyPassword_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

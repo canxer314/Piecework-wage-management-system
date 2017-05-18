@@ -33,25 +33,25 @@ namespace Piecework_wage_management_system
             if (txt_ProductName.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the product name!");
+                MessageBox.Show("请输入产品名称！");
                 return;
             }
             else if (db.QueryProductByName(txt_ProductName.Text).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists product named " + txt_ProductName + "!");
+                MessageBox.Show("已存在产品名称：" + txt_ProductName + "!");
                 return;
             }
             else if (txt_ProductId.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the job id!");
+                MessageBox.Show("请输入产品编号！");
                 return;
             }
             else if (db.QueryProductById(int.Parse(txt_ProductId.Text)).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists product with id: " + txt_ProductId.Text + "!");
+                MessageBox.Show("已存在产品编号：" + txt_ProductId.Text + "!");
                 return;
             }
             else
@@ -65,7 +65,7 @@ namespace Piecework_wage_management_system
                 catch
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Product Id must be numberic!");
+                    MessageBox.Show("产品编号必须为数字！");
                     return;
                 }
                 db.InsertProduct(p);

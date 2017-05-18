@@ -31,13 +31,13 @@ namespace Piecework_wage_management_system
         {
             if(txtUsername.Text.Trim() == String.Empty)
             {
-                MessageBox.Show("please input the username!");
+                MessageBox.Show("请输入用户名！");
                 pwbPassword.Password = null;
                 pwbConfirm.Password = null;
                 return;
             }else if(pwbConfirm.Password.Trim() == String.Empty || pwbPassword.Password.Trim() == String.Empty)
             {
-                MessageBox.Show("please input the password!");
+                MessageBox.Show("请输入密码！");
                 pwbPassword.Password = null;
                 pwbConfirm.Password = null;
                 return;
@@ -55,7 +55,7 @@ namespace Piecework_wage_management_system
             }
             else
             {
-                MessageBox.Show("The two passwords not match!");
+                MessageBox.Show("两次密码不一致！");
                 pwbPassword.Password = null;
                 pwbConfirm.Password = null;
                 return;

@@ -74,7 +74,7 @@ namespace Piecework_wage_management_system
                 if (db.QueryEmployeeByEID(int.Parse(txt_EmployeeId.Text)).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists employee with ID:" + txt_EmployeeId.Text);
+                    MessageBox.Show("已存在员工编号：" + txt_EmployeeId.Text);
                     return;
                 }
             alteredEmployee.Name = txt_EmployeeName.Text;
@@ -116,9 +116,9 @@ namespace Piecework_wage_management_system
 
         private void btn_ResetPassword_Click(object sender, RoutedEventArgs e)
         {
-            db.UpdateEmployeePasswordById(OriginEmployee.Id, OriginEmployee.Id.ToString());
+            db.ResetEmployeePassword(OriginEmployee);
             SystemSounds.Beep.Play();
-            MessageBox.Show("The password of " + OriginEmployee.Name + " has been reset to its default value.");
+            MessageBox.Show("员工 " + OriginEmployee.Name + " 的密码已被重置！");
             this.Close();
         }
     }

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="JobManage_Page">
+      Title="工种管理">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -14,22 +14,26 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="BlanchedAlmond">
-            <MenuItem x:Name="AddJob" Header="_Add Job" Click="AddJob_Click" Margin="5,0"/>
-            <MenuItem x:Name="ModifyJob" Header="_Modify Job" Click="ModifyJob_Click" Margin="5,0"/>
-            <MenuItem x:Name="RemoveJob" Header="_Remove Job" Click="RemoveJob_Click" Margin="5,0"/>
-            <MenuItem x:Name="RefreshList" Header="Refresh _List" Click="RefreshList_Click" Margin="5,0"/>
+            <MenuItem x:Name="AddJob" Header="添加工种" Click="AddJob_Click" Margin="5,0"/>
+            <MenuItem x:Name="ModifyJob" Header="修改工种" Click="ModifyJob_Click" Margin="5,0"/>
+            <MenuItem x:Name="RemoveJob" Header="删除工种" Click="RemoveJob_Click" Margin="5,0"/>
+            <MenuItem x:Name="RefreshList" Header="刷新列表" Click="RefreshList_Click" Margin="5,0"/>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" >
-                <TextBox Name="txtSearchJob" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <Button Name="btnSearchJob" Content="Search By" Margin="0,5,5,5" Click="btnSearchJob_Click"/>
-                <RadioButton x:Name="rbtnJobName" Content="Name" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
-                <RadioButton x:Name="rbtnJobId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
+                <TextBox Name="txtSearchJob" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Margin="5" />
+                <Button Name="btnSearchJob" Content="条件搜索" Margin="0,5,5,5" Click="btnSearchJob_Click"/>
+                <RadioButton x:Name="rbtnJobName" Content="工种名称" IsChecked="True" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="0,0,5,0" />
+                <RadioButton x:Name="rbtnJobId" Content="工种编号" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="0" />
             </StackPanel>
-            <DataGrid x:Name="gridJob" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,0,0,0">
+            <DataGrid x:Name="gridJob" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                      AutoGenerateColumns="False" Margin="5,0,0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="工种名称"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="工种编号"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

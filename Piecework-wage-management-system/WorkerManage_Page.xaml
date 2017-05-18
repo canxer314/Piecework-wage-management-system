@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="WorkerManage_Page">
+      Title="员工管理">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -14,19 +14,20 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="BlanchedAlmond" >
-            <MenuItem Header="_Add Employee" Click="AddEmployee"/>
-            <MenuItem Header="_Modify Employee" Click="AlterEmployee"/>
-            <MenuItem Header="_Remove Employee" Click="RemoveEmployee"/>
-            <MenuItem Header="Refresh _List" Click="RefreshList"/>
+            <MenuItem Header="添加员工" Click="AddEmployee"/>
+            <MenuItem Header="更改员工" Click="AlterEmployee"/>
+            <MenuItem Header="删除员工" Click="RemoveEmployee"/>
+            <MenuItem Header="刷新列表" Click="RefreshList"/>
         </Menu>
-        <DataGrid x:Name="gridEmployees" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False">
+        <DataGrid x:Name="gridEmployees" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
-                <DataGridTextColumn Binding="{Binding Gender}" Header="Gender"/>
-                <DataGridTextColumn Binding="{Binding Workshop}" Header="Workshop"/>
-                <DataGridTextColumn Binding="{Binding Job}" Header="Job"/>
-                <DataGridTextColumn Binding="{Binding Telephone}" Header="Telephone"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="员工姓名"/>
+                <DataGridTextColumn Binding="{Binding Id}" Header="员工编号"/>
+                <DataGridTextColumn Binding="{Binding Gender}" Header="性别"/>
+                <DataGridTextColumn Binding="{Binding Workshop}" Header="工作车间"/>
+                <DataGridTextColumn Binding="{Binding Job}" Header="工种"/>
+                <DataGridTextColumn Binding="{Binding Telephone}" Header="电话号码"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="AdministratorManage_Page">
+      Title="系统管理员">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -14,15 +14,16 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Background="BlanchedAlmond" >
-            <MenuItem x:Name="AddAccount" Header="_Add account" Click="AddAccount_Click"/>
-            <MenuItem x:Name="ModifyPassword" Header="_Modify Password" Click="ModifyPassword_Click"/>
-            <MenuItem x:Name="DeleteAccount" Header="_Delete account" Click="DeleteAccount_Click"/>
-            <MenuItem x:Name="RefreshList" Header="_Refresh List" Click="RefreshList_Click"/>
+            <MenuItem x:Name="AddAccount" Header="添加管理员" Click="AddAccount_Click"/>
+            <MenuItem x:Name="ModifyPassword" Header="更改管理员" Click="ModifyPassword_Click"/>
+            <MenuItem x:Name="DeleteAccount" Header="移除管理员" Click="DeleteAccount_Click"/>
+            <MenuItem x:Name="RefreshList" Header="刷新列表" Click="RefreshList_Click"/>
         </Menu>
-        <DataGrid x:Name="gridAdministrator" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False">
+        <DataGrid x:Name="gridAdministrator" IsReadOnly="True" Grid.Row="1" HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Id}" Header="管理员编号"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="管理员名称"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

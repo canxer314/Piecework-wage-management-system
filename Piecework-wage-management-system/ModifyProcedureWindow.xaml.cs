@@ -65,14 +65,14 @@ namespace Piecework_wage_management_system
                 if (Db.QueryProcedureById(int.Parse(txt_ProcedureId.Text)).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Procedure with ID:" + txt_ProcedureId.Text);
+                    MessageBox.Show("已存在工序编号：" + txt_ProcedureId.Text);
                     return;
                 }
             if (txt_ProcedureName.Text != OriginProcedure.Name)
                 if (Db.QueryProcedureByName(txt_ProcedureName.Text).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Procedure with name:" + txt_ProcedureName.Text);
+                    MessageBox.Show("已存在工序名称：" + txt_ProcedureName.Text);
                     return;
                 }
             alteredProcedure.Name = txt_ProcedureName.Text;
@@ -83,11 +83,20 @@ namespace Piecework_wage_management_system
             catch
             {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Procedure Id must be numberic!");
+                    MessageBox.Show("工序编号必须为数字！");
                     return;
             }
             alteredProcedure.Product_Id = (cmb_Product.SelectedItem as Product).Id;
-            Db.DeleteProcedureById(OriginProcedure.Id);
+            try
+            {
+                Db.DeleteProcedureById(OriginProcedure.Id);
+            }
+            catch
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("更改失败!");
+                return;
+            }
             Db.InsertProcedure(alteredProcedure);
             PmPage.FillGridView_Procedure();
             this.Close();

@@ -61,26 +61,26 @@ namespace Piecework_wage_management_system
                 if (txt_ProcedureId.Text == proc.Id.ToString())
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Procedure with ID:" + txt_ProcedureId.Text);
+                    MessageBox.Show("已存在工序编号：" + txt_ProcedureId.Text);
                     return;
                 }
             }
             if (txt_ProcedureName == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Procedure Name can not be blank!");
+                MessageBox.Show("工序名称不能为空！");
                 return;
             }
             if (txt_ProcedureId == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Procedure Id can not be blank!");
+                MessageBox.Show("工序编号不能为空！");
                 return;
             }
             if (cmb_Product.SelectedItem == null)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Belong to what Product can not be blank!");
+                MessageBox.Show("所属产品名称不能为空！");
                 return;
             }
             Procedure p = new Procedure();
@@ -91,7 +91,7 @@ namespace Piecework_wage_management_system
             }
             catch {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Procedure Id must be numberic!");
+                MessageBox.Show("工序编号不能为空！");
                 return;
             }
             p.Product_Id = (cmb_Product.SelectedItem as Product).Id;

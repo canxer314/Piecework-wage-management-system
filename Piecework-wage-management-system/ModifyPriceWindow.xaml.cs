@@ -55,7 +55,7 @@ namespace Piecework_wage_management_system
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("The Price must be numberic!");
+                MessageBox.Show("工序单价必须为数字！");
                 return;
             }
             modifiedPrice.Id = OriginPrice.Id;

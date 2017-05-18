@@ -53,18 +53,17 @@ namespace Piecework_wage_management_system
             if (gridAdministrator.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a account in the table before you modify its password.");
+                MessageBox.Show("请先选择一个想要修改密码的管理员账号！");
                 return;
             }
             if (gridAdministrator.SelectedItems.Count > 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify multiple account password at one time.");
+                MessageBox.Show("无法同时修改多个管理员的密码！");
                 return;
             }
-            IEnumerable<Administrator> adminList;
-            adminList = db.QueryAdministratorByName((gridAdministrator.SelectedItem as Administrator).Name);
-            ModifyAdminPasswordWindow modifyPwdWnd = new ModifyAdminPasswordWindow(adminList.ElementAt(0),db);
+            Administrator admin = db.QueryAdministratorByName((gridAdministrator.SelectedItem as Administrator).Name).Single();
+            ModifyAdminPasswordWindow modifyPwdWnd = new ModifyAdminPasswordWindow(admin,db);
             modifyPwdWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyPwdWnd.ShowDialog();
         }
@@ -74,13 +73,13 @@ namespace Piecework_wage_management_system
             if (gridAdministrator.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a admin account in the table before you delete it.");
+                MessageBox.Show("请先选择要删除的管理员账号！");
                 return;
             }
             if (gridAdministrator.SelectedItems.Count > 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not delete multiple admin account at one time.");
+                MessageBox.Show("无法一次删除多个管理员账号！");
                 return;
             }
             foreach (Administrator item in gridAdministrator.SelectedItems)

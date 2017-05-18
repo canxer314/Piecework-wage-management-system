@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="AddProcedureWindow" Height="400" Width="300" ResizeMode="NoResize">
+        Title="添加工序" Height="400" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -21,20 +21,30 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Add new Procedure"/>
-        <TextBlock x:Name="tb_Product" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Product:"/>
-        <ComboBox x:Name="cmb_Product" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5"> <ComboBox.ItemTemplate>
+        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="添加新工序"/>
+        <TextBlock x:Name="tb_Product" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="产品名称:"/>
+        <ComboBox x:Name="cmb_Product" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+                  TabIndex="5"> <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock x:Name="ProductName" Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock x:Name="tb_ProcedureName" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Name:"/>
-        <TextBox x:Name="txt_ProcedureName" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
-        <TextBlock x:Name="tb_ProcedureId" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Id:"/>
-        <TextBox x:Name="txt_ProcedureId" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <Button x:Name="btn_Clean" Height="20" Width="50" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Click="btn_Clean_Click" TabIndex="8">Clean</Button>
-        <Button x:Name="btn_AddProcedure" Height="20" Width="50" Grid.Row="5" Grid.Column="1" FontWeight="Bold" Click="btn_AddProcedure_Click" TabIndex="7">Add</Button>
-        <Button x:Name="btn_Return" Height="20" Width="50" Grid.Row="5" Grid.Column="2" FontWeight="Bold" Click="btn_Return_Click" TabIndex="9">Return</Button>
+        <TextBlock x:Name="tb_ProcedureName" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="工序名称:"/>
+        <TextBox x:Name="txt_ProcedureName" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="1"/>
+        <TextBlock x:Name="tb_ProcedureId" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="工序编号:"/>
+        <TextBox x:Name="txt_ProcedureId" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="2"/>
+        <Button x:Name="btn_Clean" Height="20" Width="50" Grid.Row="5" Grid.Column="0" FontWeight="Bold" 
+                Click="btn_Clean_Click" TabIndex="8">清除</Button>
+        <Button x:Name="btn_AddProcedure" Height="20" Width="50" Grid.Row="5" Grid.Column="1" FontWeight="Bold" 
+                Click="btn_AddProcedure_Click" TabIndex="7">添加</Button>
+        <Button x:Name="btn_Return" Height="20" Width="50" Grid.Row="5" Grid.Column="2" FontWeight="Bold" 
+                Click="btn_Return_Click" TabIndex="9">返回</Button>
     </Grid>
 </Window>

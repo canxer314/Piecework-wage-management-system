@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="EmployeeWindow" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
+        Title="员工窗口" Height="650" Width="1024" ResizeMode="CanResizeWithGrip">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -18,24 +18,29 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="#FFB0CFEA" FontSize="12" >
-            <MenuItem Header="_Account" Margin="5,0">
-                <MenuItem Name="btn_LoginOut" Header="_Login out" Click="btn_LoginOut_Click"/>
+            <MenuItem Header="账号" Margin="5,0">
+                <MenuItem Name="btn_LoginOut" Header="注销" Click="btn_LoginOut_Click"/>
                 <Separator />
-                <MenuItem Header="E_xit" Click="MenuItem_Click"/>
+                <MenuItem Name="btn_Exit" Header="退出" Click="btn_Exit_Click"/>
             </MenuItem>
-            <MenuItem Header="_Edit" Margin="5,0">
-                <MenuItem Header="Undo" Command="Undo" />
+            <MenuItem Header="编辑" Margin="5,0">
+                <MenuItem Header="撤消" Command="Undo" />
                 <Separator />
-                <MenuItem Header="Cut" Command="Cut" />
-                <MenuItem Header="Copy" Command="Copy" />
-                <MenuItem Header="Paste" Command="Paste" />
+                <MenuItem Header="剪切" Command="Cut" />
+                <MenuItem Header="复制" Command="Copy" />
+                <MenuItem Header="粘贴" Command="Paste" />
             </MenuItem>
+            <MenuItem Name="btn_ModifyPassword" Header="修改密码" Click="btn_ModifyPassword_Click" 
+                      Margin="5,0"/>
         </Menu>
         <UniformGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Columns="2">
-            <Button Name="btn_Reckon" HorizontalContentAlignment="Center" Click="btn_Reckon_Click" Background="#FFDEFFC6">Reckon By Piece</Button>
-            <Button Name="btn_ShowPayroll" HorizontalContentAlignment="Center" Click="btn_ShowPayroll_Click" Background="Wheat">Show Payroll</Button>
+            <Button Name="btn_Reckon" HorizontalContentAlignment="Center" Click="btn_Reckon_Click" 
+                    Background="#FFDEFFC6">计件</Button>
+            <Button Name="btn_ShowPayroll" HorizontalContentAlignment="Center" Click="btn_ShowPayroll_Click" 
+                    Background="Wheat">查看业绩</Button>
         </UniformGrid>
-        <Frame Name="frmMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" VerticalContentAlignment="Top" />
+        <Frame Name="frmMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden" 
+               VerticalAlignment="Stretch" VerticalContentAlignment="Top" />
     </Grid>
 
 </Window>

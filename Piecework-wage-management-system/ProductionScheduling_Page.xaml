@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="ProductionScheduling_Page">
+      Title="生产排产">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -17,17 +17,18 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical">
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF74CD1B">
-                <TextBlock FontWeight="Bold">Production Task:</TextBlock>
-                <MenuItem x:Name="AddTask" Header="Add" Click="AddTask_Click"/>
-                <MenuItem x:Name="ModifyTask" Header="Modify" Click="ModifyTask_Click"/>
-                <MenuItem x:Name="RemoveTask" Header="Remove" Click="RemoveTask_Click"/>
+                <TextBlock FontWeight="Bold">生产任务:</TextBlock>
+                <MenuItem x:Name="AddTask" Header="添加" Click="AddTask_Click"/>
+                <MenuItem x:Name="ModifyTask" Header="更改" Click="ModifyTask_Click"/>
+                <MenuItem x:Name="RemoveTask" Header="删除" Click="RemoveTask_Click"/>
             </Menu>
-            <DataGrid x:Name="gridTask" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="gridTask_SelectionChanged">
+            <DataGrid x:Name="gridTask" IsReadOnly="True" AutoGenerateColumns="False" 
+                      SelectionChanged="gridTask_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task num"/>
-                    <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
-                    <DataGridTextColumn Binding="{Binding TaskDate}" Header="Date"/>
+                    <DataGridTextColumn Binding="{Binding TaskNum}" Header="任务编号"/>
+                    <DataGridTextColumn Binding="{Binding Product_Name}" Header="产品名称"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="感值"/>
+                    <DataGridTextColumn Binding="{Binding TaskDate}" Header="日期"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -42,38 +43,40 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical">
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF7474DE">
-                    <TextBlock FontWeight="Bold">Procedure</TextBlock>
+                    <TextBlock FontWeight="Bold">工序</TextBlock>
                 </Menu>
-                <DataGrid x:Name="gridProcedure" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gridProcedure_SelectionChanged" >
+                <DataGrid x:Name="gridProcedure" IsReadOnly="True" AutoGenerateColumns="False" 
+                          CanUserSortColumns="False" SelectionChanged="gridProcedure_SelectionChanged" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding InputProcedure}" Header="工序名称"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <Border Background="Gray" Grid.Column="1"></Border>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFAF7BEE">
-                    <TextBlock FontWeight="Bold">Price</TextBlock>
-                    <MenuItem x:Name="ModifyPrice" Header="Edit" Click="ModifyPrice_Click"/>
+                    <TextBlock FontWeight="Bold">工序单价</TextBlock>
+                    <MenuItem x:Name="ModifyPrice" Header="更改" Click="ModifyPrice_Click"/>
                 </Menu>
-                <DataGrid x:Name="gridPrice" IsReadOnly="True" AutoGenerateColumns="False" CanUserSortColumns="False" SelectionChanged="gridPrice_SelectionChanged" >
+                <DataGrid x:Name="gridPrice" IsReadOnly="True" AutoGenerateColumns="False" 
+                          CanUserSortColumns="False" SelectionChanged="gridPrice_SelectionChanged" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Unit}" Header="Unit"/>
-                        <DataGridTextColumn Binding="{Binding Unit_Price}" Header="Price"/>
+                        <DataGridTextColumn Binding="{Binding Unit}" Header="计件单位"/>
+                        <DataGridTextColumn Binding="{Binding Unit_Price}" Header="工序单价"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <Border Background="Gray" Grid.Column="3"></Border>
             <StackPanel Grid.Column="4" Orientation="Vertical">
                 <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFFFF51A">
-                    <TextBlock FontWeight="Bold">Employee:</TextBlock>
-                    <MenuItem x:Name="AddEmployee" Click="AddEmployee_Click" Header="Assign" />
-                    <MenuItem x:Name="RemoveEmployee" Click="RemoveEmployee_Click" Header="Del" />
+                    <TextBlock FontWeight="Bold">员工:</TextBlock>
+                    <MenuItem x:Name="AddEmployee" Click="AddEmployee_Click" Header="分配" />
+                    <MenuItem x:Name="RemoveEmployee" Click="RemoveEmployee_Click" Header="删除" />
                 </Menu>
                 <DataGrid x:Name="gridEmployee" IsReadOnly="True" AutoGenerateColumns="False" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="员工编号"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="员工姓名"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

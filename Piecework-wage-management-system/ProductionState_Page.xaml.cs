@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,7 +21,7 @@ namespace Piecework_wage_management_system
     /// <summary>
     /// ProceduceRecord_Page.xaml 的交互逻辑
     /// </summary>
-    public partial class ProductionState_Page : Page
+    public partial class ProductionState_Page : System.Windows.Controls.Page
     {
         private DataAccessLayer Db { set; get; }
         public ProductionState_Page()
@@ -63,7 +66,7 @@ namespace Piecework_wage_management_system
             }
             catch
             {
-                MessageBox.Show("Wrong date :" + dateString);
+                MessageBox.Show("错误日期:" + dateString);
                 return;
             }
             List<Value> valueList = Db.QueryValueByAll().ToList();
@@ -90,7 +93,7 @@ namespace Piecework_wage_management_system
             }
             catch
             {
-                MessageBox.Show("Wrong date :" + dateString);
+                MessageBox.Show("错误日期:" + dateString);
                 return;
             }
             List<Value> valueList = Db.QueryValueByAll().ToList();
@@ -125,7 +128,7 @@ namespace Piecework_wage_management_system
                     ps.EmployeeName = Db.QueryEmployeeByEID(a.EmployeeId).Single().Name;
                     ps.ProcedureName = Db.QueryProcedureById(vp.Procedure_Id).Single().Name;
                     ps.Ratio = Db.QueryRelationshipByInput(ps.ProcedureName).Single().Input_Output_Ratio;
-                    ps.State = "Normal";
+                    ps.State = "正常";
                     ps.ProcedureBehind = Db.QueryRelationshipByInput(ps.ProcedureName).Single().OutputProcedure;
                     psList.Add(ps);
                 }
@@ -139,14 +142,19 @@ namespace Piecework_wage_management_system
         {
             if (psList.Count == 0)
                 return;
-            foreach (ProcedureState ps1 in psList)
+            foreach (ProcedureState ps0 in psList)
             {
-                int outputCount = ps1.Count;
+                int outputCount = 0;
                 int maxInputCount = -1;
+                foreach (ProcedureState ps1 in psList)
+                {
+                    if (ps1.ProcedureName == ps0.ProcedureName)
+                        outputCount += ps1.Count;
+                }
                 foreach (ProcedureState ps2 in psList)
                 {
                     //ps2 is the procedure in front of ps1
-                    if (ps2.ProcedureBehind == ps1.ProcedureName)
+                    if (ps2.ProcedureBehind == ps0.ProcedureName)
                     {
                         if (ps2.Count / ps2.Ratio < maxInputCount || maxInputCount < 0)
                         {
@@ -156,7 +164,7 @@ namespace Piecework_wage_management_system
                 }
                 if (outputCount > maxInputCount && maxInputCount >= 0)
                 {
-                    ps1.State = "Exceed!";
+                    ps0.State = "超标！";
                 }
             }
         }
@@ -174,6 +182,84 @@ namespace Piecework_wage_management_system
         private void lst_Days_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FillGridTask();
+        }
+
+        private void btn_Print_Click(object sender, RoutedEventArgs e)
+        {
+            if (lst_Months.SelectedItems.Count != 1 ||
+                lst_Days.SelectedItems.Count != 1 ||
+                gridTask.SelectedItems.Count != 1)
+                return;
+            System.Data.DataTable dt = new System.Data.DataTable();
+            dt.Columns.Add("Date", typeof(string));
+            dt.Columns.Add("Task", typeof(int));
+            dt.Columns.Add("Product", typeof(string));
+            dt.Columns.Add("Value", typeof(string));
+            dt.Columns.Add("ProcedureName", typeof(string));
+            dt.Columns.Add("Ratio", typeof(int));
+            dt.Columns.Add("EmployeeName", typeof(string));
+            dt.Columns.Add("EmployeeId", typeof(int));
+            dt.Columns.Add("Count", typeof(int));
+            dt.Columns.Add("State", typeof(string));
+            dt.Columns.Add("ProcedureBehind", typeof(string));
+
+            string dateString = lst_Months.SelectedItem.ToString() + "/" + lst_Days.SelectedItem.ToString();
+            int task = (gridTask.SelectedItem as Value).TaskNum;
+            string product = (gridTask.SelectedItem as Value).Product_Name;
+            string value = (gridTask.SelectedItem as Value).Name;
+            foreach (ProcedureState ps in gridProcedure.Items)
+            {
+                DataRow row = dt.NewRow();
+                row["Date"] = dateString;
+                row["Task"] = task;
+                row["Product"] = product;
+                row["Value"] = value;
+                row["ProcedureName"] = ps.ProcedureName;
+                row["Ratio"] = ps.Ratio;
+                row["EmployeeName"] = ps.EmployeeName;
+                row["EmployeeId"] = ps.EmployeeId;
+                row["Count"] = ps.Count;
+                row["State"] = ps.State;
+                row["ProcedureBehind"] = ps.ProcedureBehind;
+                dt.Rows.Add(row);
+            }
+
+
+            //创建Excel  
+
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Workbook excelWB = excelApp.Workbooks.Add(System.Type.Missing);    //创建工作簿（WorkBook：即Excel文件主体本身）  
+            Worksheet excelWS = (Worksheet)excelWB.Worksheets[1];   //创建工作表（即Excel里的子表sheet） 1表示在子表sheet1里进行数据导出  
+
+            //excelWS.Cells.NumberFormat = "@";     //  如果数据中存在数字类型 可以让它变文本格式显示  
+            //将数据导入到工作表的单元格  
+
+            excelWS.Cells[1, 1] = "日期";
+            excelWS.Cells[1, 2] = "任务编号";
+            excelWS.Cells[1, 3] = "产品名称";
+            excelWS.Cells[1, 4] = "感值";
+            excelWS.Cells[1, 5] = "工序名称";
+            excelWS.Cells[1, 6] = "投入产出比";
+            excelWS.Cells[1, 7] = "员工姓名";
+            excelWS.Cells[1, 8] = "员工编号";
+            excelWS.Cells[1, 9] = "计数";
+            excelWS.Cells[1, 10] = "状态";
+            excelWS.Cells[1, 11] = "后置工序";
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    excelWS.Cells[i + 2, j + 1] = dt.Rows[i][j].ToString();   //Excel单元格第一个从索引1开始  
+                }
+            }
+
+            string savePath = "D:\\生产状况_" + DateTime.Now.ToString("yyyyMMddhhmm") + ".xlsx";
+            excelWB.SaveAs(savePath);  //将其进行保存到指定的路径  
+            excelWB.Close();
+
+            SystemSounds.Beep.Play();
+            MessageBox.Show("已保存为Excel文件：" + savePath);
+            excelApp.Quit();  //KillAllExcel(excelApp); 释放可能还没释放的进程  
         }
     }
 }

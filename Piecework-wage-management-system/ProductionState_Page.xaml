@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="ProceduceRecord_Page">
+      Title="生产状况">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -20,37 +20,44 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="23"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="23"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Background="CadetBlue">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
-                Months
+                月
             </TextBlock>
         </Border>
-        <ListBox Name="lst_Months" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" SelectionChanged="lst_Months_SelectionChanged">
+        <ListBox Name="lst_Months" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" 
+                 SelectionChanged="lst_Months_SelectionChanged">
         </ListBox>
         <Border Grid.Row="0" Grid.Column="1" Background="CadetBlue">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
-                Days
+                日
             </TextBlock>
         </Border>
-        <ListBox Name="lst_Days" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" SelectionChanged="lst_Days_SelectionChanged">
+        <ListBox Name="lst_Days" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" 
+                 SelectionChanged="lst_Days_SelectionChanged">
         </ListBox>
-        <DataGrid Name="gridTask" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" CanUserSortColumns="False" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="gridTask_SelectionChanged">
+        <Button Name="btn_Print" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" 
+                Background="GreenYellow" Click="btn_Print_Click">保存为Excel</Button>
+        <DataGrid Name="gridTask" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" CanUserSortColumns="False" 
+                  IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="gridTask_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task No."/>
-                <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
+                <DataGridTextColumn Binding="{Binding TaskNum}" Header="任务编号"/>
+                <DataGridTextColumn Binding="{Binding Product_Name}" Header="产品名称"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="感值"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="gridProcedure" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="3" CanUserSortColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Name="gridProcedure" Grid.Row="0" Grid.RowSpan="3" Grid.Column="3" Grid.ColumnSpan="3" 
+                  CanUserSortColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ProcedureName}" Header="Procedure"/>
-                <DataGridTextColumn Binding="{Binding Ratio}" Header="Ratio"/>
-                <DataGridTextColumn Binding="{Binding EmployeeName}" Header="EmployeeName"/>
-                <DataGridTextColumn Binding="{Binding EmployeeId}" Header="EmployeeId"/>
-                <DataGridTextColumn Binding="{Binding Count}" Header="Count"/>
-                <DataGridTextColumn Binding="{Binding State}" Header="State"/>
-                <DataGridTextColumn Binding="{Binding ProcedureBehind}" Header="Output"/>
+                <DataGridTextColumn Binding="{Binding ProcedureName}" Header="工序名称"/>
+                <DataGridTextColumn Binding="{Binding Ratio}" Header="投入产出比"/>
+                <DataGridTextColumn Binding="{Binding EmployeeName}" Header="员工姓名"/>
+                <DataGridTextColumn Binding="{Binding EmployeeId}" Header="员工编号"/>
+                <DataGridTextColumn Binding="{Binding Count}" Header="计数"/>
+                <DataGridTextColumn Binding="{Binding State}" Header="状态"/>
+                <DataGridTextColumn Binding="{Binding ProcedureBehind}" Header="后置工序"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

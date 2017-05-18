@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="AddAdminAccountWindow" Height="400" Width="300" ResizeMode="NoResize">
+        Title="添加管理员" Height="400" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -21,20 +21,24 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Add new Administrator"/>
-        <TextBlock x:Name="tb_Username" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Username:"/>
-        <TextBox x:Name="txt_Username" Height="25" Width="160" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
-        <TextBlock x:Name="tb_Password" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Password:"/>
-        <PasswordBox x:Name="pwd_Password" Height="25" Width="160" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <TextBlock x:Name="tb_Confirm" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Confirm:"/>
-        <PasswordBox x:Name="pwd_Confirm" Height="25" Width="160" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3"/>
-        <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="btn_Signup" Grid.Column="0" Height="20" Width="55" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Click="btn_Signup_Click" TabIndex="4" Content="Add"/>
-            <Button x:Name="btn_Return" Grid.Column="1" Height="20" Width="55" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Click="btn_Return_Click" TabIndex="5">Return</Button>
-        </Grid>
+        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" 
+                   FontWeight="Bold" Text="添加新管理员账号"/>
+        <TextBlock x:Name="tb_Username" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="用户名:"/>
+        <TextBox x:Name="txt_Username" Height="25" Width="160" Grid.Row="2" Grid.Column="1" 
+                 Grid.ColumnSpan="3" TabIndex="1"/>
+        <TextBlock x:Name="tb_Password" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="密码:"/>
+        <PasswordBox x:Name="pwd_Password" Height="25" Width="160" Grid.Row="3" Grid.Column="1" 
+                     Grid.ColumnSpan="3" TabIndex="2"/>
+        <TextBlock x:Name="tb_Confirm" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="确认密码:"/>
+        <PasswordBox x:Name="pwd_Confirm" Height="25" Width="160" Grid.Row="4" Grid.Column="1" 
+                     Grid.ColumnSpan="3" TabIndex="3"/>
+        <Button x:Name="btn_Signup" Grid.Row="5" Grid.Column="1" Height="20" Width="55" VerticalAlignment="Center" 
+                HorizontalAlignment="Center" FontWeight="Bold" Click="btn_Signup_Click" TabIndex="4" Content="添加"/>
+        <Button x:Name="btn_Return" Grid.Row="5" Grid.Column="2" Height="20" Width="55" VerticalAlignment="Center" 
+                HorizontalAlignment="Center" FontWeight="Bold" Click="btn_Return_Click" TabIndex="5">返回</Button>
     </Grid>
 </Window>

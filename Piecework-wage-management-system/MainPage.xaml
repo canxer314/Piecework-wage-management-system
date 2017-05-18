@@ -5,10 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="MainPage">
+      d:DesignHeight="602" d:DesignWidth="846"
+      Title="欢迎页面">
 
-    <Grid>
-        <TextBox FontSize="25">Hello main page!</TextBox>
-    </Grid>
+    <UniformGrid Rows="2" Background="AliceBlue">
+        <TextBlock FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                   TextWrapping="Wrap" FontWeight="Bold" Margin="10" Foreground="YellowGreen">
+            欢迎使用计件工资管理系统</TextBlock>
+        <TextBlock FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                   TextWrapping="Wrap" FontWeight="Bold" Margin="10" Foreground="YellowGreen">
+            请在左边功能栏里选择要使用的功能</TextBlock>
+    </UniformGrid>
 </Page>

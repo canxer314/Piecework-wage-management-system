@@ -33,23 +33,23 @@ namespace Piecework_wage_management_system
             if (txt_WorkshopName.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the workshop name!");
+                MessageBox.Show("请输入车间名称！");
                 return;
             } else if (db.QueryWorkshopByName(txt_WorkshopName.Text).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists workshop named " + txt_WorkshopName + "!");
+                MessageBox.Show("已存在车间名称：" + txt_WorkshopName + "!");
                 return;
             } else if (txt_WorkshopId.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the workname id!");
+                MessageBox.Show("请输入车间编号！");
                 return;
             }
             else if (db.QueryWorkshopById(int.Parse(txt_WorkshopId.Text)).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists workshop with id: " + txt_WorkshopId.Text + "!");
+                MessageBox.Show("已存在车间编号：" + txt_WorkshopId.Text + "!");
                 return;
             }else
             {
@@ -62,7 +62,7 @@ namespace Piecework_wage_management_system
                 catch
                 {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Workshop Id must be numberic!");
+                MessageBox.Show("车间编号必须为数字！");
                 return;
                 }
                 db.InsertWorkshop(ws);

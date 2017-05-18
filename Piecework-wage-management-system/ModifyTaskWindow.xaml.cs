@@ -54,14 +54,14 @@ namespace Piecework_wage_management_system
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Task number must be numberic!");
+                MessageBox.Show("任务编号必须为数字！");
                 return;
             }
             if (n != OriginTask.TaskNum)
                 if (Db.QueryValueByTaskNum(n).Count() != 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Task with task number:" + n);
+                    MessageBox.Show("已存在任务编号：" + n);
                     return;
                 }
             modifiedTask.TaskNum = n;
@@ -70,7 +70,7 @@ namespace Piecework_wage_management_system
                 if (Db.QueryValueByNameAndProductId(txt_Value.Text, OriginTask.Product_Id).Count() != 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Task with value:" + txt_Value.Text);
+                    MessageBox.Show("已存在感值：" + txt_Value.Text);
                     return;
                 }
             }

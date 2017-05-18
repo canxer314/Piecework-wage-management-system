@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="WorkShopManage_Page">
+      Title="车间管理">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -17,22 +17,26 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="BlanchedAlmond">
-            <MenuItem x:Name="AddWorkshop" Header="_Add Workshop" Click="AddWorkshop_Click" Margin="5,0"/>
-            <MenuItem x:Name="ModifyWorkshop" Header="_Modify Workshop" Click="ModifyWorkshop_Click" Margin="5,0"/>
-            <MenuItem x:Name="RemoveWorkshop" Header="_Remove Workshop" Click="RemoveWorkshop_Click" Margin="5,0"/>
-            <MenuItem x:Name="RefreshList" Header="Refresh _List" Click="RefreshList_Click" Margin="5,0"/>
+            <MenuItem x:Name="AddWorkshop" Header="添加车间" Click="AddWorkshop_Click" Margin="5,0"/>
+            <MenuItem x:Name="ModifyWorkshop" Header="更改车间" Click="ModifyWorkshop_Click" Margin="5,0"/>
+            <MenuItem x:Name="RemoveWorkshop" Header="删除车间" Click="RemoveWorkshop_Click" Margin="5,0"/>
+            <MenuItem x:Name="RefreshList" Header="刷新列表" Click="RefreshList_Click" Margin="5,0"/>
         </Menu>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" >
-                <TextBox Name="txtSearchWorkshop" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <Button Name="btnSearchWorkshop" Content="Search By" Margin="0,5,5,5" Click="btnSearchWorkshop_Click"/>
-                <RadioButton x:Name="rbtnWorkshopName" Content="Name" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" />
-                <RadioButton x:Name="rbtnWorkshopId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0" />
+                <TextBox Name="txtSearchWorkshop" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Margin="5" />
+                <Button Name="btnSearchWorkshop" Content="条件搜索" Margin="0,5,5,5" Click="btnSearchWorkshop_Click"/>
+                <RadioButton x:Name="rbtnWorkshopName" Content="车间名称" IsChecked="True" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="0,0,5,0" />
+                <RadioButton x:Name="rbtnWorkshopId" Content="车间编号" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="0" />
             </StackPanel>
-            <DataGrid x:Name="gridWorkshop" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,0,0,0">
+            <DataGrid x:Name="gridWorkshop" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                      AutoGenerateColumns="False" Margin="5,0,0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="车间名称"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="车间编号"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

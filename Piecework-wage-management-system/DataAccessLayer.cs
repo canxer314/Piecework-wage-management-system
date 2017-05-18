@@ -14,6 +14,24 @@ namespace Piecework_wage_management_system
         public readonly string mysqlconnectionString =
                  @"server=127.0.0.1;database=gradulation_design_db;uid=root;pwd=abcd709394;charset='gbk'";
 
+        public bool DropDatabase()
+        {
+            MySqlConnection conn = new MySqlConnection("Data Source=localhost;Persist Security Info=yes;UserId=root; PWD=abcd709394;");
+            MySqlCommand cmd = new MySqlCommand(@"
+            DROP DATABASE IF EXISTS gradulation_design_db;
+            ", conn);
+            try
+            {
+                conn.Open();
+            }
+            catch
+            {
+                return false;
+            }
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            return true;
+        }
         //初始化数据库
         public bool DataBaseInit()
         {
@@ -42,9 +60,9 @@ namespace Piecework_wage_management_system
                 Workshop CHAR(20),
                 Job CHAR(20),
                 CONSTRAINT fk_Workshop FOREIGN KEY (Workshop)
-                    REFERENCES tbl_Workshop (Name) ON DELETE SET NULL ON UPDATE SET NULL,
+                    REFERENCES tbl_Workshop (Name) ON UPDATE SET NULL,
                 CONSTRAINT fk_Job FOREIGN KEY (Job)
-                    REFERENCES tbl_Job (Name) ON DELETE SET NULL ON UPDATE SET NULL,
+                    REFERENCES tbl_Job (Name) ON UPDATE SET NULL,
                 Telephone CHAR(20)
             );
             CREATE TABLE IF NOT EXISTS tbl_Product (
@@ -56,21 +74,21 @@ namespace Piecework_wage_management_system
                 Name CHAR(20) UNIQUE KEY,
                 Product_Id INT,
                 CONSTRAINT fk_Product FOREIGN KEY (Product_Id)
-                    REFERENCES tbl_Product (Id) ON DELETE CASCADE ON UPDATE CASCADE
+                    REFERENCES tbl_Product (Id) ON UPDATE CASCADE
             );
             CREATE TABLE IF NOT EXISTS tbl_Relationship
             (
             	Id INT AUTO_INCREMENT PRIMARY KEY,
             	InputProcedure char(20) UNIQUE KEY,
             	CONSTRAINT fk_InputProcedure FOREIGN KEY (InputProcedure)
-            		REFERENCES tbl_Procedure(Name) ON DELETE CASCADE ON UPDATE CASCADE,
+            		REFERENCES tbl_Procedure(Name) ON UPDATE CASCADE,
             	OutputProcedure char(20),
             	CONSTRAINT fk_OutputProcedure FOREIGN KEY (OutputProcedure)
-            		REFERENCES tbl_Procedure(Name) ON DELETE CASCADE ON UPDATE CASCADE,
+            		REFERENCES tbl_Procedure(Name) ON UPDATE CASCADE,
             	Input_Output_Ratio INT,
             	Product_Id INT,
             	CONSTRAINT fk_Product_Id FOREIGN KEY (Product_Id)
-                	REFERENCES tbl_Procedure (Product_Id) ON DELETE CASCADE ON UPDATE CASCADE
+                	REFERENCES tbl_Procedure (Product_Id) ON UPDATE CASCADE
             );
             CREATE TABLE IF NOT EXISTS tbl_Value (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -80,7 +98,7 @@ namespace Piecework_wage_management_system
                 Product_Name CHAR(20),
             	Product_Id INT,
             	CONSTRAINT fk_Value_Product_Id FOREIGN KEY (Product_Id)
-                	REFERENCES tbl_Product (Id) ON DELETE CASCADE ON UPDATE CASCADE
+                	REFERENCES tbl_Product (Id) ON UPDATE CASCADE
             );
             CREATE TABLE IF NOT EXISTS tbl_Value_Price (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,24 +106,24 @@ namespace Piecework_wage_management_system
                 Unit_Price FLOAT,
             	Value_Id INT,
             	CONSTRAINT fk_Price_Value_Id FOREIGN KEY (Value_Id)
-                	REFERENCES tbl_Value (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+                	REFERENCES tbl_Value (Id) ON UPDATE CASCADE,
                 Procedure_Id INT,
                 CONSTRAINT fk_Price_ProcedureId FOREIGN KEY (Procedure_Id)
-                    REFERENCES tbl_Procedure (Id) ON DELETE CASCADE ON UPDATE CASCADE
+                    REFERENCES tbl_Procedure (Id) ON UPDATE CASCADE
             );
             CREATE TABLE IF NOT EXISTS tbl_Assign (
                 Id INT AUTO_INCREMENT PRIMARY KEY,
                 EmployeeId INT,
                 CONSTRAINT fk_Reckon_EmployeeId FOREIGN KEY (EmployeeId)
-                    REFERENCES tbl_Employee (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    REFERENCES tbl_Employee (Id) ON UPDATE CASCADE,
                 Price_Id INT,
                 CONSTRAINT fk_Assign_Price_Id FOREIGN KEY (Price_Id)
-                    REFERENCES tbl_Value_Price (Id) ON DELETE CASCADE ON UPDATE CASCADE
+                    REFERENCES tbl_Value_Price (Id) ON UPDATE CASCADE
             );
             CREATE TABLE IF NOT EXISTS tbl_Reckon (
                 Assign_Id INT PRIMARY KEY,
                 CONSTRAINT fk_Assign_Id FOREIGN KEY (Assign_Id)
-                    REFERENCES tbl_Assign (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    REFERENCES tbl_Assign (Id) ON UPDATE CASCADE,
                 Count INT 
             );
             ", conn);
@@ -269,14 +287,22 @@ namespace Piecework_wage_management_system
                 //CONSTRAINT fk_Job FOREIGN KEY (Job)
                 //    REFERENCES tbl_Job (Name) ON DELETE SET NULL ON UPDATE SET NULL,
                 //Telephone CHAR(20)
-                return conn.Execute("update tbl_Employee set Name=@Name, Password=@Password, Gender=@Gender, Workshop=@Workshop, Job=@Job, Telephone=@Telephone where Id=@Id", new { Name = e.Name, Password = e.Password, Gender = e.Gender, Workshop = e.Workshop, Job = e.Job, Telephone = e.Telephone, Id = e.Id });
+                return conn.Execute("update tbl_Employee set Name=@Name, Password=@Password, Gender=@Gender, Workshop=@Workshop, Job=@Job, Telephone=@Telephone where Id=@Id", 
+                    new { Name = e.Name, Password = e.Password, Gender = e.Gender, Workshop = e.Workshop, Job = e.Job, Telephone = e.Telephone, Id = e.Id });
             }
         }
-        public int UpdateEmployeePasswordById(int id, string password)
+        public int ResetEmployeePassword(Employee e)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("update tbl_Employee set Password=@Password where Id=@Id", new { Password = password, Id = id });
+                return conn.Execute("update tbl_Employee set Password=@Password where Id=@Id", new { Password = e.Id.ToString(), Id = e.Id});
+            }
+        }
+        public int UpdateEmployeePassword(Employee e)
+        {
+            using (IDbConnection conn = OpenConnection())
+            {
+                return conn.Execute("update tbl_Employee set Password=@Password where Id=@Id", new { Password = e.Password, Id = e.Id});
             }
         }
         public int DeleteEmployeeById(int id)
@@ -514,7 +540,8 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("update tbl_Value set TaskNum=@TaskNum, Name=@Name where Id=@Id", new { TaskNum = modifiedTask.TaskNum, Name = modifiedTask.Name, Id = modifiedTask.Id });
+                return conn.Execute("update tbl_Value set TaskNum=@TaskNum, Name=@Name where Id=@Id", 
+                    new { TaskNum = modifiedTask.TaskNum, Name = modifiedTask.Name, Id = modifiedTask.Id });
             }
         }
         public int DeleteValueById(int id)
@@ -586,21 +613,23 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("update tbl_Relationship set OutputProcedure=@OutputProcedure, Input_Output_Ratio=@Input_Output_Ratio where InputProcedure=@InputProcedure", new { OutputProcedure = modifiedRelationship.OutputProcedure, Input_Output_Ratio = modifiedRelationship.Input_Output_Ratio, InputProcedure = modifiedRelationship.InputProcedure });
+                return conn.Execute("update tbl_Relationship set OutputProcedure=@OutputProcedure, Input_Output_Ratio=@Input_Output_Ratio where InputProcedure=@InputProcedure", 
+                    new { OutputProcedure = modifiedRelationship.OutputProcedure, Input_Output_Ratio = modifiedRelationship.Input_Output_Ratio, InputProcedure = modifiedRelationship.InputProcedure });
             }
         }
         public int DeleteRelationshipByName(string name)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("delete from tbl_Relationship where Procedure_Name=@Procedure_Name", new { Procedure_Name = name });
+                return conn.Execute("delete from tbl_Relationship where InputProcedure=@InputProcedure", new { InputProcedure = name });
             }
         }
         public IEnumerable<Procedure> QueryProcedureNotInRelationshipByProductId(int id)
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Procedure>("select * from tbl_procedure where Product_Id = @Product_Id and Name not in (select InputProcedure from tbl_Relationship)", new { Product_Id = id });
+                return conn.Query<Procedure>("select * from tbl_procedure where Product_Id = @Product_Id and Name not in (select InputProcedure from tbl_Relationship)", 
+                    new { Product_Id = id });
             }
         }
         public int InsertValuePrice(ValuePrice p)
@@ -646,7 +675,8 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("update tbl_Value_Price set Unit=@Unit, Unit_Price=@Unit_Price where Id=@Id", new { Unit = price.Unit, Unit_Price = price.Unit_Price, Id = price.Id });
+                return conn.Execute("update tbl_Value_Price set Unit=@Unit, Unit_Price=@Unit_Price where Id=@Id", 
+                    new { Unit = price.Unit, Unit_Price = price.Unit_Price, Id = price.Id });
             }
         }
         public int InsertAssign(Assign a)
@@ -676,7 +706,8 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Query<Assign>("select * from tbl_Assign where EmployeeId=@EmployeeId and Price_Id=@Price_Id", new { EmployeeId = a.EmployeeId, Price_Id = a.Price_Id });
+                return conn.Query<Assign>("select * from tbl_Assign where EmployeeId=@EmployeeId and Price_Id=@Price_Id", 
+                    new { EmployeeId = a.EmployeeId, Price_Id = a.Price_Id });
             }
         }
         public int DeleteAssignById(int id)
@@ -690,7 +721,8 @@ namespace Piecework_wage_management_system
         {
             using (IDbConnection conn = OpenConnection())
             {
-                return conn.Execute("delete from tbl_Assign where Value_Id=@Value_Id and Procedure_Id=@Procedure_Id and EmployeeId=EmployeeId", new { Value_Id = v_id, Procedure_Id = p_id, EmployeeId = e_id });
+                return conn.Execute("delete from tbl_Assign where Value_Id=@Value_Id and Procedure_Id=@Procedure_Id and EmployeeId=EmployeeId", 
+                    new { Value_Id = v_id, Procedure_Id = p_id, EmployeeId = e_id });
             }
         }
         public int InsertReckon(Reckon r)

@@ -81,7 +81,7 @@ namespace Piecework_wage_management_system
             if (gridTask.SelectedItems.Count != 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You can only modify one task at one time!");
+                MessageBox.Show("一次只能更改一个生产任务信息！");
                 return;
             }
             ModifyTaskWindow mtWnd = new ModifyTaskWindow(gridTask.SelectedItem as Value, this);
@@ -95,7 +95,17 @@ namespace Piecework_wage_management_system
             {
                 foreach (Value item in gridTask.SelectedItems)
                 {
-                    Db.DeleteValueById(item.Id);
+                    try
+                    {
+                        Db.DeleteValueById(item.Id);
+                    }
+                    catch
+                    {
+                        SystemSounds.Beep.Play();
+                        MessageBox.Show("删除失败！");
+                        FillGridTask();
+                        return;
+                    }
                 }
                 FillGridTask();
             }
@@ -131,33 +141,44 @@ namespace Piecework_wage_management_system
             if (gridPrice.SelectedItems.Count == 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose a procedure!");
+                MessageBox.Show("请选择一个工序！");
                 return;
             }
-            AssignEmployeeWindow aeWnd = new AssignEmployeeWindow(this,gridPrice.SelectedItem as ValuePrice);
+            AssignEmployeeWindow aeWnd = new AssignEmployeeWindow(this, gridPrice.SelectedItem as ValuePrice);
             aeWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             aeWnd.ShowDialog();
         }
 
         private void RemoveEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if(gridEmployee.SelectedItems.Count == 0)
+            if (gridEmployee.SelectedItems.Count == 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose at least one employee!");
+                MessageBox.Show("请选择想要取消分配的员工！");
                 return;
             }
-            foreach(Employee employee in gridEmployee.SelectedItems)
+            foreach (Employee employee in gridEmployee.SelectedItems)
             {
                 Value v = gridTask.SelectedItem as Value;
                 Relationship r = gridProcedure.SelectedItem as Relationship;
                 Procedure p = Db.QueryProcedureByName(r.InputProcedure).Single();
                 ValuePrice vp = gridPrice.SelectedItem as ValuePrice;
-                foreach(Employee eTmp in gridEmployee.SelectedItems)
+                foreach (Employee eTmp in gridEmployee.SelectedItems)
                 {
-                    Db.DeleteAssignByValueIdAndProcedureIdAndEmployeeId(v.Id, p.Id, eTmp.Id);
+                    try
+                    {
+                        Db.DeleteAssignByValueIdAndProcedureIdAndEmployeeId(v.Id, p.Id, eTmp.Id);
+                    }
+                    catch
+                    {
+                        SystemSounds.Beep.Play();
+                        MessageBox.Show("取消分配失败！");
+                        FillEmployee();
+                        return;
+                    }
                 }
             }
+            FillEmployee();
         }
     }
 }

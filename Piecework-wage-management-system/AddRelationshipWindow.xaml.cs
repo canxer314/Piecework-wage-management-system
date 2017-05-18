@@ -50,25 +50,25 @@ namespace Piecework_wage_management_system
             if (cmb_Input.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a input procedure.");
+                MessageBox.Show("前置工序不能为空！");
                 return;
             }
             if (cmb_Output.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a output procedure.");
+                MessageBox.Show("后置工序不能为空！");
                 return;
             }
             if (String.IsNullOrEmpty(txt_Ratio.Text.Trim()) == true)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Ratio must not be blank!");
+                MessageBox.Show("投入产出比不能为空！");
                 return;
             }
             if((cmb_Input.SelectedItem as Procedure).Name == (cmb_Output.SelectedItem as Procedure).Name)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Input procedure and Output procedure can not be same!");
+                MessageBox.Show("前置工序与后置工序不能相同！");
                 return;
             }
             Relationship r = new Relationship();
@@ -81,7 +81,7 @@ namespace Piecework_wage_management_system
             }
             catch {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Ratio must be numberic!");
+                MessageBox.Show("投入产出比必须为数字！");
                 return;
             }
             Db.InsertRelationship(r);

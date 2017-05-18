@@ -49,21 +49,15 @@ namespace Piecework_wage_management_system
 
         private void ModifyWorkshop_Click(object sender, RoutedEventArgs e)
         {
-            if (gridWorkshop.SelectedItems.Count < 1)
+            if (gridWorkshop.SelectedItems.Count != 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Workshop in the table before you modify it.");
-                return;
-            }
-            if (gridWorkshop.SelectedItems.Count > 1)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify multiple Workshop information at one time.");
+                MessageBox.Show("请选择一个车间！");
                 return;
             }
             IEnumerable<Workshop> wsList;
             wsList = db.QueryWorkshopById((gridWorkshop.SelectedItem as Workshop).Id);
-            ModifyWorkshopWindow modifyWorkshopWnd = new ModifyWorkshopWindow(wsList.ElementAt(0),this);
+            ModifyWorkshopWindow modifyWorkshopWnd = new ModifyWorkshopWindow(wsList.ElementAt(0), this);
             modifyWorkshopWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyWorkshopWnd.ShowDialog();
         }
@@ -73,12 +67,22 @@ namespace Piecework_wage_management_system
             if (gridWorkshop.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select at least one workshop in the table before you remove it.");
+                MessageBox.Show("请先选择想要删除的车间！");
                 return;
             }
             foreach (Workshop item in gridWorkshop.SelectedItems)
             {
-                db.DeleteWorkshopById(item.Id);
+                try
+                {
+                    db.DeleteWorkshopById(item.Id);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("删除失败！");
+                    FillListView();
+                    return;
+                }
             }
             FillListView();
         }
@@ -106,16 +110,18 @@ namespace Piecework_wage_management_system
                 gridWorkshop.ItemsSource = db.QueryWorkshopByAll();
                 return;
             }
-            if(rbtnWorkshopName.IsChecked == true)
+            if (rbtnWorkshopName.IsChecked == true)
             {
                 gridWorkshop.ItemsSource = db.QueryWorkshopByName(txtSearchWorkshop.Text);
-            }else if(rbtnWorkshopId.IsChecked == true)
+            }
+            else if (rbtnWorkshopId.IsChecked == true)
             {
                 gridWorkshop.ItemsSource = db.QueryWorkshopById(int.Parse(txtSearchWorkshop.Text));
-            }else
+            }
+            else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose a search category!");
+                MessageBox.Show("请选择搜索条件！");
             }
         }
 

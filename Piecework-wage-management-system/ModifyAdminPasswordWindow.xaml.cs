@@ -34,12 +34,12 @@ namespace Piecework_wage_management_system
             if(pwd_OldPassword.Password != admin.Password)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("The Old Password not correct!");
+                MessageBox.Show("旧密码不正确！");
                 return;
             }else if(pwd_NewPassword.Password != pwd_Confirm.Password)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("The two passwords not match!");
+                MessageBox.Show("两次输入的密码不相同！");
             }else
             {
                 db.UpdateAdministratorPasswordById(admin.Id, pwd_NewPassword.Password);

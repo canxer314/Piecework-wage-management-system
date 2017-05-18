@@ -61,7 +61,7 @@ namespace Piecework_wage_management_system
             if(tb_Input.Text == (cmb_Output.SelectedItem as Procedure).Name)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Input procedure and Output procedure can not be same!");
+                MessageBox.Show("前置工序与后置工序不能相同！");
                 return;
             }
             try
@@ -71,7 +71,7 @@ namespace Piecework_wage_management_system
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Input output ratio must be numberic!");
+                MessageBox.Show("投入产出比必须为数字！");
                 return;
             }
             alteredRelationship.InputProcedure = OriginRelationship.InputProcedure;

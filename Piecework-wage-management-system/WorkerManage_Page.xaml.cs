@@ -49,16 +49,10 @@ namespace Piecework_wage_management_system
 
         private void AlterEmployee(object sender, RoutedEventArgs e)
         {
-            if (gridEmployees.SelectedItems.Count < 1)
+            if (gridEmployees.SelectedItems.Count != 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a employee in the table before you alter it.");
-                return;
-            }
-            if (gridEmployees.SelectedItems.Count > 1)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Can not alter multiple employee information.");
+                MessageBox.Show("请选选择一名员工！");
                 return;
             }
             IEnumerable<Employee> employeeList;
@@ -73,12 +67,23 @@ namespace Piecework_wage_management_system
             if (gridEmployees.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select at least one employee in the table before you remove it.");
+                MessageBox.Show("请先选择想要删除的员工！");
                 return;
             }
             foreach (Employee item in gridEmployees.SelectedItems)
             {
-                db.DeleteEmployeeById(item.Id);
+                try
+                {
+                    db.DeleteEmployeeById(item.Id);
+                }
+                catch
+                {
+
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("删除失败！");
+                    FillListView();
+                    return;
+                }
             }
             FillListView();
         }

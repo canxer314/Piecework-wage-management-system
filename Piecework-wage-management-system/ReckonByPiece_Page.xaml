@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1024"
-      Title="ReckonByPiece_Page">
+      Title="计件">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -21,15 +21,16 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFE8E81C">
             <TextBlock HorizontalAlignment="Center">
-                Current Task
+                当前任务
             </TextBlock>
         </Border>
-        <DataGrid Name="gridTask" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" SelectionChanged="gridTask_SelectionChanged">
+        <DataGrid Name="gridTask" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" 
+                  Grid.ColumnSpan="2" SelectionChanged="gridTask_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding TaskNum}" Header="Task num"/>
-                <DataGridTextColumn Binding="{Binding Product_Name}" Header="Product"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Value"/>
-                <DataGridTextColumn Binding="{Binding TaskDate}" Header="Date"/>
+                <DataGridTextColumn Binding="{Binding TaskNum}" Header="任务编号"/>
+                <DataGridTextColumn Binding="{Binding Product_Name}" Header="产品名称"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="感值"/>
+                <DataGridTextColumn Binding="{Binding TaskDate}" Header="日期"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="4">
@@ -43,25 +44,28 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="0" Background="#FFBD43BD">
                 <TextBlock HorizontalAlignment="Center">
-                Procedure Price
+                工序价格
                 </TextBlock>
             </Border>
-            <DataGrid Name="gridPrice" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" SelectionChanged="gridPrice_SelectionChanged">
+            <DataGrid Name="gridPrice" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" 
+                      SelectionChanged="gridPrice_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ProcedureName}" Header="Procedure"/>
-                    <DataGridTextColumn Binding="{Binding Unit}" Header="Unit"/>
-                    <DataGridTextColumn Binding="{Binding Price}" Header="Price"/>
+                    <DataGridTextColumn Binding="{Binding ProcedureName}" Header="工序名称"/>
+                    <DataGridTextColumn Binding="{Binding Unit}" Header="计件单位"/>
+                    <DataGridTextColumn Binding="{Binding Price}" Header="工序单价"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsSubmited}" Header="提交状态"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Border Grid.Row="0" Grid.Column="1" Background="#FF5EDC2E">
                 <TextBlock HorizontalAlignment="Center">
-                Reckon
+                计件
                 </TextBlock>
             </Border>
             <StackPanel Grid.Row="1" Grid.Column="1" Background="White" Orientation="Vertical">
-                <TextBlock Text="Please input the count:" Margin="30,30,30,0" HorizontalAlignment="Center"/>
+                <TextBlock Text="请输入计件数量:" Margin="30,30,30,0" HorizontalAlignment="Center"/>
                 <TextBox Name="txt_Count" Width="130" Height="20" Margin="30,30,30,0" HorizontalAlignment="Center"/>
-                <Button Name="btn_submit" Width="50" Height="20" Background="#FFFD2828" Margin="30,30,30,0" Click="btn_submit_Click">Submit</Button>
+                <Button Name="btn_submit" Width="50" Height="20" Background="#FFFD2828" Margin="30,30,30,0" 
+                        Click="btn_submit_Click">提交</Button>
             </StackPanel>
         </Grid>
     </Grid>

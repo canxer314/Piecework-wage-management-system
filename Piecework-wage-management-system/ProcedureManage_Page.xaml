@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="602" d:DesignWidth="846"
-      Title="ProcedureManage_Page">
+      Title="产品工序管理">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,74 +17,89 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical">
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF74CD1B">
-                <TextBlock FontWeight="Bold">PRODUCT:</TextBlock>
-                <MenuItem x:Name="AddProduct" Header="Add" Click="AddProduct_Click" />
-                <MenuItem x:Name="ModifyProduct" Header="Modify" Click="ModifyProduct_Click" />
-                <MenuItem x:Name="RemoveProduct" Header="Remove" Click="RemoveProduct_Click" />
+                <TextBlock FontWeight="Bold">产品:</TextBlock>
+                <MenuItem x:Name="AddProduct" Header="添加" Click="AddProduct_Click" />
+                <MenuItem x:Name="ModifyProduct" Header="更改" Click="ModifyProduct_Click" />
+                <MenuItem x:Name="RemoveProduct" Header="删除" Click="RemoveProduct_Click" />
             </Menu>
             <StackPanel Orientation="Horizontal" >
-                <TextBox Name="txtSearchProduct" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <Button Name="btnSearchProduct" Content="Search By" Margin="5" Click="btnSearchProduct_Click"/>
+                <TextBox Name="txtSearchProduct" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Margin="5" />
+                <Button Name="btnSearchProduct" Content="条件搜索" Margin="5" Click="btnSearchProduct_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
-                <RadioButton x:Name="rbtnProductName" IsChecked="True" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <RadioButton x:Name="rbtnProductId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnProductName" IsChecked="True" Content="产品名称" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnProductId" Content="产品编号" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                             Margin="5" />
             </StackPanel>
             <Border Background="#FF74CD1B" Height="2"></Border>
-            <DataGrid x:Name="gridProduct" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0" SelectionChanged="gridProduct_SelectionChanged">
+            <DataGrid x:Name="gridProduct" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                      AutoGenerateColumns="False" Margin="5,5,0,0" SelectionChanged="gridProduct_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="产品名称"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="产品编号"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
         <Border Background="Gray" Grid.Column="1"></Border>
         <StackPanel Grid.Column="2" Orientation="Vertical">
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF7474DE">
-                <TextBlock FontWeight="Bold">PROCEDUCE:</TextBlock>
-                <MenuItem x:Name="AddProcedure" Header="Add" Click="AddProcedure_Click" />
-                <MenuItem x:Name="ModifyProcedure" Header="Modify" Click="ModifyProcedure_Click" />
-                <MenuItem x:Name="RemoveProcedure" Header="Remove" Click="RemoveProcedure_Click" />
+                <TextBlock FontWeight="Bold">工序:</TextBlock>
+                <MenuItem x:Name="AddProcedure" Header="添加" Click="AddProcedure_Click" />
+                <MenuItem x:Name="ModifyProcedure" Header="更改" Click="ModifyProcedure_Click" />
+                <MenuItem x:Name="RemoveProcedure" Header="删除" Click="RemoveProcedure_Click" />
             </Menu>
             <StackPanel Orientation="Horizontal">
-                <TextBox Name="txtSearchProcedure" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
-                <Button Name="btnSearchProcedure" Content="Search By" Click="btnSearchProcedure_Click" Margin="5"/>
+                <TextBox Name="txtSearchProcedure" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                         Margin="5"/>
+                <Button Name="btnSearchProcedure" Content="条件搜索" Click="btnSearchProcedure_Click" Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="rbtnProcedureName" IsChecked="True" Content="Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <RadioButton x:Name="rbtnProcedureId" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnProcedureName" IsChecked="True" Content="工序名称" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnProcedureId" Content="工序编号" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="5" />
             </StackPanel>
             <Border Background="#FF7474DE" Height="2"></Border>
-            <DataGrid x:Name="gridProcedure" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+            <DataGrid x:Name="gridProcedure" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" 
+                      VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="工序名称"/>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="工序编号"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
         <Border Background="Gray" Grid.Column="3"></Border>
         <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical">
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FFAF7BEE">
-                <TextBlock FontWeight="Bold">RELATIONSHIP:</TextBlock>
-                <MenuItem x:Name="AddRelationship" Header="Add" Click="AddRelationship_Click" />
-                <MenuItem x:Name="ModifyRelationship" Header="Modify" Click="ModifyRelationship_Click" />
-                <MenuItem x:Name="RemoveRelationship" Header="Remove" Click="RemoveRelationship_Click" />
+                <TextBlock FontWeight="Bold">工序关系:</TextBlock>
+                <MenuItem x:Name="AddRelationship" Header="添加" Click="AddRelationship_Click" />
+                <MenuItem x:Name="ModifyRelationship" Header="更改" Click="ModifyRelationship_Click" />
+                <MenuItem x:Name="RemoveRelationship" Header="删除" Click="RemoveRelationship_Click" />
             </Menu>
             <StackPanel Orientation="Horizontal">
-                <TextBox Name="txtSearchRelationship" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" KeyDown="txtSearchRelationship_KeyDown"/>
-                <Button Name="btnSearchRelationship" Content="Search By" Click="btnSearchRelationship_Click" Margin="5"/>
+                <TextBox Name="txtSearchRelationship" Width="120" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Margin="5" KeyDown="txtSearchRelationship_KeyDown"/>
+                <Button Name="btnSearchRelationship" Content="条件搜索" Click="btnSearchRelationship_Click" 
+                        Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="rbtnInput" IsChecked="True" Content="Input" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <RadioButton x:Name="rbtnOutput" Content="Output" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
-                <RadioButton x:Name="rbtnRatio" Content="Ratio" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnInput" IsChecked="True" Content="前置工序" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnOutput" Content="后置工序" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="5" />
+                <RadioButton x:Name="rbtnRatio" Content="投入产出比" VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" Margin="5" />
             </StackPanel>
             <Border Background="#FFAF7BEE" Height="2"></Border>
-            <DataGrid x:Name="gridProcedureRelationship" IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,0,0">
+            <DataGrid x:Name="gridProcedureRelationship" IsReadOnly="True" Grid.Row="1" Grid.Column="2" 
+                      HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" 
+                      Margin="5,5,0,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding InputProcedure}" Header="Input"/>
-                    <DataGridTextColumn Binding="{Binding OutputProcedure}" Header="Output"/>
-                    <DataGridTextColumn Binding="{Binding Input_Output_Ratio}" Header="Ratio"/>
+                    <DataGridTextColumn Binding="{Binding InputProcedure}" Header="前置工序"/>
+                    <DataGridTextColumn Binding="{Binding OutputProcedure}" Header="后置工序"/>
+                    <DataGridTextColumn Binding="{Binding Input_Output_Ratio}" Header="投入产出比"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

@@ -45,13 +45,13 @@ namespace Piecework_wage_management_system
             if (gridJob.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Job in the table before you modify it.");
+                MessageBox.Show("请先选择工种！");
                 return;
             }
             if (gridJob.SelectedItems.Count > 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify multiple Job information at one time.");
+                MessageBox.Show("无法同时修改多个工种！");
                 return;
             }
             IEnumerable<Job> jobList;
@@ -66,12 +66,21 @@ namespace Piecework_wage_management_system
             if (gridJob.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select at least one job in the table before you remove it.");
+                MessageBox.Show("请先选择工种！");
                 return;
             }
             foreach (Job item in gridJob.SelectedItems)
             {
-                db.DeleteJobById(item.Id);
+                try
+                {
+                    db.DeleteJobById(item.Id);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("删除失败！");
+                    return;
+                }
             }
             FillListView();
         }
@@ -98,7 +107,7 @@ namespace Piecework_wage_management_system
             }else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose a search category!");
+                MessageBox.Show("请选择搜索方式！");
             }
         }
     }

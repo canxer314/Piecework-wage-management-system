@@ -33,25 +33,25 @@ namespace Piecework_wage_management_system
             if (txt_JobName.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the job name!");
+                MessageBox.Show("请输入工种名称！");
                 return;
             }
             else if (db.QueryJobByName(txt_JobName.Text).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists job named " + txt_JobName + "!");
+                MessageBox.Show("已存在工种名称：" + txt_JobName + "!");
                 return;
             }
             else if (txt_JobId.Text.Trim() == String.Empty)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input the job id!");
+                MessageBox.Show("请输入工种编号！");
                 return;
             }
             else if (db.QueryJobById(int.Parse(txt_JobId.Text)).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists job with id: " + txt_JobId.Text + "!");
+                MessageBox.Show("已存在工种编号：" + txt_JobId.Text + "!");
                 return;
             }
             else
@@ -65,7 +65,7 @@ namespace Piecework_wage_management_system
                 catch
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Job id must be numberic!");
+                    MessageBox.Show("工种编号必须为数字!");
                     return;
                 }
                 db.InsertJob(job);

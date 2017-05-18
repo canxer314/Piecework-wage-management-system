@@ -27,7 +27,7 @@ namespace Piecework_wage_management_system
             DataAccessLayer dataAccessLayer = new DataAccessLayer();
             if (dataAccessLayer.DataBaseInit() == false)
             {
-                MessageBox.Show("Database connection failed. Make sure the setting is correct.");
+                MessageBox.Show("数据库连接失败！");
                 this.Close();
             }
             else if (dataAccessLayer.QueryAdministratorByAll().Count() == 0)

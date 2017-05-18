@@ -49,28 +49,38 @@ namespace Piecework_wage_management_system
                 if (db.QueryProductByName(txt_ProductName.Text).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Product with name: " + txt_ProductName.Text + "!");
+                    MessageBox.Show("已存在产品名称： " + txt_ProductName.Text + "!");
                     return;
                 }
             if (txt_ProductId.Text != OriginProduct.Id.ToString())
                 if (db.QueryProductById(int.Parse(txt_ProductId.Text)).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Product with ID: " + txt_ProductId.Text + "!");
+                    MessageBox.Show("已存在产品编号：" + txt_ProductId.Text + "!");
                     return;
                 }
             modifiedProduct.Name = txt_ProductName.Text;
             try
             {
-            modifiedProduct.Id = int.Parse(txt_ProductId.Text);
+                modifiedProduct.Id = int.Parse(txt_ProductId.Text);
             }
             catch
             {
-                    SystemSounds.Beep.Play();
-                    MessageBox.Show("Product Id must be numberic!");
-                    return;
+                SystemSounds.Beep.Play();
+                MessageBox.Show("产品编号必须为数字！");
+                return;
             }
-            db.DeleteProductById(OriginProduct.Id);
+            try
+            {
+
+                db.DeleteProductById(OriginProduct.Id);
+            }
+            catch
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("更改失败！");
+                return;
+            }
             db.InsertProduct(modifiedProduct);
             pmPage.FillGridView_Product();
             this.Close();

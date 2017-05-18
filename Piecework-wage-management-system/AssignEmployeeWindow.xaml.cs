@@ -50,8 +50,7 @@ namespace Piecework_wage_management_system
             if (Db.QueryAssignWhetherExsit(a).Count() > 0)
             {
                 SystemSounds.Beep.Play();
-                string str = @"Already assign this employee to the procedure!
-Please choose another one!";
+                string str = "该员工已被分配到此工序！";
                 MessageBox.Show(str);
                 return;
             }
@@ -85,12 +84,12 @@ Please choose another one!";
                     }
                 }
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not found Employee with Id:" + id + "!");
+                MessageBox.Show("无此员工：" + id + "!");
             }
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please input a numberic!");
+                MessageBox.Show("员工编号必须为数字！");
             }
         }
 
@@ -105,7 +104,7 @@ Please choose another one!";
                 }
             }
             SystemSounds.Beep.Play();
-            MessageBox.Show("Can not found Employee with name:" + txt_SearchBox.Text + "!");
+            MessageBox.Show("无此员工：" + txt_SearchBox.Text + "!");
             return;
         }
 

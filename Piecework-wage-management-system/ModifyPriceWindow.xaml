@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="ModifyPriceWindow" Height="400" Width="300" ResizeMode="NoResize">
+        Title="更改工序价格" Height="400" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -23,19 +23,33 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Modify Price"/>
-        <TextBlock x:Name="tb_ProductName" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Product:"/>
-        <TextBox x:Name="txt_ProductName" IsReadOnly="True" Height="25" Width="160" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
-        <TextBlock x:Name="tb_ValueName" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Value:"/>
-        <TextBox x:Name="txt_ValueName" IsReadOnly="True" Height="25" Width="160" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
-        <TextBlock x:Name="tb_ProcedureName" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Procedure:"/>
-        <TextBox x:Name="txt_ProcedureName" IsReadOnly="True" Height="25" Width="160" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <TextBlock x:Name="tb_Unit" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Unit:"/>
-        <TextBox x:Name="txt_Unit" Height="25" Width="160" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <TextBlock x:Name="tb_Price" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Price:"/>
-        <TextBox x:Name="txt_Price" Height="25" Width="160" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <Button x:Name="btn_Restore" Grid.Row="7" Grid.Column="0" Height="20" Width="55" FontWeight="Bold" Click="btn_Restore_Click" TabIndex="4">Restore</Button>
-        <Button x:Name="btn_Modify" Grid.Row="7" Grid.Column="1" Height="20" Width="55"  FontWeight="Bold" Click="btn_Modify_Click" TabIndex="3">Modify</Button>
-        <Button x:Name="btn_Return" Grid.Row="7" Grid.Column="2" Height="20" Width="55"  FontWeight="Bold" Click="btn_Return_Click" TabIndex="5">Return</Button>
+        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="更改工序价格"/>
+        <TextBlock x:Name="tb_ProductName" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="产品名称:"/>
+        <TextBox x:Name="txt_ProductName" IsReadOnly="True" Height="25" Width="160" Grid.Row="2" 
+                 Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
+        <TextBlock x:Name="tb_ValueName" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="感值:"/>
+        <TextBox x:Name="txt_ValueName" IsReadOnly="True" Height="25" Width="160" Grid.Row="3" 
+                 Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
+        <TextBlock x:Name="tb_ProcedureName" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="工序:"/>
+        <TextBox x:Name="txt_ProcedureName" IsReadOnly="True" Height="25" Width="160" Grid.Row="4" 
+                 Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
+        <TextBlock x:Name="tb_Unit" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="计件单位:"/>
+        <TextBox x:Name="txt_Unit" Height="25" Width="160" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="2"/>
+        <TextBlock x:Name="tb_Price" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="单价:"/>
+        <TextBox x:Name="txt_Price" Height="25" Width="160" Grid.Row="6" Grid.Column="1" 
+                 Grid.ColumnSpan="3" TabIndex="2"/>
+        <Button x:Name="btn_Restore" Grid.Row="7" Grid.Column="0" Height="20" Width="55" FontWeight="Bold" 
+                Click="btn_Restore_Click" TabIndex="4">还原</Button>
+        <Button x:Name="btn_Modify" Grid.Row="7" Grid.Column="1" Height="20" Width="55"  FontWeight="Bold" 
+                Click="btn_Modify_Click" TabIndex="3">更改</Button>
+        <Button x:Name="btn_Return" Grid.Row="7" Grid.Column="2" Height="20" Width="55"  FontWeight="Bold" 
+                Click="btn_Return_Click" TabIndex="5">返回</Button>
     </Grid>
 </Window>

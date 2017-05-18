@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:Piecework_wage_management_system"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1024"
-      Title="ShowReckonPayroll_Page">
+      Title="查看业绩">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -23,33 +23,37 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Background="GreenYellow">
             <TextBlock HorizontalAlignment="Center">
-            Months
+            月份
             </TextBlock>
         </Border>
-        <ListBox Name="lst_Months" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" SelectionChanged="lst_Months_SelectionChanged"/>
-        <ListView Name="lv_Task" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5" SelectionChanged="lv_Task_SelectionChanged">
+        <ListBox Name="lst_Months" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" 
+                 SelectionChanged="lst_Months_SelectionChanged"/>
+        <ListView Name="lv_Task" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="5" 
+                  SelectionChanged="lv_Task_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="Date"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Product}" Header="Product"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Value"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Procedure}" Header="Procedure"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Unit}" Header="Unit"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Price"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Count"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Wage}" Header="Wage"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Date}" Header="日期"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Product}" Header="产品名称"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="感值"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Procedure}" Header="工序名称"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Unit}" Header="计件单位"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="工序单价"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="计数"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Wage}" Header="薪水"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
         <UniformGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" Columns="2" Background="#FF62FFFF">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
-                <TextBlock FontSize="18" >Month Wage:</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                        Margin="20,0,0,0">
+                <TextBlock FontSize="18" >月工资:</TextBlock>
                 <TextBlock Name="tb_MonthWage" FontSize="18" ></TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
-                <TextBlock FontSize="18" Margin="0" >Day Wage:</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                        Margin="20,0,0,0">
+                <TextBlock FontSize="18" Margin="0" >日工资:</TextBlock>
                 <TextBlock Name="tb_DayWage" FontSize="18" ></TextBlock>
             </StackPanel>
         </UniformGrid>

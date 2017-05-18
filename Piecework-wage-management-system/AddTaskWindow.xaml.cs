@@ -47,7 +47,7 @@ namespace Piecework_wage_management_system
             if (cmb_Product.SelectedIndex == -1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must select a product!");
+                MessageBox.Show("产品编号不能为空！");
                 return;
             }
             else
@@ -60,7 +60,7 @@ namespace Piecework_wage_management_system
                 if (string.IsNullOrWhiteSpace(txt_TaskNum.Text) == true)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("The Task Number must not be blank!");
+                    MessageBox.Show("任务编号不能为空！");
                     return;
                 }
                 else
@@ -72,7 +72,7 @@ namespace Piecework_wage_management_system
             {
                 txt_TaskNum.Text = string.Empty;
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Task number must be numberic!");
+                MessageBox.Show("任务编号必须为数字！");
                 return;
             }
             //if (Db.QueryValueByName(txt_Value.Text).Count() == 0)
@@ -84,7 +84,7 @@ namespace Piecework_wage_management_system
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Already exists value with name:" + txt_Value.Text);
+                MessageBox.Show("该产品已存在感值：" + txt_Value.Text);
                 txt_Value.Text = string.Empty;
                 return;
             }

@@ -76,24 +76,7 @@ namespace Piecework_wage_management_system
 
             }
         }
-        //public void FillGridView_Value()
-        //{
-        //    try
-        //    {
-        //        if (gridProcedure.SelectedItems.Count != 1)
-        //        {
-        //            //gridValue.ItemsSource = db.QueryValueByAll();
-        //            return;
-        //        }
-        //        IEnumerable<Procedure> tmpList;
-        //        tmpList = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id);
-        //        gridValue.ItemsSource = db.QueryValueByProcedureId(tmpList.ElementAt(0).Id);
-        //    }
-        //    catch
-        //    {
 
-        //    }
-        //}
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
             AddProductWindow aProtWnd = new AddProductWindow(this);
@@ -106,21 +89,21 @@ namespace Piecework_wage_management_system
             if (gridProduct.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Product in the table before you modify it.");
+                MessageBox.Show("请先选择产品！");
                 return;
             }
             if (gridProduct.SelectedItems.Count > 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify multiple Product information at one time.");
+                MessageBox.Show("无法一次更改多个产品信息！");
                 return;
             }
             IEnumerable<Product> tmpList;
             tmpList = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
-            if(db.QueryProcedureByProduct_Id(tmpList.ElementAt(0).Id).Count()!=0)
+            if (db.QueryProcedureByProduct_Id(tmpList.ElementAt(0).Id).Count() != 0)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify Product which have procedures under it.");
+                MessageBox.Show("无法更改已分配工序的产品信息！");
                 return;
             }
             ModifyProductWindow modifyProductWnd = new ModifyProductWindow(tmpList.ElementAt(0), this);
@@ -133,12 +116,22 @@ namespace Piecework_wage_management_system
             if (gridProduct.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select at least one Product in the table before you remove it.");
+                MessageBox.Show("请先选择产品！");
                 return;
             }
             foreach (Product item in gridProduct.SelectedItems)
             {
-                db.DeleteProductById(item.Id);
+                try
+                {
+                    db.DeleteProductById(item.Id);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("删除失败！");
+                    FillGridView_Product();
+                    return;
+                }
             }
             FillGridView_Product();
         }
@@ -164,30 +157,24 @@ namespace Piecework_wage_management_system
                 catch
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("You must only input numberic when search by id!");
+                    MessageBox.Show("当您选择以产品编号为搜索条件时请在搜索栏里输入数字！");
                     return;
                 }
-                    gridProduct.ItemsSource = db.QueryProductById(i);
+                gridProduct.ItemsSource = db.QueryProductById(i);
             }
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose a search category!");
+                MessageBox.Show("请选择搜索条件！");
             }
         }
 
         private void AddProcedure_Click(object sender, RoutedEventArgs e)
         {
-            if (gridProduct.SelectedItems.Count < 1)
+            if (gridProduct.SelectedItems.Count != 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Product before you add Procedure on it.");
-                return;
-            }
-            if (gridProduct.SelectedItems.Count > 1)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Can not add Procedure on multiple Product at one time.");
+                MessageBox.Show("请选择一项产品！");
                 return;
             }
             IEnumerable<Product> tmpList;
@@ -202,22 +189,16 @@ namespace Piecework_wage_management_system
             if (gridProcedure.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Procedure in the table before you modify it.");
+                MessageBox.Show("请先选择工序！");
                 return;
             }
             if (gridProcedure.SelectedItems.Count > 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify multiple Procedure information at one time.");
+                MessageBox.Show("无法一次更改多个工序信息！");
                 return;
             }
             Procedure p = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id).Single();
-            //if(db.QueryRelationshipByInput(p.Name).Count()!=0)
-            //{
-            //    SystemSounds.Beep.Play();
-            //    MessageBox.Show("Can not modify Procedure which have relations under it.");
-            //    return;
-            //}
             ModifyProcedureWindow modifyProcedureWnd = new ModifyProcedureWindow(p, this);
             modifyProcedureWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyProcedureWnd.ShowDialog();
@@ -228,12 +209,22 @@ namespace Piecework_wage_management_system
             if (gridProcedure.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select at least one Procedure in the table before you remove it.");
+                MessageBox.Show("请先选择想要删除的工序！");
                 return;
             }
             foreach (Procedure item in gridProcedure.SelectedItems)
             {
-                db.DeleteProcedureById(item.Id);
+                try
+                {
+                    db.DeleteProcedureById(item.Id);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("删除失败！");
+                    FillGridView_Procedure();
+                    return;
+                }
             }
             FillGridView_Procedure();
         }
@@ -256,133 +247,31 @@ namespace Piecework_wage_management_system
                 {
                     i = int.Parse(txtSearchProcedure.Text);
                 }
-                catch(FormatException ex)
+                catch (FormatException ex)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("You must only input numberic when search by id!");
+                    MessageBox.Show("当您选择以工序编号为搜索条件时请在搜索栏里输入数字！");
                     return;
                 }
-                    gridProcedure.ItemsSource = db.QueryProcedureById(i);
+                gridProcedure.ItemsSource = db.QueryProcedureById(i);
             }
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose a search category!");
+                MessageBox.Show("请选择搜索条件！");
             }
         }
 
-        //private void AddValue_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (gridProcedure.SelectedItems.Count < 1)
-        //    {
-        //        SystemSounds.Beep.Play();
-        //        MessageBox.Show("You must first select a Procedure before you add Value on it.");
-        //        return;
-        //    }
-        //    if (gridProcedure.SelectedItems.Count > 1)
-        //    {
-        //        SystemSounds.Beep.Play();
-        //        MessageBox.Show("Can not add Value on multiple Procedure at one time.");
-        //        return;
-        //    }
-        //    IEnumerable<Procedure> tmpList;
-        //    tmpList = db.QueryProcedureById((gridProcedure.SelectedItem as Procedure).Id);
-        //    AddValueWindow aVWnd = new AddValueWindow(this, tmpList.ElementAt(0));
-        //    aVWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        //    aVWnd.ShowDialog();
-        //}
-
-        //private void ModifyValue_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (gridValue.SelectedItems.Count < 1)
-        //    {
-        //        SystemSounds.Beep.Play();
-        //        MessageBox.Show("You must first select a Value in the table before you modify it.");
-        //        return;
-        //    }
-        //    if (gridValue.SelectedItems.Count > 1)
-        //    {
-        //        SystemSounds.Beep.Play();
-        //        MessageBox.Show("Can not modify multiple Value information at one time.");
-        //        return;
-        //    }
-        //    IEnumerable<Value> tmpList;
-        //    tmpList = db.QueryValueByName((gridValue.SelectedItem as Value).Name);
-        //    IEnumerable<Product> tmpList2;
-        //    tmpList2 = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
-        //    ModifyValueWindow modifyValueWnd = new ModifyValueWindow(tmpList.ElementAt(0),tmpList2.ElementAt(0), this);
-        //    modifyValueWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        //    modifyValueWnd.ShowDialog();
-        //}
-
-        //private void RemoveValue_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (gridValue.SelectedItems.Count < 1)
-        //    {
-        //        SystemSounds.Beep.Play();
-        //        MessageBox.Show("You must first select at least one Value in the table before you remove it.");
-        //        return;
-        //    }
-        //    foreach (Value item in gridValue.SelectedItems)
-        //    {
-        //        db.DeleteValueByName(item.Name);
-        //    }
-        //    FillGridView_Value();
-        //}
-
-        //private void btnSearchValue_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (String.IsNullOrEmpty(txtSearchValue.Text.Trim()) == true)
-        //    {
-        //        gridValue.ItemsSource = db.QueryValueByAll();
-        //        return;
-        //    }
-        //    if (rbtnValueName.IsChecked == true)
-        //    {
-        //        gridValue.ItemsSource = db.QueryValueByName(txtSearchValue.Text);
-        //    }
-        //    else if (rbtnValueUnit.IsChecked == true)
-        //    {
-        //        gridValue.ItemsSource = db.QueryValueByUnit(txtSearchValue.Text);
-        //    }
-        //    else if (rbtnValuePrice.IsChecked == true)
-        //    {
-        //        double queryValue = 0;
-        //        try
-        //        {
-        //            queryValue = double.Parse(txtSearchValue.Text);
-        //        }
-        //        catch(FormatException ex)
-        //        {
-        //            SystemSounds.Beep.Play();
-        //            MessageBox.Show("You must only input numberic when search by Price!");
-        //            return;
-        //        }
-        //            gridValue.ItemsSource = db.QueryValueByUnitPrice(queryValue);
-        //    }
-        //    else
-        //    {
-        //        SystemSounds.Beep.Play();
-        //        MessageBox.Show("Please choose a search category!");
-        //    }
-        //}
-
         private void AddRelationship_Click(object sender, RoutedEventArgs e)
         {
-            if (gridProduct.SelectedItems.Count < 1)
+            if (gridProduct.SelectedItems.Count != 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Product before you add Relation on it.");
+                MessageBox.Show("请选择一个产品！");
                 return;
             }
-            if (gridProduct.SelectedItems.Count > 1)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("Can not add Relation on multiple Product at one time.");
-                return;
-            }
-            IEnumerable<Product> tmpList = db.QueryProductById((gridProduct.SelectedItem as Product).Id);
-            AddRelationshipWindow aRwnd = new AddRelationshipWindow(this, tmpList.ElementAt(0));
+            Product p = db.QueryProductById((gridProduct.SelectedItem as Product).Id).Single();
+            AddRelationshipWindow aRwnd = new AddRelationshipWindow(this, p);
             aRwnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             aRwnd.ShowDialog();
         }
@@ -392,17 +281,17 @@ namespace Piecework_wage_management_system
             if (gridProcedureRelationship.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select a Relationship in the table before you modify it.");
+                MessageBox.Show("请选选择一个工序关系！");
                 return;
             }
             if (gridProcedureRelationship.SelectedItems.Count > 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Can not modify multiple Relationship information at one time.");
+                MessageBox.Show("无法一次修改多个工序关系！");
                 return;
             }
             Relationship r = db.QueryRelationshipByInput((gridProcedureRelationship.SelectedItem as Relationship).InputProcedure).Single();
-            ModifyRelationshipWindow modifyRelationshipWnd = new ModifyRelationshipWindow(r,this);
+            ModifyRelationshipWindow modifyRelationshipWnd = new ModifyRelationshipWindow(r, this);
             modifyRelationshipWnd.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             modifyRelationshipWnd.ShowDialog();
 
@@ -413,12 +302,21 @@ namespace Piecework_wage_management_system
             if (gridProcedureRelationship.SelectedItems.Count < 1)
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("You must first select at least one Relationship in the table before you remove it.");
+                MessageBox.Show("请先选择想要删除的工序关系！");
                 return;
             }
             foreach (Relationship item in gridProcedureRelationship.SelectedItems)
             {
-                db.DeleteRelationshipByName(item.InputProcedure);
+                try
+                {
+                    db.DeleteRelationshipByName(item.InputProcedure);
+                }
+                catch
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("删除失败！");
+                    return;
+                }
             }
             FillGridView_Relationship();
         }
@@ -440,7 +338,7 @@ namespace Piecework_wage_management_system
             }
             else if (rbtnRatio.IsChecked == true)
             {
-                int query  = 0;
+                int query = 0;
                 try
                 {
                     query = int.Parse(txtSearchRelationship.Text);
@@ -448,15 +346,15 @@ namespace Piecework_wage_management_system
                 catch
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("You must only input numberic when search by Ratio!");
+                    MessageBox.Show("当您选择以投入产出比为搜索条件时请在搜索栏里输入数字！");
                     return;
                 }
-                    gridProcedureRelationship.ItemsSource = db.QueryRelationshipByRatio(query);
+                gridProcedureRelationship.ItemsSource = db.QueryRelationshipByRatio(query);
             }
             else
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Please choose a search category!");
+                MessageBox.Show("请选择搜索条件！");
             }
         }
 
@@ -465,11 +363,6 @@ namespace Piecework_wage_management_system
             FillGridView_Procedure();
             FillGridView_Relationship();
         }
-
-        //private void gridProcedure_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    FillGridView_Value();
-        //}
 
         private void txtSearchRelationship_KeyDown(object sender, KeyEventArgs e)
         {

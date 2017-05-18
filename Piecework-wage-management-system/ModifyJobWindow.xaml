@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="ModifyJobWindow" Height="400" Width="300" ResizeMode="NoResize">
+        Title="更改工种" Height="400" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -20,13 +20,21 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Modify Job"/>
-        <TextBlock x:Name="tb_JobName" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Job Name:"/>
-        <TextBox x:Name="txt_JobName" Height="25" Width="160" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
-        <TextBlock x:Name="tb_JobId" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Job Id:"/>
-        <TextBox x:Name="txt_JobId" Height="25" Width="160" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <Button x:Name="btn_Restore" Grid.Row="4" Grid.Column="0" Height="20" Width="55" FontWeight="Bold" Click="btn_Restore_Click" TabIndex="4">Restore</Button>
-        <Button x:Name="btn_Modify" Grid.Row="4" Grid.Column="1" Height="20" Width="55"  FontWeight="Bold" Click="btn_Modify_Click" TabIndex="3">Modify</Button>
-        <Button x:Name="btn_Return" Grid.Row="4" Grid.Column="2" Height="20" Width="55"  FontWeight="Bold" Click="btn_Return_Click" TabIndex="5">Return</Button>
+        <TextBlock x:Name="tb_Title" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="更改工种"/>
+        <TextBlock x:Name="tb_JobName" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="工种名称:"/>
+        <TextBox x:Name="txt_JobName" Height="25" Width="160" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="1"/>
+        <TextBlock x:Name="tb_JobId" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="工种编号:"/>
+        <TextBox x:Name="txt_JobId" Height="25" Width="160" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="2"/>
+        <Button x:Name="btn_Restore" Grid.Row="4" Grid.Column="0" Height="20" Width="55" FontWeight="Bold" 
+                Click="btn_Restore_Click" TabIndex="4">还原</Button>
+        <Button x:Name="btn_Modify" Grid.Row="4" Grid.Column="1" Height="20" Width="55"  FontWeight="Bold" 
+                Click="btn_Modify_Click" TabIndex="3">更改</Button>
+        <Button x:Name="btn_Return" Grid.Row="4" Grid.Column="2" Height="20" Width="55"  FontWeight="Bold" 
+                Click="btn_Return_Click" TabIndex="5">返回</Button>
     </Grid>
 </Window>

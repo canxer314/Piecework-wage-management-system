@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Piecework_wage_management_system"
         mc:Ignorable="d"
-        Title="AddEmployeeWindow" Height="400" Width="300">
+        Title="添加员工" Height="400" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -22,25 +22,35 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="tb_Title" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Add new Employee"/>
-        <TextBlock x:Name="tb_EmployeeName" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Name:"/>
-        <TextBox x:Name="txt_EmployeeName" Height="25" Width="180" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="1"/>
-        <TextBlock x:Name="tb_EmployeeId" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="EmployeeId:"/>
-        <TextBox x:Name="txt_EmployeeId" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="2"/>
-        <TextBlock x:Name="tb_Gender" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Gender:"/>
-        <ComboBox x:Name="cmb_Gender" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="3">
-            <ComboBoxItem x:Name="Male">Male</ComboBoxItem>
-            <ComboBoxItem x:Name="Female">Female</ComboBoxItem>
+        <TextBlock x:Name="tb_Title" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="添加新员工"/>
+        <TextBlock x:Name="tb_EmployeeName" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="姓名:"/>
+        <TextBox x:Name="txt_EmployeeName" Height="25" Width="180" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="1"/>
+        <TextBlock x:Name="tb_EmployeeId" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="员工号:"/>
+        <TextBox x:Name="txt_EmployeeId" Height="25" Width="180" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="2"/>
+        <TextBlock x:Name="tb_Gender" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="性别:"/>
+        <ComboBox x:Name="cmb_Gender" Height="25" Width="180" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" 
+                  TabIndex="3">
+            <ComboBoxItem x:Name="Male">男性</ComboBoxItem>
+            <ComboBoxItem x:Name="Female">女性</ComboBoxItem>
         </ComboBox>
-            <TextBlock x:Name="tb_Workshop" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Workshop:"/>
-        <ComboBox x:Name="cmb_Workshop" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="4">
+        <TextBlock x:Name="tb_Workshop" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" FontWeight="Bold" Text="工作车间:"/>
+        <ComboBox x:Name="cmb_Workshop" Height="25" Width="180" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" 
+                  TabIndex="4">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock x:Name="WorkshopName" Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock x:Name="tb_Job" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Job:"/>
+        <TextBlock x:Name="tb_Job" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   FontWeight="Bold" Text="工种:"/>
         <ComboBox x:Name="cmb_Job" Height="25" Width="180" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="5">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -48,10 +58,15 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBlock x:Name="tb_Telephone" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Text="Telephone:"/>
-        <TextBox x:Name="txt_Telephone" Height="25" Width="180" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" TabIndex="6"/>
-        <Button x:Name="btn_Clean" Height="20" Width="50" Grid.Row="7" Grid.Column="0" FontWeight="Bold" Click="btn_Clean_Click" TabIndex="8">Clean</Button>
-        <Button x:Name="btn_AddEmployee" Height="20" Width="50" Grid.Row="7" Grid.Column="1" FontWeight="Bold" Click="btn_AddEmployee_Click" TabIndex="7">Add</Button>
-        <Button x:Name="btn_Return" Height="20" Width="50" Grid.Row="7" Grid.Column="2" FontWeight="Bold" Click="btn_Return_Click" TabIndex="9">Return</Button>
+        <TextBlock x:Name="tb_Telephone" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" FontWeight="Bold" Text="手机号码:"/>
+        <TextBox x:Name="txt_Telephone" Height="25" Width="180" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" 
+                 TabIndex="6"/>
+        <Button x:Name="btn_Clean" Height="20" Width="50" Grid.Row="7" Grid.Column="0" FontWeight="Bold" 
+                Click="btn_Clean_Click" TabIndex="8">清除</Button>
+        <Button x:Name="btn_AddEmployee" Height="20" Width="50" Grid.Row="7" Grid.Column="1" FontWeight="Bold" 
+                Click="btn_AddEmployee_Click" TabIndex="7">添加</Button>
+        <Button x:Name="btn_Return" Height="20" Width="50" Grid.Row="7" Grid.Column="2" FontWeight="Bold" 
+                Click="btn_Return_Click" TabIndex="9">返回</Button>
     </Grid>
 </Window>

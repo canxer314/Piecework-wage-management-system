@@ -37,11 +37,11 @@ namespace Piecework_wage_management_system
             List<Assign> assignList = Db.QueryAssignByEmployeeId(LoginedEmployee.Id).ToList();
             List<Value> valueList = new List<Value>();
             bool isExist = false;
-            foreach(Assign a in assignList)
+            foreach (Assign a in assignList)
             {
                 isExist = false;
                 int id = Db.QueryValuePriceById(a.Price_Id).Single().Value_Id;
-                foreach(Value v in valueList)
+                foreach (Value v in valueList)
                 {
                     if (id == v.Id)
                     {
@@ -63,11 +63,11 @@ namespace Piecework_wage_management_system
             List<ValuePrice> vpList = Db.QueryValuePriceByValueId(v.Id).ToList();
             List<Assign> assignList = Db.QueryAssignByEmployeeId(LoginedEmployee.Id).ToList();
             priceList = new List<P_Price>();
-            foreach(Assign a in assignList)
+            foreach (Assign a in assignList)
             {
-                foreach(ValuePrice vp in vpList)
+                foreach (ValuePrice vp in vpList)
                 {
-                    if(a.Price_Id == vp.Id)
+                    if (a.Price_Id == vp.Id)
                     {
                         P_Price p = new P_Price();
                         p.AssignId = a.Id;
@@ -75,6 +75,7 @@ namespace Piecework_wage_management_system
                         p.PriceId = vp.Id;
                         p.ProcedureName = Db.QueryProcedureById(vp.Procedure_Id).Single().Name;
                         p.Unit = vp.Unit;
+                        p.IsSubmited = false;
                         priceList.Add(p);
                     }
                 }
@@ -91,16 +92,20 @@ namespace Piecework_wage_management_system
             try
             {
                 r.Count = int.Parse(txt_Count.Text);
-                if(r.Count < 0)
+                if (r.Count < 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("The count can not be minus!");
+                    MessageBox.Show("计件数量不能小于零！");
                     return;
                 }
                 Db.UpdateReckonCount(r);
+                p.IsSubmited = true;
             }
             catch
             {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("提交失败！");
+                return;
             }
         }
 

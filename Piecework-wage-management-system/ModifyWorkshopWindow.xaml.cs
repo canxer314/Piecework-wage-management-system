@@ -50,14 +50,14 @@ namespace Piecework_wage_management_system
                 if (db.QueryWorkshopByName(txt_WorkshopName.Text).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Workshop with name: " + txt_WorkshopName.Text + "!");
+                    MessageBox.Show("已存在车间名称：" + txt_WorkshopName.Text + "!");
                     return;
                 }
             if (txt_WorkshopId.Text != OriginWorkshop.Id.ToString())
                 if (db.QueryWorkshopById(int.Parse(txt_WorkshopId.Text)).Count() > 0)
                 {
                     SystemSounds.Beep.Play();
-                    MessageBox.Show("Already exists Workshop with ID: " + txt_WorkshopId.Text + "!");
+                    MessageBox.Show("已存在车间编号：" + txt_WorkshopId.Text + "!");
                     return;
                 }
             modifiedWorkshop.Name = txt_WorkshopName.Text;
@@ -68,10 +68,19 @@ namespace Piecework_wage_management_system
             catch
             {
                 SystemSounds.Beep.Play();
-                MessageBox.Show("Workshop Id must be numberic!");
+                MessageBox.Show("车间编号必须为数字！");
                 return;
             }
-            db.DeleteWorkshopById(OriginWorkshop.Id);
+            try
+            {
+                db.DeleteWorkshopById(OriginWorkshop.Id);
+            }
+            catch
+            {
+                SystemSounds.Beep.Play();
+                MessageBox.Show("更改失败！");
+                return;
+            }
             db.InsertWorkshop(modifiedWorkshop);
             wsmPage.FillListView();
             this.Close();
