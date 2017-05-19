@@ -29,6 +29,14 @@ namespace Piecework_wage_management_system
             InitializeComponent();
             Db = new DataAccessLayer();
             FillListMonth();
+            try
+            {
+                lst_Months.SelectedIndex = 0;
+                lst_Days.SelectedIndex = 0;
+                gridTask.SelectedIndex = 0;
+                gridProcedure.SelectedIndex = 0;
+            }
+            catch { }
         }
 
         private void FillListMonth()
@@ -142,29 +150,36 @@ namespace Piecework_wage_management_system
         {
             if (psList.Count == 0)
                 return;
-            foreach (ProcedureState ps0 in psList)
+            foreach (ProcedureState ps in psList)
             {
                 int outputCount = 0;
                 int maxInputCount = -1;
                 foreach (ProcedureState ps1 in psList)
                 {
-                    if (ps1.ProcedureName == ps0.ProcedureName)
+                    if (ps1.ProcedureName == ps.ProcedureName)
                         outputCount += ps1.Count;
                 }
                 foreach (ProcedureState ps2 in psList)
                 {
                     //ps2 is the procedure in front of ps1
-                    if (ps2.ProcedureBehind == ps0.ProcedureName)
+                    int inputCount = 0;
+                    foreach (ProcedureState ps3 in psList)
                     {
-                        if (ps2.Count / ps2.Ratio < maxInputCount || maxInputCount < 0)
+                        //ps3 has the same procedure name with ps2
+                        if (ps3.ProcedureName == ps2.ProcedureName)
+                            inputCount += ps3.Count;
+                    }
+                    if (ps2.ProcedureBehind == ps.ProcedureName)
+                    {
+                        if (inputCount / ps2.Ratio < maxInputCount || maxInputCount < 0)
                         {
-                            maxInputCount = ps2.Count / ps2.Ratio;
+                            maxInputCount = inputCount / ps2.Ratio;
                         }
                     }
                 }
                 if (outputCount > maxInputCount && maxInputCount >= 0)
                 {
-                    ps0.State = "超标！";
+                    ps.State = "超标！";
                 }
             }
         }

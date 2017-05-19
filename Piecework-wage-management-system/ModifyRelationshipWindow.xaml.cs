@@ -38,7 +38,12 @@ namespace Piecework_wage_management_system
         private void RestoreOriginRelationship()
         {
             tb_Input.Text = OriginRelationship.InputProcedure;
-            IEnumerable<Procedure> tmpList = Db.QueryProcedureByProduct_Id(OriginRelationship.Product_Id);
+            List<Procedure> tmpList = Db.QueryProcedureByProduct_Id(OriginRelationship.Product_Id).ToList();
+            //Procedure pNull = new Procedure();
+            //pNull.Id = 0;
+            //pNull.Name = "无";
+            //pNull.Product_Id = tmpList.ElementAt(0).Product_Id;
+            //tmpList.Add(pNull);
             int i = -1;
             foreach (var p in tmpList)
             {
@@ -46,6 +51,7 @@ namespace Piecework_wage_management_system
                 if (p.Name == OriginRelationship.OutputProcedure)
                     break;
             }
+            cmb_Output.ItemsSource = tmpList;
             cmb_Output.SelectedIndex = i;
             txt_Ratio.Text = OriginRelationship.Input_Output_Ratio.ToString();
         }
@@ -58,12 +64,12 @@ namespace Piecework_wage_management_system
         private void btn_Modify_Click(object sender, RoutedEventArgs e)
         {
             Relationship alteredRelationship = new Relationship();
-            if(tb_Input.Text == (cmb_Output.SelectedItem as Procedure).Name)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("前置工序与后置工序不能相同！");
-                return;
-            }
+            //if(tb_Input.Text == (cmb_Output.SelectedItem as Procedure).Name)
+            //{
+            //    SystemSounds.Beep.Play();
+            //    MessageBox.Show("前置工序与后置工序不能相同！");
+            //    return;
+            //}
             try
             {
                 alteredRelationship.Input_Output_Ratio = int.Parse(txt_Ratio.Text);

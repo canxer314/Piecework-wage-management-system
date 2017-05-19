@@ -35,7 +35,12 @@ namespace Piecework_wage_management_system
         {
             IEnumerable<Procedure> inputList = Db.QueryProcedureNotInRelationshipByProductId(SelectedProduct.Id);
             cmb_Input.ItemsSource = inputList;
-            IEnumerable<Procedure> outputList = Db.QueryProcedureByProduct_Id(SelectedProduct.Id);
+            List<Procedure> outputList = Db.QueryProcedureByProduct_Id(SelectedProduct.Id).ToList();
+            //Procedure pNull = new Procedure();
+            //pNull.Id = 0;
+            //pNull.Name = "无";
+            //pNull.Product_Id = outputList.ElementAt(0).Product_Id;
+            //outputList.Add(pNull);
             cmb_Output.ItemsSource = outputList;
             txt_Ratio.Text = "1";
         }
@@ -65,12 +70,12 @@ namespace Piecework_wage_management_system
                 MessageBox.Show("投入产出比不能为空！");
                 return;
             }
-            if((cmb_Input.SelectedItem as Procedure).Name == (cmb_Output.SelectedItem as Procedure).Name)
-            {
-                SystemSounds.Beep.Play();
-                MessageBox.Show("前置工序与后置工序不能相同！");
-                return;
-            }
+            //if((cmb_Input.SelectedItem as Procedure).Name == (cmb_Output.SelectedItem as Procedure).Name)
+            //{
+            //    SystemSounds.Beep.Play();
+            //    MessageBox.Show("前置工序与后置工序不能相同！");
+            //    return;
+            //}
             Relationship r = new Relationship();
             r.Product_Id = SelectedProduct.Id;
             r.InputProcedure = (cmb_Input.SelectedItem as Procedure).Name;

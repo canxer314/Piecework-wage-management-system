@@ -27,6 +27,13 @@ namespace Piecework_wage_management_system
             db = new DataAccessLayer();
             InitializeComponent();
             FillGridView_Product();
+            try
+            {
+                gridProduct.SelectedIndex = 0;
+                gridProcedure.SelectedIndex = 0;
+                gridProcedureRelationship.SelectedIndex = 0;
+            }
+            catch { }
         }
 
         public void FillGridView_Product()

@@ -32,7 +32,7 @@
                   TabIndex="5" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock x:Name="Procedure_NameName" Text="{Binding Name}"/>
+                    <TextBlock x:Name="Procedure_Name" Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
