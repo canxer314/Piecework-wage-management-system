@@ -1,2 +1,2 @@
 # Piecework-wage-management-system
-Piecework wage management system. My Gradulation Design.
+Piecework wage management system. My Graduation Design.
